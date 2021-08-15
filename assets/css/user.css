@@ -1,0 +1,6 @@
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    overflow: unset;
+}
+.navbar-vertical.navbar-expand-xs {
+    overflow: unset;
+}
