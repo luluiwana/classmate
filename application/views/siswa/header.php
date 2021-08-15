@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="<?=base_url()?>assets/css/user.css">
 </head>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show ">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
         id="sidenav-main">
         <div class="sidenav-header">
@@ -31,19 +31,19 @@
             <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
                 target="_blank">
                 <img src="<?=base_url()?>assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold">Soft UI Dashboard</span>
+                <span class="ms-1 font-weight-bold text-light">Classmate</span>
             </a>
         </div>
         <hr class="horizontal dark mt-0">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link  active" href="../pages/dashboard.html">
+                    <a class="nav-link  active" href="<?=base_url()?>siswa">
                         <div
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-home fs-6"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Dashboard</span>
+                        <span class="nav-link-text ms-1 ">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -52,7 +52,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher text-dark"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Kelas</span>
+                        <span class="nav-link-text ms-1 text-light">Kelas</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -61,7 +61,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher text-dark"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Diskusi</span>
+                        <span class="nav-link-text ms-1 text-light">Diskusi</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -70,7 +70,7 @@
                             class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher text-dark"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Live Code</span>
+                        <span class="nav-link-text ms-1 text-light">Live Code</span>
                     </a>
                 </li>
 
@@ -84,7 +84,7 @@
                             <i class="fas fa-chalkboard-teacher text-dark"></i>
 
                         </div>
-                        <span class="nav-link-text ms-1">Pengaturan Profil</span>
+                        <span class="nav-link-text ms-1 text-light">Pengaturan Profil</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -94,7 +94,7 @@
                             <i class="fas fa-chalkboard-teacher text-dark"></i>
 
                         </div>
-                        <span class="nav-link-text ms-1">Keluar</span>
+                        <span class="nav-link-text ms-1 text-light">Keluar</span>
                     </a>
                 </li>
 
@@ -108,7 +108,7 @@
             navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
 
-                <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+                <h6 class="font-weight-bolder mb-0 text-light">Dashboard</h6>
 
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -117,8 +117,8 @@
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1"></i>
-                                <span class="d-sm-inline d-none">Lulu</span>
+                                <i class="fa fa-user me-sm-1 text-light"></i>
+                                <span class="d-sm-inline d-none text-light">Lulu</span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

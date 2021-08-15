@@ -4,3 +4,9 @@
 .navbar-vertical.navbar-expand-xs {
     overflow: unset;
 }
+body{
+    background-color: black;
+}
+.card{
+    background-color: #1e272e;
+}
