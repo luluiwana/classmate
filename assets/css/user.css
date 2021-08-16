@@ -30,3 +30,9 @@ body{
     background-color: #353535;
 
 }
+label, .form-label{
+    color: white;
+}
+.breadcrumb{
+        background-color: #141414;
+}

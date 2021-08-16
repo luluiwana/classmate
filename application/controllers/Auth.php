@@ -19,8 +19,7 @@ class Auth extends CI_Controller
         } else {
             $this->form_validation->set_rules('email', 'email', 'required');
             $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
-            if ($this->form_validation->run() == FALSE) {
-
+            if ($this->form_validation->run() == false) {
                 $this->load->view('home/header');
                 $this->load->view('auth/login');
                 $this->load->view('home/footer');
@@ -35,11 +34,15 @@ class Auth extends CI_Controller
                         $userdata = array(
                             'id_user'  => $data->UserID,
                             'nama'     => $data->UserName,
+                            'role'     => $data->UserRole,
                         );
                         $this->session->set_userdata($userdata);
-                       
-                       redirect('siswa','refresh');
-                       
+                        if ($data->UserRole=="siswa") {
+                            redirect('siswa', 'refresh');
+                        }
+                        if ($data->UserRole=="guru") {
+                            redirect('guru', 'refresh');
+                        }
                     } else {
                         echo 'password ga cocok';
                     }
@@ -52,8 +55,7 @@ class Auth extends CI_Controller
     public function daftar()
     {
         $this->form_validation->set_rules('nama', 'nama', 'required');
-        if ($this->form_validation->run() == FALSE) {
-
+        if ($this->form_validation->run() == false) {
             $this->load->view('home/header');
             $this->load->view('auth/daftar');
             $this->load->view('home/footer');
@@ -63,11 +65,18 @@ class Auth extends CI_Controller
                 'UserEmail' => $this->input->post('email'),
                 'UserPassword' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                 'UserContactNo' => $this->input->post('telp'),
-                'UserStatus' => $this->input->post('userRole'),
+                'UserRole' => $this->input->post('userRole'),
             ];
             $this->M_Auth->do_register($insert_data);
-            print_r('daftar sucess');
-            die;
+            
+            redirect('auth', 'refresh');
         }
+    }
+    public function logout()
+    {
+        $this->session->unset_userdata('id_user');
+        $this->session->unset_userdata('nama');
+        
+        redirect('auth', 'refresh');
     }
 }
