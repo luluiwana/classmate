@@ -5,8 +5,28 @@
     overflow: unset;
 }
 body{
-    background-color: black;
+    background-color: #0e0e0e;
 }
 .card{
-    background-color: #1e272e;
+    background-color: #141414;
+}
+.blur{
+    background-color: #0e0e0e !important;
+}
+.shadow-blur {
+    box-shadow: none !important;
+}
+.bg-dark {
+    background-color: #141414 !important;
+}
+.navbar-vertical .navbar-nav>.nav-item .nav-link.active {
+    color: #ffffff;
+    background-color: #ffffff24;
+}
+.progress {
+  
+    height: 12px;
+   
+    background-color: #353535;
+
 }

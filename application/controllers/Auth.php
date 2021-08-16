@@ -37,7 +37,9 @@ class Auth extends CI_Controller
                             'nama'     => $data->UserName,
                         );
                         $this->session->set_userdata($userdata);
-                        print_r('berhasil login dengan ' . $userdata['nama']);
+                       
+                       redirect('siswa','refresh');
+                       
                     } else {
                         echo 'password ga cocok';
                     }
