@@ -47,7 +47,7 @@
               <div class="card-footer text-center pt-0 px-lg-2 px-1">
                 <p class="mb-4 text-sm mx-auto">
                   Sudah memiliki akun?
-                  <a href="<?= base_url() ?>auth/daftar" class="text-info text-gradient font-weight-bold">Login</a>
+                  <a href="<?= base_url() ?>auth/" class="text-info text-gradient font-weight-bold">Login</a>
                 </p>
               </div>
             </div>

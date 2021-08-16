@@ -35,9 +35,7 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($menu == 'Dashboard') {
-                                            echo 'active';
-                                        } ?>" href="<?= base_url() ?>siswa">
+                    <a class="nav-link <?php if($menu=='Dashboard'){echo 'active';}?>" href="<?= base_url() ?>guru">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-home"></i>
                         </div>
@@ -45,9 +43,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if ($menu == 'Kelas') {
-                                            echo 'active';
-                                        } ?>" href="<?= base_url() ?>siswa/kelas">
+                    <a class="nav-link <?php if($menu=='Kelas'){echo 'active';}?>" href="<?=base_url()?>guru/kelas">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
                         </div>
@@ -84,9 +80,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/sign-in.html">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher text-dark"></i>
+                    <a class="nav-link  " href="<?=base_url()?>auth/logout">
+                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-chalkboard-teacher "></i>
+
                         </div>
                         <span class="nav-link-text ms-1 text-light">Keluar</span>
                     </a>
@@ -94,8 +91,8 @@
 
             </ul>
         </div>
-    </aside>
 
+    </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
@@ -110,10 +107,10 @@
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1 text-light"></i>
+                                <i class="fa fa-user me-sm-1 "></i>
                                 <span class="d-sm-inline d-none text-light"><?=
-                                                                            $this->session->userdata('nama');
-                                                                            ?></span>
+                                $this->session->userdata('nama');
+                                ?></span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

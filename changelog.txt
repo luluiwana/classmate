@@ -1,0 +1,11 @@
+15 Agustus 2020
+
+- Fitur login
+- Fitur register
+- Fitur Livecode
+- Tampilan Dashboard Siswa
+
+16 Agustus 2020
+- Memperbaiki Tampilan Dashboard Siswa
+- Membuat Dashboard guru
+- Guru dapat menambahkan kelas baru
