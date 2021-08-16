@@ -26,6 +26,18 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/livecode');
         $this->load->view('siswa/footer');
     }
+
+    public function discussion()
+    {
+        $data = array(
+            'title' => "Diskusi",
+            'topbar' => "Diskusi"
+        );
+        $this->load->view('siswa/header', $data);
+        $this->load->view('siswa/diskusi');
+        $this->load->view('siswa/footer');
+        # code...
+    }
 }
 
     
