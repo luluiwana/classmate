@@ -36,3 +36,6 @@ label, .form-label{
 .breadcrumb{
         background-color: #141414;
 }
+.btn-primary{
+        background: linear-gradient(98deg, #C33AFC 5.58%, #080311 119.8%);
+}
