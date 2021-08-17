@@ -11,6 +11,7 @@ class Guru extends CI_Controller
             redirect('auth', 'refresh');
         }
         $this->load->model('Course_model');
+        
     }
 
     public function index()
@@ -18,11 +19,23 @@ class Guru extends CI_Controller
         $data = array(
         'title'         =>"Dashboard",
         'menu'          =>"Dashboard",
-        'isCourse'      =>$this->Course_model->isCourseGuru(),
-        'courseList'    =>$this->Course_model->getCourseGuru()
+        'courseList'    =>$this->Course_model->getCourseGuru_limit(),
+        'countCourse'   =>$this->Course_model->countCourseGuru(),
+        'countSiswa'    =>$this->Course_model->countSiswa(),
         );
         $this->load->view('guru/template/header', $data);
         $this->load->view('guru/dashboard');
+        $this->load->view('guru/template/footer');
+    }
+    public function kelas()
+    {
+         $data = array(
+        'title'         =>"Kelas",
+        'menu'          =>"Kelas",
+        'courseList'    =>$this->Course_model->getCourseGuru()
+        );
+        $this->load->view('guru/template/header', $data);
+        $this->load->view('guru/course/kelas');
         $this->load->view('guru/template/footer');
     }
     public function buatkelas()

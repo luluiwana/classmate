@@ -8,7 +8,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Kelas</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    3
+                                    <?=$countCourse?>
                                 </h5>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Siswa</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    45
+                                    <?=$countSiswa?>
 
                                 </h5>
                             </div>
@@ -51,7 +51,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Materi</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    34
+                                    0
 
                                 </h5>
                             </div>
@@ -73,7 +73,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Quiz</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    3
+                                    0
 
                                 </h5>
                             </div>
@@ -137,7 +137,7 @@
     </div>
     <div class="row mt-4">
         <h5 class="text-white font-weight-bolder mb-4 pt-2">Kelas Terbaru</h5>
-        <?php if ($isCourse==true) :?>
+        <?php if (!empty($courseList)) :?>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="<?=base_url()?>guru/buatkelas" class="btn btn-primary me-md-2" type="button">Buat Kelas</a>
         </div>
@@ -162,6 +162,9 @@
             </div>
         </div>
         <?php endforeach;?>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+            <a href="<?=base_url()?>guru/kelas" class="btn btn-primary me-md-2" type="button">Lihat Semua Kelas</a>
+        </div>
         <?php else:?>
         <div class="card">
             <div class="card-body">

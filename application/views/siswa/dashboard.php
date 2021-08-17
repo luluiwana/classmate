@@ -8,7 +8,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Poin XP</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    8700
+                                    0
                                 </h5>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Kelas</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    2
+                                    <?=$countCourse?>
 
                                 </h5>
                             </div>
@@ -51,7 +51,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Misi</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    2/6
+                                   0/0
 
                                 </h5>
                             </div>
@@ -73,7 +73,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Daftar Tugas</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                    10/27
+                                    0/0
 
                                 </h5>
                             </div>
@@ -96,7 +96,9 @@
                         <div class="col-lg-6">
                             <div class="d-flex flex-column h-100 text-light">
                                 <p class="mb-1 pt-2 text-bold">Petualang</p>
-                                <h5 class="font-weight-bolder text-light">Lulu Iwana</h5>
+                                <h5 class="font-weight-bolder text-light"><?=
+                                $this->session->userdata('nama');
+                                ?></h5>
 
                                 <a class="text-body text-sm font-weight-bold mb-0  mt-auto" href="javascript:;">
                                     <p class="text-light">Koleksi Lencana</p>
@@ -143,11 +145,11 @@
     </div>
     <div class="row mt-4">
         <h5 class="text-white font-weight-bolder mb-4 pt-2">Kelas Saya</h5>
-        <?php if ($isCourse==true) :?>
-             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <?php if (!empty($courseList)) :?>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a href="<?=base_url()?>siswa/carikelas" class="btn btn-primary me-md-2" type="button">Temukan Kelas</a>
         </div>
-            <?php foreach ($courseList as $row):?>
+        <?php foreach ($courseList as $row):?>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body pt-0 p-3 ">
@@ -167,7 +169,10 @@
             </div>
         </div>
         <?php endforeach;?>
-       
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">
+            <a href="<?=base_url()?>siswa/kelas" class="btn btn-primary me-md-2" type="button">Lihat Semua Kelas</a>
+        </div>
+
         <?php else:?>
         <div class="card">
             <div class="card-body">

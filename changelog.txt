@@ -1,11 +1,29 @@
 15 Agustus 2020
-
+GURU
+- Fitur login
+- Fitur register
+SISWA
 - Fitur login
 - Fitur register
 - Fitur Livecode
 - Tampilan Dashboard Siswa
 
 16 Agustus 2020
-- Memperbaiki Tampilan Dashboard Siswa
+GURU
 - Membuat Dashboard guru
 - Guru dapat menambahkan kelas baru
+SISWA
+- Memperbaiki Tampilan Dashboard Siswa
+
+17 Agustus 2020
+SISWA
+- Siswa dapat mengambil kelas
+- Perbaikan bug (kelas yg sudah diambil masih muncul di cari kelas)
+- Dashboard siswa hanya menampilkan 6 kelas terbaru
+- Membuat menu kelas (Siswa)
+- Menampilkan jumlah kelas yg diambil siswa di Dashboard Siswa
+GURU
+- Dashboard guru hanya menampilkan 6 kelas terbaru
+- Membuat menu guru (Siswa)
+- Menampilkan jumlah kelas yg dibuat guru di Dashboard Guru
+- Menampilkan jumlah siswa yang diajar di Dashboard Guru

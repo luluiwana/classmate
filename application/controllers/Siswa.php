@@ -19,12 +19,25 @@ class Siswa extends CI_Controller
         $data = array(
             'title'     => "Dashboard",
             'menu'      => "Dashboard",
-            'isCourse'  => $this->Course_model->isCourse(),
+            'courseList' => $this->Course_model->getCourseSiswa_limit(),
+            'countCourse'=>$this->Course_model->countCourseSiswa(),
+        );
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/dashboard');
+        $this->load->view('siswa/template/footer');
+    }
+
+    public function kelas()
+    {
+        $data = array(
+            'title'     => "Kelas",
+            'menu'      => "Kelas",
             'courseList' => $this->Course_model->getCourseSiswa()
         );
-        $this->load->view('siswa/header', $data);
-        $this->load->view('siswa/dashboard');
-        $this->load->view('siswa/footer');
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/kelas');
+        $this->load->view('siswa/template/footer');
+
     }
 
     public function carikelas()
@@ -34,9 +47,9 @@ class Siswa extends CI_Controller
             'menu'  => 'Kelas',
             'course' => $this->Course_model->getAllCourse(),
         );
-        $this->load->view('siswa/header', $data);
-        $this->load->view('siswa/carikelas');
-        $this->load->view('siswa/footer');
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/carikelas');
+        $this->load->view('siswa/template/footer');
     }
     public function join($id)
     {
@@ -55,9 +68,9 @@ class Siswa extends CI_Controller
         $data = array(
             'title' => "Live Code",
         );
-        $this->load->view('siswa/header', $data);
+        $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/livecode');
-        $this->load->view('siswa/footer');
+        $this->load->view('siswa/template/footer');
     }
 
     public function discussion()
@@ -66,9 +79,9 @@ class Siswa extends CI_Controller
             'title' => "Diskusi",
             'topbar' => "Diskusi"
         );
-        $this->load->view('siswa/header', $data);
+        $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/diskusi');
-        $this->load->view('siswa/footer');
+        $this->load->view('siswa/template/footer');
         # code...
     }
 }
