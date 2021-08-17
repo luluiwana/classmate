@@ -62,6 +62,17 @@ class Siswa extends CI_Controller
 
         redirect('siswa', 'refresh');
     }
+    public function course($CourseID)
+    {
+         $data = array(
+            'title'     => $this->Course_model->course($CourseID)->CourseName,
+            'menu'      => 'Kelas',
+            'course'    => $this->Course_model->course($CourseID),
+        );
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/course');
+        $this->load->view('siswa/template/footer');
+    }
 
     public function liveCode()
     {

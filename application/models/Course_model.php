@@ -31,7 +31,6 @@ class Course_model extends CI_Model
         $this->db->where('course.TeacherID', $id);
         $this->db->group_by('user_course.UserID');
         return $this->db->count_all_results();
-        
     }
 
     public function getCourseGuru_limit()
@@ -75,6 +74,14 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $query = $this->db->query('SELECT *,course.CourseID as id FROM course WHERE course.CourseID NOT IN (SELECT course.CourseID FROM course INNER JOIN user_course ON course.CourseID=user_course.CourseID AND user_course.UserID='.$id.')');
         return $query->result();
+    }
+    public function course($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->join('user_course', 'course.CourseID=user_course.CourseID');
+        $this->db->where('user_course.UserID', $id);
+        $this->db->where('course.CourseID', $CourseID);
+        return $this->db->get('course')->row();
     }
 }
                         
