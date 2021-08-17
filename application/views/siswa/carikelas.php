@@ -6,24 +6,24 @@
                 <li class="breadcrumb-item active" aria-current="page">Temukan Kelas</li>
             </ol>
         </nav>
-        <?php foreach ($course as $row ):?>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body pt-0 p-3 ">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <img src="<?=base_url()?>media/logo/<?=$row->CourseLogo?>" alt="" class="img-fluid mt-4">
-                        </div>
-                        <div class="col-md-8">
-                            <h6 class=" mb-0 mt-3 text-light fw-bold"><?=$row->CourseName?> | <?=$row->ClassName?></h6>
-                            <p class="text-secondary mt-2 small"> <i class="fas fa-school me-2"></i> <?=$row->SchoolName?></p>
-                            <a href="<?=base_url()?>siswa/join/<?=$row->CourseID?>" class="btn btn-primary btn-sm">Bergabung ke Kelas</a>
+        <?php foreach ($course as $row) : ?>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body pt-0 p-3 ">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="<?= base_url() ?>media/logo/<?= $row->CourseLogo ?>" alt="" class="img-fluid mt-4">
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class=" mb-0 mt-3 text-light fw-bold"><?= $row->CourseName ?> | <?= $row->ClassName ?></h6>
+                                <p class="text-secondary mt-2 small"> <i class="fas fa-school me-2"></i> <?= $row->SchoolName ?></p>
+                                <a href="<?= base_url() ?>siswa/join/<?= $row->Course ?>" class="btn btn-primary btn-sm">Bergabung ke Kelas</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <?php endforeach;?>
+        <?php endforeach; ?>
     </div>
 
 </div>

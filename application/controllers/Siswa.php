@@ -8,19 +8,19 @@ class Siswa extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Course_model');
-        if ($this->session->userdata('role')!='siswa') {
+        if ($this->session->userdata('role') != 'siswa') {
             redirect('auth', 'refresh');
         }
     }
-    
+
 
     public function index()
     {
         $data = array(
             'title'     => "Dashboard",
             'menu'      => "Dashboard",
-            'isCourse'  =>$this->Course_model->isCourse(),
-            'courseList'=>$this->Course_model->getCourseSiswa()
+            'isCourse'  => $this->Course_model->isCourse(),
+            'courseList' => $this->Course_model->getCourseSiswa()
         );
         $this->load->view('siswa/header', $data);
         $this->load->view('siswa/dashboard');
@@ -32,7 +32,7 @@ class Siswa extends CI_Controller
         $data = array(
             'title' => 'Temukan Kelas',
             'menu'  => 'Kelas',
-            'course'=> $this->Course_model->getAllCourse(),
+            'course' => $this->Course_model->getAllCourse(),
         );
         $this->load->view('siswa/header', $data);
         $this->load->view('siswa/carikelas');
@@ -44,12 +44,10 @@ class Siswa extends CI_Controller
             'UserID'    => $this->session->userdata('id_user'),
             'CourseID'  => $id
         );
-        
+
         $this->db->insert('user_course', $data);
-        
-        redirect('siswa','refresh');
-        
-        
+
+        redirect('siswa', 'refresh');
     }
 
     public function liveCode()
