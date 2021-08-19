@@ -13,7 +13,7 @@
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                            <div class="icon icon-shape  shadow text-center border-radius-md">
                                 <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                            <div class="icon icon-shape  shadow text-center border-radius-md">
                                 <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -51,13 +51,13 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold text-light">Misi</p>
                                 <h5 class="font-weight-bolder mb-0 text-light">
-                                   0/0
+                                    0/0
 
                                 </h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                            <div class="icon icon-shape  shadow text-center border-radius-md">
                                 <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                            <div class="icon icon-shape  shadow text-center border-radius-md">
                                 <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-                            <div class="bg-gradient-primary border-radius-lg h-100">
+                            <div class=" border-radius-lg h-100">
                                 <img src="<?=base_url()?>assets/img/shapes/waves-white.svg"
                                     class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                                 <div class="position-relative d-flex align-items-center justify-content-center h-100">
@@ -151,22 +151,25 @@
         </div>
         <?php foreach ($courseList as $row):?>
         <div class="col-md-6">
-            <div class="card">
-                <div class="card-body pt-0 p-3 ">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="<?=base_url()?>media/logo/<?=$row->CourseLogo?>" class="img-fluid mt-4" alt="">
-                        </div>
-                        <div class="col-md-9">
-                            <h6 class=" mb-0 mt-3 text-light fw-bold"><?=$row->CourseName?></h6>
-                            <div class="progress mt-3">
-                                <div class="progress-bar" role="progressbar" style="width: 25%; height:17px"
-                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+            <a href="<?=base_url()?>siswa/course/<?=$row->CourseID?>">
+                <div class="card">
+                    <div class="card-body pt-0 p-3 ">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img src="<?=base_url()?>media/logo/<?=$row->CourseLogo?>" class="img-fluid mt-4"
+                                    alt="">
+                            </div>
+                            <div class="col-md-9">
+                                <h6 class=" mb-0 mt-3 text-light fw-bold"><?=$row->CourseName?></h6>
+                                <!-- <div class="progress mt-3">
+                                    <div class="progress-bar" role="progressbar" style="width: 25%; height:17px"
+                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
         <?php endforeach;?>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-4">

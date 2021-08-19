@@ -22,6 +22,7 @@ SISWA
 - Dashboard siswa hanya menampilkan 6 kelas terbaru
 - Membuat menu kelas (Siswa)
 - Menampilkan jumlah kelas yg diambil siswa di Dashboard Siswa
+- Membuat halaman kelas
 GURU
 - Dashboard guru hanya menampilkan 6 kelas terbaru
 - Membuat menu guru (Siswa)
