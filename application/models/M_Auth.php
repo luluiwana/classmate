@@ -4,7 +4,6 @@ class M_Auth extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Auth');
     }
 
     public function do_register($data)

@@ -8,6 +8,7 @@ class Siswa extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Course_model');
+        $this->load->model('M_Discussion');
         if ($this->session->userdata('role') != 'siswa') {
             redirect('auth', 'refresh');
         }
@@ -20,7 +21,7 @@ class Siswa extends CI_Controller
             'title'     => "Dashboard",
             'menu'      => "Dashboard",
             'courseList' => $this->Course_model->getCourseSiswa_limit(),
-            'countCourse'=>$this->Course_model->countCourseSiswa(),
+            'countCourse' => $this->Course_model->countCourseSiswa(),
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/dashboard');
@@ -37,7 +38,6 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/kelas');
         $this->load->view('siswa/template/footer');
-
     }
 
     public function carikelas()
@@ -67,6 +67,7 @@ class Siswa extends CI_Controller
     {
         $data = array(
             'title' => "Live Code",
+            'menu'  => 'Live Code',
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/livecode');
@@ -77,12 +78,35 @@ class Siswa extends CI_Controller
     {
         $data = array(
             'title' => "Diskusi",
-            'topbar' => "Diskusi"
+            'menu'  => 'Diskusi',
         );
         $this->load->view('siswa/template/header', $data);
-        $this->load->view('siswa/diskusi');
+        $this->load->view('siswa/diskusi/lihat_diskusi');
         $this->load->view('siswa/template/footer');
         # code...
+    }
+
+    public function add_discussion()
+    {
+        $data = array(
+            'title' => "Tambah Diskusi",
+            'menu'  => 'Diskusi',
+        );
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/diskusi/add_diskusi');
+        $this->load->view('siswa/template/footer');
+        # code...
+    }
+
+    public function addDataDiskusi()
+    {
+        $insert_data = [
+            'ForumQtitle' => $this->input->post('judul'),
+            'ForumQContent' => $this->input->post('judul'),
+            'UserID' =>  $this->session->userdata('id_user'),
+            'Category' => $this->input->post('kategori')
+        ];
+        $this->M_Discussion->addDiscussion();
     }
 }
 

@@ -18,8 +18,12 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="<?= base_url() ?>assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
+    <link id="pagestyle" href="<?= base_url() ?>assets/css/style_forum.css" rel="stylesheet" />
+    <link id="pagestyle" href="<?= base_url() ?>assets/css/editor_forum.css" rel="stylesheet" />
+    <link id="pagestyle" href="<?= base_url() ?>assets/css/responsive_forum.css" rel="stylesheet" />
     <link id="pagestyle" href="<?= base_url() ?>assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
 </head>
 
 <body class="g-sidenav-show ">
@@ -55,7 +59,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/billing.html">
+                    <a class="nav-link  " href="<?= base_url('siswa/discussion') ?>">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
                         </div>
@@ -84,7 +88,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="<?=base_url()?>auth/logout">
+                    <a class="nav-link  " href="<?= base_url() ?>auth/logout">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher text-dark"></i>
                         </div>
