@@ -28,3 +28,5 @@ GURU
 - Membuat menu guru (Siswa)
 - Menampilkan jumlah kelas yg dibuat guru di Dashboard Guru
 - Menampilkan jumlah siswa yang diajar di Dashboard Guru
+
+20 Agustus 2021
