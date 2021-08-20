@@ -55,6 +55,28 @@ class Auth extends CI_Controller
     public function daftar()
     {
         $this->form_validation->set_rules('nama', 'nama', 'required');
+        $this->form_validation->set_rules('userRole', 'user role', 'required');
+        $this->form_validation->set_rules('telp', 'Nomor Telepon', 'required|numeric|min_length[10]|max_length[15]',
+        array(
+            'numeric'       => '%s harus berupa angka',
+            'min_length'    => '%s terlalu pendek',
+            'max_length'    => '%s terlalu panjang'
+        ));
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.UserEmail]',
+        array(
+            'valid_email'   => "%s tidak valid",
+            'is_unique'     => "%s sudah pernah terdaftar"
+        ));
+        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]',
+        array(
+            'min_length'    => '%s terlalu pendek'
+        ));
+        $this->form_validation->set_rules('passconf', 'Konfirmasi password', 'required|matches[password]',
+        array(
+            'matches'   => '%s tidak sesuai'
+        )
+        );
+        
         if ($this->form_validation->run() == false) {
             $this->load->view('home/header');
             $this->load->view('auth/daftar');
