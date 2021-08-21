@@ -32,13 +32,6 @@ class M_Auth extends CI_Model
     {
         $this->db->where('UserEmail', $email);
         $row = $this->db->get('users')->row();
-        $count = $this->db->count_all_results();
-        print_r($row);die;
-        if ($count==0) {
-            return "no";
-        }else {
-            return $row->UserPassword;
-
-        }
+        return $row->UserPassword;
     }   
 }
