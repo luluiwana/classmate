@@ -11,52 +11,95 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        if ($this->session->has_userdata('id_user')) {
-            $userdata = array('id_user', 'nama');
-            $this->session->unset_userdata($userdata);
-            $this->session->sess_destroy();
-            redirect('auth', 'refresh');
+        $this->form_validation->set_rules('email', 'email', 'callback_email_check');
+        $this->form_validation->set_rules('password', 'Kata Sandi', 'callback_password_check');
+        if ($this->form_validation->run() == false) {
+            // print_r($this->input->post('email'));die;
+            
+            $data['title']="Login";
+            $this->load->view('home/header', $data);
+            $this->load->view('auth/login');
+            $this->load->view('home/footer');
         } else {
-            $this->form_validation->set_rules('email', 'email', 'required');
-            $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
-            if ($this->form_validation->run() == false) {
-                $this->load->view('home/header');
-                $this->load->view('auth/login');
-                $this->load->view('home/footer');
-            } else {
-                $password =  $this->input->post('password');
-                $email = $this->input->post('email');
-                $cek_email = $this->M_Auth->emailCheck($email);
-                if ($cek_email == true) {
-                    $password_hash = $this->M_Auth->password_check($email);
-                    if (password_verify($password, $password_hash)) {
-                        $data = $this->M_Auth->getUserByEmail($email);
-                        $userdata = array(
-                            'id_user'  => $data->UserID,
-                            'nama'     => $data->UserName,
-                            'role'     => $data->UserRole,
-                        );
-                        $this->session->set_userdata($userdata);
-                        if ($data->UserRole=="siswa") {
-                            redirect('siswa', 'refresh');
-                        }
-                        if ($data->UserRole=="guru") {
-                            redirect('guru', 'refresh');
-                        }
-                    } else {
-                        echo 'password ga cocok';
-                    }
-                } else {
-                    echo 'email ga cocok';
-                }
-            }
+            print_r("validasi sukses");die;
+        }
+        // if (password_verify($password, $password_hash)) {
+                //         $data = $this->M_Auth->getUserByEmail($email);
+                //         $userdata = array(
+                //             'id_user'  => $data->UserID,
+                //             'nama'     => $data->UserName,
+                //             'role'     => $data->UserRole,
+                //         );
+                //         $this->session->set_userdata($userdata);
+                //         if ($data->UserRole=="siswa") {
+                //             redirect('siswa', 'refresh');
+                //         }
+                //         if ($data->UserRole=="guru") {
+                //             redirect('guru', 'refresh');
+    }
+    public function email_check($email)
+    {
+        $email_cek = $this->M_Auth->email_check($email);
+        if ($email_cek==FALSE) {
+            $this->form_validation->set_message('email_check', '{field} tidak terdaftar');
+            return false;
+        }else {
+            return true;
+        }
+    }
+    public function password_check($password)
+    {
+        $email  = $this->input->post('email');
+        $hash = $this->M_Auth->password_check($email,$password);
+        if (empty($password_check)) {
+            return false;
+        }else {
+            print_r($hash);die;
         }
     }
     public function daftar()
     {
         $this->form_validation->set_rules('nama', 'nama', 'required');
+        $this->form_validation->set_rules('userRole', 'user role', 'required');
+        $this->form_validation->set_rules(
+            'telp',
+            'Nomor Telepon',
+            'required|numeric|min_length[10]|max_length[15]',
+            array(
+            'numeric'       => '%s harus berupa angka',
+            'min_length'    => '%s terlalu pendek',
+            'max_length'    => '%s terlalu panjang'
+        )
+        );
+        $this->form_validation->set_rules(
+            'email',
+            'Email',
+            'required|valid_email|is_unique[users.UserEmail]',
+            array(
+            'valid_email'   => "%s tidak valid",
+            'is_unique'     => "%s sudah pernah terdaftar"
+        )
+        );
+        $this->form_validation->set_rules(
+            'password',
+            'Password',
+            'required|min_length[5]',
+            array(
+            'min_length'    => '%s terlalu pendek'
+        )
+        );
+        $this->form_validation->set_rules(
+            'passconf',
+            'Konfirmasi password',
+            'required|matches[password]',
+            array(
+            'matches'   => '%s tidak sesuai'
+        )
+        );
+        
         if ($this->form_validation->run() == false) {
-            $this->load->view('home/header');
+            $data['title'] = "Daftar";
+            $this->load->view('home/header', $data);
             $this->load->view('auth/daftar');
             $this->load->view('home/footer');
         } else {

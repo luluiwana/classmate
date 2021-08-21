@@ -11,15 +11,15 @@ class M_Auth extends CI_Model
         $this->db->insert('users', $data);
     }
 
-    public function emailCheck($email)
+    public function email_check($email)
     {
         $this->db->select('count(*) as c');
         $this->db->where('UserEmail', $email);
         $row = $this->db->get('users')->row();
-        if ($row->c == 1) {
-            return TRUE;
-        } else {
-            return FALSE;
+        if ($row->c==0) {
+            return false;
+        }else {
+            return true;
         }
     }
 
@@ -32,6 +32,13 @@ class M_Auth extends CI_Model
     {
         $this->db->where('UserEmail', $email);
         $row = $this->db->get('users')->row();
-        return $row->UserPassword;
-    }
+        $count = $this->db->count_all_results();
+        print_r($row);die;
+        if ($count==0) {
+            return "no";
+        }else {
+            return $row->UserPassword;
+
+        }
+    }   
 }
