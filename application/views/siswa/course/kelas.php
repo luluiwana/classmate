@@ -7,7 +7,8 @@
         </div>
         <?php foreach ($courseList as $row):?>
         <div class="col-md-6">
-            <div class="card">
+           <a href="<?=base_url()?>siswa/course/<?=$row->CourseID?>">
+                <div class="card">
                 <div class="card-body pt-0 p-3 ">
                     <div class="row">
                         <div class="col-md-3">
@@ -23,6 +24,7 @@
                     </div>
                 </div>
             </div>
+           </a>
         </div>
         <?php endforeach;?>
          
