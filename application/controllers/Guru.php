@@ -69,6 +69,17 @@ class Guru extends CI_Controller
         }
         redirect('guru', 'refresh');
     }
+    public function course($CourseID)
+    {
+        $data = array(
+            'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName." - ".$this->Course_model->courseByGuru($CourseID)->ClassName,
+            'menu'      => 'Kelas',
+            'course'    => $this->Course_model->courseByGuru($CourseID),
+        );
+        $this->load->view('guru/template/header', $data);
+        $this->load->view('guru/course/course');
+        $this->load->view('guru/template/footer');
+    }
 }
         
     /* End of file  guru.php */

@@ -83,6 +83,14 @@ class Course_model extends CI_Model
         $this->db->where('course.CourseID', $CourseID);
         return $this->db->get('course')->row();
     }
+    public function courseByGuru($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('TeacherID', $id);
+        $this->db->where('CourseID', $CourseID);
+        return $this->db->get('course')->row();
+        
+    }
 }
                         
 /* End of file Course.php */
