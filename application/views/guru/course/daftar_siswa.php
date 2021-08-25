@@ -5,6 +5,7 @@
             <table class="table table-hover mt-3" id="daftar_siswa">
                 <thead>
                     <th>No</th>
+                    <th>Ava</th>
                     <th>Nama Lengkap</th>
                     <th>Email</th>
                     <th>Nomor Telepon</th>
@@ -15,6 +16,9 @@
                     <?php foreach($siswa as $row):?>
                     <tr>
                         <td><?=$i?></td>
+                        <td>
+                            <img src="<?=base_url()?>media/avatar/<?=$row->UserAvatar?>" class="small-ava" alt="">
+                        </td>
                         <td><?=$row->UserName?></td>
                         <td><?=$row->UserEmail?></td>
                         <td><?=$row->UserContactNo?></td>

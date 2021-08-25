@@ -16,7 +16,7 @@
                 <a href="<?=base_url()?>siswa/aktivitas/<?=$course->CourseID?>"
                     class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Aktivitas"){echo "active-menu";}?>">Aktivitas</a>
                 <a href="<?=base_url()?>siswa/teman/<?=$course->CourseID?>"
-                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Teman"){echo "active-menu";}?>">Teman (32)</a>
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Teman"){echo "active-menu";}?>">Teman (<?=$jml_siswa?>)</a>
                 <a href="<?=base_url()?>siswa/informasi/<?=$course->CourseID?>"
                     class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Informasi"){echo "active-menu";}?>">Informasi</a>
                

@@ -10,6 +10,9 @@
 .profil-ava{
 	    width: 150px;
 }
+.small-ava{
+	width: 30px;
+}
 body {
 	background-color: #111111;
 }
@@ -92,6 +95,10 @@ label,
 	border: 2px solid #ff9800;
 	background: linear-gradient(24deg, #2b1700, #0d0e15);
 }
+.vector{
+	    width: 400px;
+    margin-top: -160px;
+}
 
 /* TABLE */
 thead,
@@ -105,6 +112,9 @@ th {
 .table td {
 	font-size: 14px;
 	color: white;
+}
+.table{
+	    --bs-table-hover-bg: rgb(114 0 255);
 }
 /* DATATABLE */
 table.dataTable thead th,

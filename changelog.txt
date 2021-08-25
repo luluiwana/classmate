@@ -48,3 +48,9 @@ SISWA
 - Mengubah Profil (Mengganti nama, email, dan no telp)
 - Mengubah password
 - Mengganti avatar
+- Melihat daftar teman satu kelas
+- Keluar dari kelas
+GURU
+- Mengubah Profil (Mengganti nama, email, dan no telp)
+- Mengubah password
+- Mengganti avatar

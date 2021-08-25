@@ -62,52 +62,66 @@ class Siswa extends CI_Controller
 
         redirect('siswa', 'refresh');
     }
+    public function quit($CourseID)
+    {
+        $this->Course_model->quit($CourseID);
+        
+        redirect('siswa/kelas','refresh');
+        
+    }
     public function course($CourseID)
     {
-         $data = array(
+        $data = array(
             'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Kelas',
             'course'    => $this->Course_model->course($CourseID),
+            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');
         $this->load->view('siswa/course/course');
         $this->load->view('siswa/template/footer');
     }
-     public function aktivitas($CourseID)
+    public function aktivitas($CourseID)
     {
-         $data = array(
+        $data = array(
             'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Aktivitas',
             'course'    => $this->Course_model->course($CourseID),
+            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
+
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');
         $this->load->view('siswa/course/aktivitas');
         $this->load->view('siswa/template/footer');
     }
-     public function teman($CourseID)
+    public function teman($CourseID)
     {
-         $data = array(
+        $data = array(
             'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Teman',
             'course'    => $this->Course_model->course($CourseID),
+            'teman'     => $this->Course_model->teman($CourseID),
+            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');
         $this->load->view('siswa/course/teman');
         $this->load->view('siswa/template/footer');
     }
-     public function informasi($CourseID)
+    public function informasi($CourseID)
     {
-         $data = array(
+        $data = array(
             'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Informasi',
             'course'    => $this->Course_model->course($CourseID),
+            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
+
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');

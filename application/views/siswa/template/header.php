@@ -22,8 +22,10 @@
     <link id="pagestyle" href="<?= base_url() ?>assets/css/editor_forum.css" rel="stylesheet" />
     <link id="pagestyle" href="<?= base_url() ?>assets/css/responsive_forum.css" rel="stylesheet" />
     <link id="pagestyle" href="<?= base_url() ?>assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
 </head>
 
 <body class="g-sidenav-show ">
