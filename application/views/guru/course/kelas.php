@@ -1,4 +1,5 @@
- <div class="row mt-4">
+<div class="container">
+     <div class="row mt-4">
      <?php if (!empty($courseList)) :?>
      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
          <a href="<?=base_url()?>guru/buatkelas" class="btn btn-primary me-md-2" type="button">Buat Kelas</a>
@@ -37,3 +38,4 @@
      <?php endif;?>
 
  </div>
+</div>

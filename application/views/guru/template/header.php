@@ -18,8 +18,11 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="<?= base_url() ?>assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
+    
     <link id="pagestyle" href="<?= base_url() ?>assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
+    
 </head>
 
 <body class="g-sidenav-show ">
@@ -36,7 +39,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link <?php if($menu=='Dashboard'){echo 'active';}?>" href="<?= base_url() ?>guru">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-home"></i>
                         </div>
                         <span class="nav-link-text ms-1 text-light ">Dashboard</span>
@@ -44,7 +47,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php if($menu=='Kelas'){echo 'active';}?>" href="<?=base_url()?>guru/kelas">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
                         </div>
                         <span class="nav-link-text ms-1 text-light">Kelas</span>
@@ -52,7 +55,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="../pages/billing.html">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
                         </div>
                         <span class="nav-link-text ms-1 text-light">Diskusi</span>
@@ -60,7 +63,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url('siswa/livecode') ?>">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
                         </div>
                         <span class="nav-link-text ms-1 text-light">Live Code</span>
@@ -72,16 +75,15 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="../pages/profile.html">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher "></i>
-
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-alt "></i>
                         </div>
                         <span class="nav-link-text ms-1 text-light">Pengaturan Profil</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="<?=base_url()?>auth/logout">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
 
                         </div>

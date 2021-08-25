@@ -4,11 +4,17 @@
 .navbar-vertical.navbar-expand-xs {
 	overflow: unset;
 }
+#sidenav-main{
+	    background-color: #191b2a;
+}
+.profil-ava{
+	    width: 150px;
+}
 body {
-	background-color: #0e0e0e;
+	background-color: #111111;
 }
 .card {
-	background-color: #141414;
+	background-color: #191b2a;
 }
 .blur {
 	background-color: #0e0e0e !important;
@@ -20,13 +26,16 @@ body {
 	background-color: #141414 !important;
 }
 .navbar-vertical .navbar-nav > .nav-item .nav-link.active {
-	color: #ffffff;
-	background-color: #ffffff24;
+    color: #ffffff;
+    background-color: #7200ff;
 }
 .progress {
 	height: 12px;
 
 	background-color: #353535;
+}
+.choose-ava{
+	width:18%
 }
 label,
 .form-label {
@@ -36,17 +45,97 @@ label,
 	background-color: #141414;
 }
 .btn-primary {
-	 background-color: #7200ff !important;
+	background-color: #7200ff !important;
 }
-.btn-dark{
-    background-color: #393838 !important;
+.btn-dark {
+	background-color: #393838 !important;
+}
+.btn-warning {
+    color: #000 !important;
+    background-color: #ffc700;
+    border-color: #fbcf33;
 }
 .bg-primary {
-    background-color: #7200ff !important;
+	background-color: #7200ff !important;
+}
+.bg-darkblue {
+	background: linear-gradient(
+		144deg,
+		rgba(25, 27, 42, 1) 38%,
+		rgba(10, 12, 45, 1) 82%
+	);
 }
 .text-warning {
-    color: #ffc700 !important;
+	color: #ffc700 !important;
 }
-.text-primary{
-    color:#a592f0 !important;
+.text-primary {
+	color: #a592f0 !important;
+}
+.active-menu {
+	background-color: #2d3144;
+	color: white;
+}
+.form-control,
+.form-control:focus {
+	background-color: transparent;
+	color: white;
+}
+.form-control:disabled, .form-control[readonly] {
+    background-color: transparent;
+    opacity: 1;
+}
+.modal-danger {
+	border: 2px solid rgb(118 3 3);
+	background: linear-gradient(24deg, #270202, #0d0e15);
+}
+.modal-warning {
+	border: 2px solid #ff9800;
+	background: linear-gradient(24deg, #2b1700, #0d0e15);
+}
+
+/* TABLE */
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+	border-color: #606d86;
+}
+.table td {
+	font-size: 14px;
+	color: white;
+}
+/* DATATABLE */
+table.dataTable thead th,
+table.dataTable thead td {
+	padding: 0.5rem 0.5rem;
+	color: white;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+.dataTables_wrapper .dataTables_filter input {
+	color: white;
+}
+table.dataTable tbody tr {
+	background-color: transparent;
+}
+.dataTables_wrapper .dataTables_length select {
+	color: white;
+	background-color: #191b2a;
+}
+.dataTables_wrapper .dataTables_info {
+	display: none;
+}
+/* MEDIA */
+@media only screen and (max-width: 768px) {
+	.course-menu {
+		width: 100%;
+	}
+	.card .card-body {
+		padding: 0px;
+	}
+	.choose-ava{
+	width:30%
+}
 }

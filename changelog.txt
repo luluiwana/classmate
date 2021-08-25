@@ -29,4 +29,22 @@ GURU
 - Menampilkan jumlah kelas yg dibuat guru di Dashboard Guru
 - Menampilkan jumlah siswa yang diajar di Dashboard Guru
 
-20 Agustus 2021
+22 Agustus 2021
+GURU
+- Membuat sub menu kelas (Kelas, Rekap Nilai, Siswa, Pengaturan)
+- Menampilkan daftar nama dan identitas siswa
+- Fitur pencarian dan sorting data siswa di menu kelas->Siswa
+- Mengurutkan nama siswa berdasarkan abjad secara defaut pada fitur kelas->siswa
+- Mengedit Data Kelas (Nama Kelas, Nama Sekolah, Logo)
+- Menghapus kelas
+- Mengeluarkan siswa dari kelas
+
+23 Agustus 2021
+SISWA
+- Membuat sub menu kelas (Misi, aktivitas, teman, dan informasi kelas)
+
+25 Agustus 2021
+SISWA
+- Mengubah Profil (Mengganti nama, email, dan no telp)
+- Mengubah password
+- Mengganti avatar
