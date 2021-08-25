@@ -64,7 +64,7 @@ class Siswa extends CI_Controller
     }
     public function course($CourseID)
     {
-         $data = array(
+        $data = array(
             'title'     => $this->Course_model->course($CourseID)->CourseName,
             'menu'      => 'Kelas',
             'course'    => $this->Course_model->course($CourseID),
@@ -83,41 +83,6 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/livecode');
         $this->load->view('siswa/template/footer');
-    }
-
-    public function discussion()
-    {
-        $data = array(
-            'title' => "Diskusi",
-            'menu'  => 'Diskusi',
-        );
-        $this->load->view('siswa/template/header', $data);
-        $this->load->view('siswa/diskusi/lihat_diskusi');
-        $this->load->view('siswa/template/footer');
-        # code...
-    }
-
-    public function add_discussion()
-    {
-        $data = array(
-            'title' => "Tambah Diskusi",
-            'menu'  => 'Diskusi',
-        );
-        $this->load->view('siswa/template/header', $data);
-        $this->load->view('siswa/diskusi/add_diskusi');
-        $this->load->view('siswa/template/footer');
-        # code...
-    }
-
-    public function addDataDiskusi()
-    {
-        $insert_data = [
-            'ForumQtitle' => $this->input->post('judul'),
-            'ForumQContent' => $this->input->post('judul'),
-            'UserID' =>  $this->session->userdata('id_user'),
-            'Category' => $this->input->post('kategori')
-        ];
-        $this->M_Discussion->addDiscussion();
     }
 }
 
