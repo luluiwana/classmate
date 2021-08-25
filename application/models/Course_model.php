@@ -83,6 +83,56 @@ class Course_model extends CI_Model
         $this->db->where('course.CourseID', $CourseID);
         return $this->db->get('course')->row();
     }
+    public function courseByGuru($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('TeacherID', $id);
+        $this->db->where('CourseID', $CourseID);
+        return $this->db->get('course')->row();
+        
+    }
+    public function getSiswaByCourse($CourseID)
+    {
+
+    $id = $this->session->userdata('id_user');
+
+    $this->db->join('course', 'user_course.CourseID=course.CourseID');
+    $this->db->join('users', 'users.UserID=user_course.UserID');
+    $this->db->where('course.CourseID', $CourseID);
+    $this->db->where('course.TeacherID', $id);
+    
+    $this->db->order_by('users.UserName', 'asc');
+    
+    return $this->db->get('user_course')->result();
+    }
+    public function updateKelas($CourseID,$data)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('TeacherID', $id);
+        $this->db->update('course', $data);
+    }
+    public function getOldLogo($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('TeacherID', $id);
+        $this->db->where('CourseID', $CourseID);
+        $row = $this->db->get('course')->row();
+        return $row->CourseLogo;
+    }
+    public function deleteCourse($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('TeacherID', $id);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->delete('course');
+    }
+    public function kick($CourseID, $UserID)
+    {
+        $this->db->where('UserID', $UserID);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->delete('user_course');
+    }
 }
                         
 /* End of file Course.php */

@@ -33,5 +33,25 @@ class M_Auth extends CI_Model
         $this->db->where('UserEmail', $email);
         $row = $this->db->get('users')->row();
         return $row->UserPassword;
+    }  
+     public function old_check()
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('UserID', $id);
+        $row = $this->db->get('users')->row();
+        return $row->UserPassword;
     }   
+    public function getProfil()
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('UserID', $id);
+        return $this->db->get('users')->row();
+    }
+    public function update($data)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('UserID', $id);
+        $this->db->update('users', $data);    
+    }
+
 }

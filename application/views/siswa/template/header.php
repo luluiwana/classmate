@@ -28,12 +28,12 @@
 </head>
 
 <body class="g-sidenav-show ">
-    <aside class="sidenav navbar bg-dark navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <div class="sidenav-header  ">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html" target="_blank">
                 <img src="<?= base_url() ?>assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold text-light">Classmate</span>
+                <span class="ms-1 font-weight-bold text-white">Classmate</span>
             </a>
         </div>
         <hr class="horizontal dark mt-0">
@@ -43,57 +43,58 @@
                     <a class="nav-link <?php if ($menu == 'Dashboard') {
                                             echo 'active';
                                         } ?>" href="<?= base_url() ?>siswa">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-home"></i>
                         </div>
-                        <span class="nav-link-text ms-1 text-light ">Dashboard</span>
+                        <span class="nav-link-text ms-1 text-white ">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php if ($menu == 'Kelas') {
                                             echo 'active';
                                         } ?>" href="<?= base_url() ?>siswa/kelas">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
                         </div>
-                        <span class="nav-link-text ms-1 text-light">Kelas</span>
+                        <span class="nav-link-text ms-1 text-white">Kelas</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url('siswa/discussion') ?>">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher "></i>
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-comments "></i>
                         </div>
-                        <span class="nav-link-text ms-1 text-light">Diskusi</span>
+                        <span class="nav-link-text ms-1 text-white">Diskusi</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url('siswa/livecode') ?>">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher "></i>
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-code "></i>
                         </div>
-                        <span class="nav-link-text ms-1 text-light">Live Code</span>
+                        <span class="nav-link-text ms-1 text-white">Live Code</span>
                     </a>
                 </li>
 
                 <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-light">Profil</h6>
+                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-white">Profil</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/profile.html">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-dark text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher "></i>
-
+                    <a class="nav-link  <?php if ($menu == 'Profil') {
+                                            echo 'active';
+                                        } ?>" href="<?=base_url()?>profil/">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="fas fa-user-alt "></i>
                         </div>
-                        <span class="nav-link-text ms-1 text-light">Pengaturan Profil</span>
+                        <span class="nav-link-text ms-1 text-white">Pengaturan Profil</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url() ?>auth/logout">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher text-dark"></i>
+                            <i class="fas fa-sign-out-alt text-dark"></i>
                         </div>
-                        <span class="nav-link-text ms-1 text-light">Keluar</span>
+                        <span class="nav-link-text ms-1 text-white">Keluar</span>
                     </a>
                 </li>
 
@@ -106,7 +107,7 @@
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
 
-                <h6 class="font-weight-bolder mb-0 text-light"><?= $title ?></h6>
+                <h6 class="font-weight-bolder mb-0 text-white"><?= $title ?></h6>
 
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -115,8 +116,8 @@
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1 text-light"></i>
-                                <span class="d-sm-inline d-none text-light"><?=
+                                <i class="fa fa-user me-sm-1 text-white"></i>
+                                <span class="d-sm-inline d-none text-white"><?=
                                                                             $this->session->userdata('nama');
                                                                             ?></span>
                             </a>

@@ -65,12 +65,53 @@ class Siswa extends CI_Controller
     public function course($CourseID)
     {
         $data = array(
-            'title'     => $this->Course_model->course($CourseID)->CourseName,
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
+            'course_menu'      => 'Kelas',
             'course'    => $this->Course_model->course($CourseID),
         );
         $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/course_menu');
         $this->load->view('siswa/course/course');
+        $this->load->view('siswa/template/footer');
+    }
+    public function aktivitas($CourseID)
+    {
+        $data = array(
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
+            'menu'      => 'Kelas',
+            'course_menu'      => 'Aktivitas',
+            'course'    => $this->Course_model->course($CourseID),
+        );
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/course_menu');
+        $this->load->view('siswa/course/aktivitas');
+        $this->load->view('siswa/template/footer');
+    }
+    public function teman($CourseID)
+    {
+        $data = array(
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
+            'menu'      => 'Kelas',
+            'course_menu'      => 'Teman',
+            'course'    => $this->Course_model->course($CourseID),
+        );
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/course_menu');
+        $this->load->view('siswa/course/teman');
+        $this->load->view('siswa/template/footer');
+    }
+    public function informasi($CourseID)
+    {
+        $data = array(
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
+            'menu'      => 'Kelas',
+            'course_menu'      => 'Informasi',
+            'course'    => $this->Course_model->course($CourseID),
+        );
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/course_menu');
+        $this->load->view('siswa/course/informasi');
         $this->load->view('siswa/template/footer');
     }
 
