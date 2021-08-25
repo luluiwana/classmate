@@ -61,7 +61,7 @@
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url('siswa/discussion') ?>">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher "></i>
+                            <i class="fas fa-comments "></i>
                         </div>
                         <span class="nav-link-text ms-1 text-white">Diskusi</span>
                     </a>
@@ -69,7 +69,7 @@
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url('siswa/livecode') ?>">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher "></i>
+                            <i class="fas fa-code "></i>
                         </div>
                         <span class="nav-link-text ms-1 text-white">Live Code</span>
                     </a>
@@ -91,7 +91,7 @@
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url() ?>auth/logout">
                         <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="fas fa-chalkboard-teacher text-dark"></i>
+                            <i class="fas fa-sign-out-alt text-dark"></i>
                         </div>
                         <span class="nav-link-text ms-1 text-white">Keluar</span>
                     </a>
