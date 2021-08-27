@@ -296,7 +296,7 @@ function navbarBlurOnScroll(id) {
       });
 
       navLinksToggler.forEach(element => {
-        element.classList.add('bg-dark')
+        element.classList.add('bg-white')
       });
     } else if (type === "transparent") {
       navLinks.forEach(element => {

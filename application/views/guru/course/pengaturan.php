@@ -1,7 +1,12 @@
 <div class="row mx-0 mt-4">
-    <div class="col-md-7">
-        <div class="card bg-darkblue">
-            <div class="card-body">
+
+    <div class="card bg-darkblue">
+        <div class="card-body row">
+             <div class="col-md-6 d-none d-sm-block">
+                <img src="<?=base_url()?>assets/img/vector/Mathematics-rafiki.svg" alt="" srcset="" class="w-100">
+                <a href="https://storyset.com/education" class="d-none">Education illustrations by Storyset</a>
+            </div>
+            <div class="col-md-6" >
                 <form action="<?=base_url()?>guru/editkelas/<?=$course->CourseID?>" method="post"
                     enctype='multipart/form-data'>
                     <div class="mb-3">
@@ -63,18 +68,14 @@
                         </div>
                     </div>
                 </form>
+            </div>
+           
 
-            </div>
+
         </div>
     </div>
-    <div class="col-md-5 d-none d-sm-block">
-        <div class="card bg-darkblue">
-            <div class="card-body">
-                <img src="<?=base_url()?>assets/img/vector/Mathematics-rafiki.svg" alt="" srcset="" class="w-100">
-                <a href="https://storyset.com/education" class="d-none">Education illustrations by Storyset</a>
-            </div>
-        </div>
-    </div>
+
+
 
 </div>
 </div>

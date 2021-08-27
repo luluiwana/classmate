@@ -32,6 +32,15 @@ class Course_model extends CI_Model
         $this->db->group_by('user_course.UserID');
         return $this->db->count_all_results();
     }
+    public function countSiswaByCourse($CourseID)
+    {
+        $this->db->select('count(*) as c');
+        $this->db->join('course', 'user_course.CourseID=course.CourseID');
+        $this->db->join('users', 'users.UserID=user_course.UserID');
+        $this->db->where('course.CourseID', $CourseID);
+        $row = $this->db->get('user_course')->row();
+        return $row->c;
+    }
 
     public function getCourseGuru_limit()
     // get course created by teacher limit 6
@@ -89,23 +98,21 @@ class Course_model extends CI_Model
         $this->db->where('TeacherID', $id);
         $this->db->where('CourseID', $CourseID);
         return $this->db->get('course')->row();
-        
     }
     public function getSiswaByCourse($CourseID)
     {
+        $id = $this->session->userdata('id_user');
 
-    $id = $this->session->userdata('id_user');
-
-    $this->db->join('course', 'user_course.CourseID=course.CourseID');
-    $this->db->join('users', 'users.UserID=user_course.UserID');
-    $this->db->where('course.CourseID', $CourseID);
-    $this->db->where('course.TeacherID', $id);
+        $this->db->join('course', 'user_course.CourseID=course.CourseID');
+        $this->db->join('users', 'users.UserID=user_course.UserID');
+        $this->db->where('course.CourseID', $CourseID);
+        $this->db->where('course.TeacherID', $id);
     
-    $this->db->order_by('users.UserName', 'asc');
+        $this->db->order_by('users.UserName', 'asc');
     
-    return $this->db->get('user_course')->result();
+        return $this->db->get('user_course')->result();
     }
-    public function updateKelas($CourseID,$data)
+    public function updateKelas($CourseID, $data)
     {
         $id = $this->session->userdata('id_user');
         $this->db->where('CourseID', $CourseID);
@@ -131,6 +138,22 @@ class Course_model extends CI_Model
     {
         $this->db->where('UserID', $UserID);
         $this->db->where('CourseID', $CourseID);
+        $this->db->delete('user_course');
+    }
+    public function teman($CourseID)
+    {
+        $this->db->join('course', 'user_course.CourseID=course.CourseID');
+        $this->db->join('users', 'users.UserID=user_course.UserID');
+        $this->db->where('course.CourseID', $CourseID);
+        $this->db->order_by('users.UserName', 'asc');
+        return $this->db->get('user_course')->result();
+
+    }
+    public function quit($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
         $this->db->delete('user_course');
     }
 }
