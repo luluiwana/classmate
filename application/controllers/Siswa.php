@@ -60,7 +60,7 @@ class Siswa extends CI_Controller
 
         $this->db->insert('user_course', $data);
 
-        redirect('siswa', 'refresh');
+        redirect('siswa/course/'.$id, 'refresh');
     }
     public function quit($CourseID)
     {

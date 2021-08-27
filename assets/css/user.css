@@ -4,13 +4,13 @@
 .navbar-vertical.navbar-expand-xs {
 	overflow: unset;
 }
-#sidenav-main{
-	    background-color: #191b2a;
+#sidenav-main {
+	background-color: #191b2a!important;
 }
-.profil-ava{
-	    width: 150px;
+.profil-ava {
+	width: 150px;
 }
-.small-ava{
+.small-ava {
 	width: 30px;
 }
 body {
@@ -29,16 +29,28 @@ body {
 	background-color: #141414 !important;
 }
 .navbar-vertical .navbar-nav > .nav-item .nav-link.active {
-    color: #ffffff;
-    background-color: #7200ff;
+	color: #ffffff;
+	background-color: #7200ff;
 }
 .progress {
-	height: 12px;
+	height: 0px;
 
 	background-color: #353535;
 }
-.choose-ava{
-	width:18%
+.progress-bar {
+	background-color: #ffc700;
+}
+.badges{
+	width: 50px;
+}
+.choose-ava {
+	width: 18%;
+}
+.course-logo {
+	width: 20%;
+}
+.course-info {
+	width: 80%;
 }
 label,
 .form-label {
@@ -54,9 +66,9 @@ label,
 	background-color: #393838 !important;
 }
 .btn-warning {
-    color: #000 !important;
-    background-color: #ffc700;
-    border-color: #fbcf33;
+	color: #000 !important;
+	background-color: #ffc700;
+	border-color: #fbcf33;
 }
 .bg-primary {
 	background-color: #7200ff !important;
@@ -67,6 +79,12 @@ label,
 		rgba(25, 27, 42, 1) 38%,
 		rgba(10, 12, 45, 1) 82%
 	);
+}
+.bg-darkpurple {
+	background: linear-gradient(144deg, rgba(25, 27, 42, 1) 38%, #2e193a 82%);
+}
+.bg-darkgreen {
+	background: linear-gradient(144deg, rgba(25, 27, 42, 1) 38%, #0f2c3b 82%);
 }
 .text-warning {
 	color: #ffc700 !important;
@@ -83,9 +101,10 @@ label,
 	background-color: transparent;
 	color: white;
 }
-.form-control:disabled, .form-control[readonly] {
-    background-color: transparent;
-    opacity: 1;
+.form-control:disabled,
+.form-control[readonly] {
+	background-color: transparent;
+	opacity: 1;
 }
 .modal-danger {
 	border: 2px solid rgb(118 3 3);
@@ -95,9 +114,9 @@ label,
 	border: 2px solid #ff9800;
 	background: linear-gradient(24deg, #2b1700, #0d0e15);
 }
-.vector{
-	    width: 400px;
-    margin-top: -160px;
+.vector {
+	width: 400px;
+	margin-top: -160px;
 }
 
 /* TABLE */
@@ -113,8 +132,11 @@ th {
 	font-size: 14px;
 	color: white;
 }
-.table{
-	    --bs-table-hover-bg: rgb(114 0 255);
+.course-link:hover {
+	background-color: rgb(114 0 255);
+}
+.table {
+	--bs-table-hover-bg: rgb(114 0 255);
 }
 /* DATATABLE */
 table.dataTable thead th,
@@ -137,15 +159,29 @@ table.dataTable tbody tr {
 .dataTables_wrapper .dataTables_info {
 	display: none;
 }
+.character {
+    width: 120%;
+    margin-top: -70px;
+}
 /* MEDIA */
 @media only screen and (max-width: 768px) {
 	.course-menu {
 		width: 100%;
 	}
-	.card .card-body {
-		padding: 0px;
+	.course-logo {
+		width: 25%;
 	}
-	.choose-ava{
-	width:30%
+	.course-info {
+		width: 75%;
+	}
+	.badges{
+	width: 40px;
+}
+	.choose-ava {
+		width: 30%;
+	}
+	.character {
+    width: 100px;
+    margin-top: 0px;
 }
 }

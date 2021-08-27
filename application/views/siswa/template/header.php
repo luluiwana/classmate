@@ -92,7 +92,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  " href="<?= base_url() ?>auth/logout">
-                        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-sign-out-alt text-dark"></i>
                         </div>
                         <span class="nav-link-text ms-1 text-white">Keluar</span>
@@ -126,9 +126,9 @@
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                                 <div class="sidenav-toggler-inner">
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
-                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line bg-light"></i>
+                                    <i class="sidenav-toggler-line bg-light"></i>
+                                    <i class="sidenav-toggler-line bg-light"></i>
                                 </div>
                             </a>
                         </li>
