@@ -17,7 +17,7 @@
                 <div class="col-md-11">
                     <div class="right-description893">
                         <div id="que-hedder2983">
-                            <h3><a class='text-white' href="post-deatils.html" target="_blank"><?= $row->ForumQTitle ?></a></h3>
+                            <h3><a class='text-white' href="<?= base_url('discussion/detail_discussion/' . $row->ForumQID) ?>" target="_blank"><?= $row->ForumQTitle ?></a></h3>
                         </div>
                         <div class="ques-details10018">
                             <?= $row->ForumQContent ?>

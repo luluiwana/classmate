@@ -26,16 +26,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-1">
-                                <div class="left-user12923 ">
-                                    <a href="#" class="mx-auto"><img src="<?= base_url('assets/img/team-3.jpg') ?>" alt="image"> </a>
+                            <?php foreach ($comments as $row) : ?>
+                                <div class="col-1">
+                                    <div class="left-user12923 ">
+                                        <a href="#" class="mx-auto"><img src="<?= base_url('assets/img/team-3.jpg') ?>" alt="image"> </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-11">
-                                <h6 class="card-title text-white">Card title</h6>
-                                <p class="card-text mb-2" style="font-size: 0.8rem;">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="card-text text-white" style="font-size: 0.7rem;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><i class="fa fa-commenting card-text text-white " style="font-size: 0.7rem;" aria-hidden="true">&nbsp; </i>Edit Komentar </a>
-                            </div>
+                                <div class="col-11">
+                                    <h6 class="card-title text-white"><?= $row->UserName ?></h6>
+                                    <p class="card-text mb-2" style="font-size: 0.2rem;"><?= $row->ForumAContent ?></p>
+                                    <!-- <a href="#" class="card-text text-white" style="font-size: 0.7rem;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><i class="fa fa-commenting card-text text-white " style="font-size: 0.7rem;" aria-hidden="true">&nbsp; </i>Edit Komentar </a> -->
+                                </div>
+                            <?php endforeach; ?>
 
                         </div>
 
