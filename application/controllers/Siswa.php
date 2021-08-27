@@ -60,23 +60,22 @@ class Siswa extends CI_Controller
 
         $this->db->insert('user_course', $data);
 
-        redirect('siswa/course/'.$id, 'refresh');
+        redirect('siswa/course/' . $id, 'refresh');
     }
     public function quit($CourseID)
     {
         $this->Course_model->quit($CourseID);
-        
-        redirect('siswa/kelas','refresh');
-        
+
+        redirect('siswa/kelas', 'refresh');
     }
     public function course($CourseID)
     {
         $data = array(
-            'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Kelas',
             'course'    => $this->Course_model->course($CourseID),
-            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
+            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');
@@ -86,11 +85,11 @@ class Siswa extends CI_Controller
     public function aktivitas($CourseID)
     {
         $data = array(
-            'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Aktivitas',
             'course'    => $this->Course_model->course($CourseID),
-            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
+            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
 
         );
         $this->load->view('siswa/template/header', $data);
@@ -101,12 +100,12 @@ class Siswa extends CI_Controller
     public function teman($CourseID)
     {
         $data = array(
-            'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Teman',
             'course'    => $this->Course_model->course($CourseID),
             'teman'     => $this->Course_model->teman($CourseID),
-            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
+            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');
@@ -116,11 +115,11 @@ class Siswa extends CI_Controller
     public function informasi($CourseID)
     {
         $data = array(
-            'title'     => $this->Course_model->course($CourseID)->CourseName.' - '.$this->Course_model->course($CourseID)->ClassName,
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Informasi',
             'course'    => $this->Course_model->course($CourseID),
-            'jml_siswa'=>$this->Course_model->countSiswaByCourse($CourseID)
+            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
 
         );
         $this->load->view('siswa/template/header', $data);
@@ -138,41 +137,6 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/livecode');
         $this->load->view('siswa/template/footer');
-    }
-
-    public function discussion()
-    {
-        $data = array(
-            'title' => "Diskusi",
-            'menu'  => 'Diskusi',
-        );
-        $this->load->view('siswa/template/header', $data);
-        $this->load->view('siswa/diskusi/lihat_diskusi');
-        $this->load->view('siswa/template/footer');
-        # code...
-    }
-
-    public function add_discussion()
-    {
-        $data = array(
-            'title' => "Tambah Diskusi",
-            'menu'  => 'Diskusi',
-        );
-        $this->load->view('siswa/template/header', $data);
-        $this->load->view('siswa/diskusi/add_diskusi');
-        $this->load->view('siswa/template/footer');
-        # code...
-    }
-
-    public function addDataDiskusi()
-    {
-        $insert_data = [
-            'ForumQtitle' => $this->input->post('judul'),
-            'ForumQContent' => $this->input->post('judul'),
-            'UserID' =>  $this->session->userdata('id_user'),
-            'Category' => $this->input->post('kategori')
-        ];
-        $this->M_Discussion->addDiscussion();
     }
 }
 

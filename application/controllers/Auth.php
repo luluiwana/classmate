@@ -21,16 +21,16 @@ class Auth extends CI_Controller
         } else {
             $email = $this->input->post('email');
             $data = $this->M_Auth->getUserByEmail($email);
-            $userdata = 
-            array(
-                'id_user'  => $data->UserID,
-                'nama'     => $data->UserName,
-                'role'     => $data->UserRole,
-            );
+            $userdata =
+                array(
+                    'id_user'  => $data->UserID,
+                    'nama'     => $data->UserName,
+                    'role'     => $data->UserRole,
+                );
             $this->session->set_userdata($userdata);
-            if ($data->UserRole=="siswa") {
+            if ($data->UserRole == "siswa") {
                 redirect('siswa', 'refresh');
-            }elseif ($data->UserRole=="guru") {
+            } elseif ($data->UserRole == "guru") {
                 redirect('guru', 'refresh');
             }
         }
@@ -39,22 +39,21 @@ class Auth extends CI_Controller
     {
         $email_cek = $this->M_Auth->email_check($email);
         $password = $this->input->post('password');
-        
-        if ($email_cek==FALSE) {
+
+        if ($email_cek == FALSE) {
             $this->form_validation->set_message('email_check', '{field} tidak terdaftar');
             return false;
-        }else {
+        } else {
             $hash = $this->M_Auth->password_check($email);
-            if (password_verify($password,$hash)) {
+            if (password_verify($password, $hash)) {
                 return true;
-            }
-            else {
-            $this->form_validation->set_message('email_check', 'Password salah');
+            } else {
+                $this->form_validation->set_message('email_check', 'Password salah');
                 return false;
             }
         }
     }
-    
+
     public function daftar()
     {
         $this->form_validation->set_rules('nama', 'nama', 'required');
@@ -64,37 +63,37 @@ class Auth extends CI_Controller
             'Nomor Telepon',
             'required|numeric|min_length[10]|max_length[15]',
             array(
-            'numeric'       => '%s harus berupa angka',
-            'min_length'    => '%s terlalu pendek',
-            'max_length'    => '%s terlalu panjang'
-        )
+                'numeric'       => '%s harus berupa angka',
+                'min_length'    => '%s terlalu pendek',
+                'max_length'    => '%s terlalu panjang'
+            )
         );
         $this->form_validation->set_rules(
             'email',
             'Email',
             'required|valid_email|is_unique[users.UserEmail]',
             array(
-            'valid_email'   => "%s tidak valid",
-            'is_unique'     => "%s sudah pernah terdaftar"
-        )
+                'valid_email'   => "%s tidak valid",
+                'is_unique'     => "%s sudah pernah terdaftar"
+            )
         );
         $this->form_validation->set_rules(
             'password',
             'Password',
             'required|min_length[5]',
             array(
-            'min_length'    => '%s terlalu pendek'
-        )
+                'min_length'    => '%s terlalu pendek'
+            )
         );
         $this->form_validation->set_rules(
             'passconf',
             'Konfirmasi password',
             'required|matches[password]',
             array(
-            'matches'   => '%s tidak sesuai'
-        )
+                'matches'   => '%s tidak sesuai'
+            )
         );
-        
+
         if ($this->form_validation->run() == false) {
             $data['title'] = "Daftar";
             $this->load->view('home/header', $data);
@@ -109,7 +108,7 @@ class Auth extends CI_Controller
                 'UserRole' => $this->input->post('userRole'),
             ];
             $this->M_Auth->do_register($insert_data);
-            
+
             redirect('auth', 'refresh');
         }
     }
@@ -117,7 +116,7 @@ class Auth extends CI_Controller
     {
         $this->session->unset_userdata('id_user');
         $this->session->unset_userdata('nama');
-        
+
         redirect('auth', 'refresh');
     }
 }
