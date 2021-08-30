@@ -17,8 +17,7 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->from('course');
         $this->db->where('TeacherID', $id);
-        return $this->db->count_all_results();
-        ;
+        return $this->db->count_all_results();;
     }
     public function getUser()
     {
@@ -32,7 +31,7 @@ class Course_model extends CI_Model
     {
         // SELECT * FROM course INNER JOIN user_course ON course.CourseID=user_course.CourseID WHERE course.TeacherID=2
         $id = $this->session->userdata('id_user');
-        
+
         $this->db->select('user_course.UserID');
         $this->db->from('course');
         $this->db->join('user_course', 'course.CourseID = user_course.CourseID');
@@ -56,9 +55,9 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->where('TeacherID', $id);
         $this->db->limit(6);
-        
+
         $this->db->order_by('CourseID', 'desc');
-        
+
         return $this->db->get('course')->result();
     }
     public function getCourseSiswa_limit()
@@ -89,7 +88,7 @@ class Course_model extends CI_Model
     //get course where user not joining into that course
     {
         $id = $this->session->userdata('id_user');
-        $query = $this->db->query('SELECT *,course.CourseID as id FROM course WHERE course.CourseID NOT IN (SELECT course.CourseID FROM course INNER JOIN user_course ON course.CourseID=user_course.CourseID AND user_course.UserID='.$id.')');
+        $query = $this->db->query('SELECT *,course.CourseID as id FROM course WHERE course.CourseID NOT IN (SELECT course.CourseID FROM course INNER JOIN user_course ON course.CourseID=user_course.CourseID AND user_course.UserID=' . $id . ')');
         return $query->result();
     }
     public function course($CourseID)
@@ -115,9 +114,9 @@ class Course_model extends CI_Model
         $this->db->join('users', 'users.UserID=user_course.UserID');
         $this->db->where('course.CourseID', $CourseID);
         $this->db->where('course.TeacherID', $id);
-    
+
         $this->db->order_by('users.UserName', 'asc');
-    
+
         return $this->db->get('user_course')->result();
     }
     public function updateKelas($CourseID, $data)
@@ -155,7 +154,6 @@ class Course_model extends CI_Model
         $this->db->where('course.CourseID', $CourseID);
         $this->db->order_by('users.UserName', 'asc');
         return $this->db->get('user_course')->result();
-
     }
     public function quit($CourseID)
     {
@@ -163,6 +161,40 @@ class Course_model extends CI_Model
         $this->db->where('CourseID', $CourseID);
         $this->db->where('UserID', $id);
         $this->db->delete('user_course');
+    }
+
+    public function getCompetenciesByID($CourseID)
+    {
+        return $this->db->get_where('competencies', array('CourseID' => $CourseID))->result_object();
+    }
+    public function getCompetenciesByIDwithArray($CourseID)
+    {
+        return $this->db->get_where('competencies', array('CourseID' => $CourseID))->result_array();
+    }
+
+    public function getCouseByCompetenciesID($CompetenciesID)
+    {
+        return $this->db->get_where('competencies', array('CompetenciesID' => $CompetenciesID))->row_object();
+    }
+
+    public function addCompetencies($data)
+    {
+        $this->db->insert('competencies', $data);
+    }
+
+    public function addLesson($data)
+    {
+        $this->db->insert('course_lesson', $data);
+    }
+
+    public function getLessonContentByID($LessonID)
+    {
+        return $this->db->get_where('course_lesson', array('LessonID' => $LessonID))->row_array();
+    }
+
+    public function getLessonByCompetenciesID($CompetenciesID)
+    {
+        return $this->db->get_where('course_lesson', array('CompetenciesID' => $CompetenciesID))->result_array();
     }
 }
                         
