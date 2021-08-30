@@ -54,3 +54,9 @@ GURU
 - Mengubah Profil (Mengganti nama, email, dan no telp)
 - Mengubah password
 - Mengganti avatar
+
+30 Agustus 2021
+SISWA
+- Menampilkan materi
+- Menampilkan level
+- Menampilkan karakter sesuai level

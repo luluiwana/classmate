@@ -1,9 +1,9 @@
 <div class="row mx-0 mt-4">
 
     <div class="card bg-darkblue">
-        <div class="card-body row">
+        <div class="card-body row p-2">
              <div class="col-md-6 d-none d-sm-block">
-                <img src="<?=base_url()?>assets/img/vector/Mathematics-rafiki.svg" alt="" srcset="" class="w-100">
+                <img src="<?=base_url()?>assets/img/vector/Online test-pana.svg" alt="" srcset="" class="w-100">
                 <a href="https://storyset.com/education" class="d-none">Education illustrations by Storyset</a>
             </div>
             <div class="col-md-6" >

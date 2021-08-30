@@ -8,7 +8,7 @@
             <p class="fw-bold text-white small mt-3"> <i class="fas fa-dot-circle text-warning me-1"></i> KELAS SAYA</p>
             <?php foreach ($courseList as $row):?>
             <div class="mt-2">
-                <a href="<?=base_url()?>siswa/course/<?=$row->CourseID?>">
+                <a href="<?=base_url()?>lesson/course/<?=$row->CourseID?>">
                     <div class="card course-link">
                         <div class="card-body ">
                             <div class="row">

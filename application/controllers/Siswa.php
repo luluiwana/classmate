@@ -22,6 +22,7 @@ class Siswa extends CI_Controller
             'menu'      => "Dashboard",
             'courseList' => $this->Course_model->getCourseSiswa_limit(),
             'countCourse' => $this->Course_model->countCourseSiswa(),
+            'user'        => $this->Course_model->getUser(),
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/dashboard');
@@ -60,7 +61,7 @@ class Siswa extends CI_Controller
 
         $this->db->insert('user_course', $data);
 
-        redirect('siswa/course/' . $id, 'refresh');
+        redirect('lesson/course/' . $id, 'refresh');
     }
     public function quit($CourseID)
     {
@@ -68,20 +69,7 @@ class Siswa extends CI_Controller
 
         redirect('siswa/kelas', 'refresh');
     }
-    public function course($CourseID)
-    {
-        $data = array(
-            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
-            'menu'      => 'Kelas',
-            'course_menu'      => 'Kelas',
-            'course'    => $this->Course_model->course($CourseID),
-            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
-        );
-        $this->load->view('siswa/template/header', $data);
-        $this->load->view('siswa/course/course_menu');
-        $this->load->view('siswa/course/course');
-        $this->load->view('siswa/template/footer');
-    }
+  
     public function aktivitas($CourseID)
     {
         $data = array(

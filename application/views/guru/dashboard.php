@@ -8,17 +8,17 @@
                     <p class="text-warning fw-bolder fs-4">GURU</p>
                     <hr>
                     <div class="row text-white small">
-                        <div class="col-md-3 w-25">
+                        <div class="col-md-3 w-50">
                             Kelas <p class="fw-bold fs-4"> <?=$countCourse?></p>
                         </div>
-                        <div class="col-md-3 w-25">
+                        <div class="col-md-3 w-50">
                             Siswa <p class="fw-bold fs-4"> <?=$countSiswa?></p>
                         </div>
-                        <div class="col-md-3 w-25">
+                        <div class="col-md-3 w-50">
                             Materi <p class="fw-bold fs-4">3</p>
                         </div>
-                        <div class="col-md-3 w-25">
-                            Quiz <p class="fw-bold fs-4">0/6</p>
+                        <div class="col-md-3 w-50">
+                            Quiz <p class="fw-bold fs-4">6</p>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
     </div>
    
     <div class="row mt-4">
-        <h6 class="text-white font-weight-bolder mb-4 pt-2">Kelas Terbaru</h6>
+        <h6 class="text-white font-weight-bolder mb-2 pt-2">Kelas Terbaru</h6>
         <?php if (!empty($courseList)) :?>
         <?php foreach ($courseList as $row ):?>
       
@@ -85,7 +85,7 @@
             </a>
         </div>
         <?php endforeach;?>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start mt-2">
             <a href="<?=base_url()?>guru/kelas" class="btn btn-warning me-md-2" type="button">Lihat Semua Kelas</a>
         </div>
         <?php else:?>

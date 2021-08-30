@@ -4,13 +4,13 @@
             <div class="card bg-darkpurple">
                 <div class="card-body row">
                     <div class="col-md-7">
-                        <p class="text-white fw-bold text-uppercase mb-0"><?=$this->session->userdata('nama');?>
+                        <p class="text-white fw-bold text-uppercase mb-0"><?=$user->UserName?>
                         </p>
-                        <p class="text-warning fw-bolder fs-2">PETUALANG</p>
+                        <p class="text-warning fw-bolder fs-2 text-uppercase"><?=$user->desc?></p>
                         <hr>
                         <div class="row text-white small">
                             <div class="col-md-3 w-50">
-                                Kelas <p class="fw-bold fs-4">3</p>
+                                Kelas <p class="fw-bold fs-4"><?=$countCourse?></p>
                             </div>
                             <div class="col-md-3 w-50">
                                 Misi <p class="fw-bold fs-4">0/6</p>
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="col-md-5 text-center">
-                        <img src="<?=base_url()?>assets/character/4.png" class="character" alt="">
+                        <img src="<?=base_url()?>assets/character/<?=$user->LevelID?>.png" class="character" alt="">
                     </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                     <div class="card bg-darkgreen">
                         <div class="card-body">
                             <p class="text-white fw-bold small"> <i class="fas fa-dot-circle text-success me-1"></i>LEVEL</p>
-                            <p class="text-white fw-bold fs-2 text-center"><i class="fas fa-star"></i> 2</p>
+                            <p class="text-white fw-bold fs-2 text-center"><i class="fas fa-star"></i><?=$user->LevelID?></p>
                         </div>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
 
         <?php foreach ($courseList as $row):?>
         <div class="col-md-4 mt-2">
-            <a href="<?=base_url()?>siswa/course/<?=$row->CourseID?>">
+            <a href="<?=base_url()?>lesson/course/<?=$row->CourseID?>">
                 <div class="card course-link">
                     <div class="card-body ">
                         <div class="row">

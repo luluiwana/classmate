@@ -20,6 +20,14 @@ class Course_model extends CI_Model
         return $this->db->count_all_results();
         ;
     }
+    public function getUser()
+    {
+        // SELECT * FROM `users` INNER JOIN Level ON Level.LevelID=users.Level WHERE users.UserID=3
+        $id = $this->session->userdata('id_user');
+        $this->db->join('Level', 'Level.LevelID=users.Level');
+        $this->db->where('users.UserID', $id);
+        return $this->db->get('users')->row();
+    }
     public function countSiswa()
     {
         // SELECT * FROM course INNER JOIN user_course ON course.CourseID=user_course.CourseID WHERE course.TeacherID=2

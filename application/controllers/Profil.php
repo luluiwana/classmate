@@ -136,7 +136,7 @@ class Profil extends CI_Controller
     }
     public function updateFoto()
     {
-          $config['upload_path']          = './media/avatar';
+        $config['upload_path']          = './media/avatar';
         $config['allowed_types']        = 'jpg|png|jpeg';;
         $this->load->library('upload', $config);
 
