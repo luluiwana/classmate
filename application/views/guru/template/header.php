@@ -18,11 +18,13 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="<?= base_url() ?>assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
-    
+
     <link id="pagestyle" href="<?= base_url() ?>assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
-    
+
 </head>
 
 <body class="g-sidenav-show ">
@@ -38,7 +40,9 @@
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?php if($menu=='Dashboard'){echo 'active';}?>" href="<?= base_url() ?>guru">
+                    <a class="nav-link <?php if ($menu == 'Dashboard') {
+                                            echo 'active';
+                                        } ?>" href="<?= base_url() ?>guru">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-home"></i>
                         </div>
@@ -46,7 +50,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($menu=='Kelas'){echo 'active';}?>" href="<?=base_url()?>guru/kelas">
+                    <a class="nav-link <?php if ($menu == 'Kelas') {
+                                            echo 'active';
+                                        } ?>" href="<?= base_url() ?>guru/kelas">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-chalkboard-teacher "></i>
                         </div>
@@ -74,7 +80,9 @@
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6 text-light">Profil</h6>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  <?php if($menu=='Profil'){echo 'active';}?>" href="<?=base_url()?>profil">
+                    <a class="nav-link  <?php if ($menu == 'Profil') {
+                                            echo 'active';
+                                        } ?>" href="<?= base_url() ?>profil">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-user-alt "></i>
                         </div>
@@ -82,7 +90,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="<?=base_url()?>auth/logout">
+                    <a class="nav-link  " href="<?= base_url() ?>auth/logout">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-sign-out-alt "></i>
 
@@ -111,8 +119,8 @@
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                                 <i class="fa fa-user me-sm-1 "></i>
                                 <span class="d-sm-inline d-none text-light"><?=
-                                $this->session->userdata('nama');
-                                ?></span>
+                                                                            $this->session->userdata('nama');
+                                                                            ?></span>
                             </a>
                         </li>
                         <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
