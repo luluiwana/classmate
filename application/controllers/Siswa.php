@@ -23,6 +23,7 @@ class Siswa extends CI_Controller
             'courseList' => $this->Course_model->getCourseSiswa_limit(),
             'countCourse' => $this->Course_model->countCourseSiswa(),
             'user'        => $this->Course_model->getUser(),
+            'total_xp'      =>$this->Course_model->totalXP(),
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/dashboard');

@@ -39,8 +39,8 @@
                 <div class="col-md-6 mt-3">
                     <div class="card bg-darkgreen">
                         <div class="card-body">
-                            <p class="text-white fw-bold small"> <i class="fas fa-dot-circle text-success me-1"></i> POIN XP</p>
-                            <p class="text-white fw-bold fs-2 text-center">23455</p>
+                            <p class="text-white fw-bold small"> <i class="fas fa-dot-circle text-success me-1"></i> TOTAL XP</p>
+                            <p class="text-white fw-bold fs-2 text-center"><?=$total_xp?></p>
                         </div>
                     </div>
                 </div>

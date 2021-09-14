@@ -196,6 +196,16 @@ class Course_model extends CI_Model
     {
         return $this->db->get_where('course_lesson', array('CompetenciesID' => $CompetenciesID))->result_array();
     }
+    public function totalXP()
+    {
+        // SELECT SUM(courseXP) FROM `user_course`WHERE UserID=1
+        $id = $this->session->userdata('id_user');
+        $this->db->select('SUM(courseXP) as xp');
+        $this->db->where('UserID', $id);
+        $row = $this->db->get('user_course')->row();
+        return $row->xp;
+    }
+ 
 }
                         
 /* End of file Course.php */

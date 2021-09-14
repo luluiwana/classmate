@@ -129,10 +129,6 @@ class Guru extends CI_Controller
                 $data['lesson'][$row['CompetenciesID']] = $lesson_result;
             }
         }
-
-
-
-
         $this->load->view('guru/template/header', $data);
         $this->load->view('guru/template/course_menu');
         $this->load->view('guru/course/course');
@@ -173,9 +169,7 @@ class Guru extends CI_Controller
 
 
         $content['lesson'] = $this->Course_model->getLessonContentByID($LessonID);
-
         $this->load->view('guru/template/header', $data);
-
         $this->load->view('guru/course/lihat_materi', $content);
         $this->load->view('guru/template/footer');
     }

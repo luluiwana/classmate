@@ -12,8 +12,8 @@
                             <img src="<?=base_url()?>media/avatar/<?=$row->UserAvatar?>" class="small-ava" alt="">
                         </td>
                         <td><?=$row->UserName?></td>
+                        <td>Skor</td>
                         <td>Level</td>
-                        <td>Poin XP</td>
                         
                     </tr>
                     <?php  endforeach;?>

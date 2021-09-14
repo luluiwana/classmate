@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 27 Agu 2021 pada 10.04
--- Versi server: 10.4.13-MariaDB
--- Versi PHP: 7.4.8
+-- Waktu pembuatan: 14 Sep 2021 pada 18.22
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `classmate`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `competencies`
+--
+
+CREATE TABLE `competencies` (
+  `CompetenciesID` int(11) NOT NULL,
+  `CourseID` int(11) NOT NULL,
+  `CompetenciesName` text NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `competencies`
+--
+
+INSERT INTO `competencies` (`CompetenciesID`, `CourseID`, `CompetenciesName`, `date_created`) VALUES
+(1, 1, 'Struktur Hierarki Basis Data', '2021-08-28 06:37:32'),
+(2, 1, 'Normalisasi basis Data', '2021-08-28 07:08:01'),
+(3, 2, 'KD 5', '2021-09-14 10:52:31');
 
 -- --------------------------------------------------------
 
@@ -41,8 +63,8 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`CourseID`, `CourseName`, `ClassName`, `SchoolName`, `TeacherID`, `CourseLogo`) VALUES
-(3, 'Basis Data', 'XI M', 'SMk 2 ', '2', 'Drawing_(1).png'),
-(4, 'PBO', '12 A B C', 'SMA 009', '2', 'images.png');
+(1, 'Basis Data', 'XI M', 'SMk 2 ', '2', 'images_(1)2.jpg'),
+(2, 'Basis Data 2', 'XI RPL B', 'SMK 25 jayapura', '2', 'unnamed.jpg');
 
 -- --------------------------------------------------------
 
@@ -52,11 +74,22 @@ INSERT INTO `course` (`CourseID`, `CourseName`, `ClassName`, `SchoolName`, `Teac
 
 CREATE TABLE `course_lesson` (
   `LessonID` int(11) NOT NULL,
-  `CourseID` int(11) NOT NULL,
+  `CompetenciesID` int(11) NOT NULL,
+  `LessonTitle` varchar(255) NOT NULL,
   `LessonContent` text NOT NULL,
   `File` varchar(256) NOT NULL,
   `date_upload` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `course_lesson`
+--
+
+INSERT INTO `course_lesson` (`LessonID`, `CompetenciesID`, `LessonTitle`, `LessonContent`, `File`, `date_upload`) VALUES
+(1, 1, 'Where does it come from?', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '', '2021-08-28 06:38:20'),
+(2, 1, 'sasasasasa', '<p>sasasasa</p>', '2_1630331823.', '2021-08-30 13:57:03'),
+(3, 1, 'dsasdsa', '<p>ddasdsa</p>', '2_1630331878.', '2021-08-30 13:57:57'),
+(4, 3, 'cara membangunkan katak', 'absdasd asd asd asd as', '', '2021-09-14 10:53:42');
 
 -- --------------------------------------------------------
 
@@ -73,23 +106,6 @@ CREATE TABLE `forum_answer` (
   `CreatedDateTime` datetime NOT NULL DEFAULT current_timestamp(),
   `UpdatedDateTime` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `forum_answer`
---
-
-INSERT INTO `forum_answer` (`ForumAID`, `ForumAContent`, `ForumQID`, `UserID`, `ForumAStatus`, `CreatedDateTime`, `UpdatedDateTime`) VALUES
-(1, '<u>== should be used to check values</u><br><i>== should be used to check both value as well as datatype</i>', 1, 2, 0, '2018-03-04 18:36:38', '2018-04-13 15:25:16'),
-(2, 'use what you want I dont care', 1, 3, 1, '2018-03-04 21:07:45', '2018-04-13 09:37:10'),
-(3, 'abc', 1, 1, 1, '2018-03-05 17:09:28', '2018-04-13 09:37:15'),
-(26, 'Hello &lt;?php echo &quot;Bello&quot;; ?&gt; Tello', 11, 2, 0, '2018-04-17 15:30:38', NULL),
-(27, '<p>eowkq</p>', 14, 11, 0, '2021-08-23 14:08:08', NULL),
-(28, '<p>weq</p>', 14, 11, 0, '2021-08-23 14:08:23', NULL),
-(29, '<p>ewqok</p>', 14, 11, 0, '2021-08-23 14:08:37', NULL),
-(30, '<p>wqeq</p>', 14, 11, 0, '2021-08-23 14:09:48', NULL),
-(31, '<p>ewqeq</p>', 14, 11, 0, '2021-08-23 14:12:36', NULL),
-(32, '<p><span style=\"text-align: justify;\">Lorem Ipsum</span><span style=\"text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><br></p>', 14, 11, 0, '2021-08-27 14:29:11', NULL),
-(33, '<p>Mantab gan</p>', 1, 11, 0, '2021-08-27 14:32:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -108,13 +124,28 @@ CREATE TABLE `forum_question` (
   `category` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `forum_question`
+-- Struktur dari tabel `level`
 --
 
-INSERT INTO `forum_question` (`ForumQID`, `ForumQTitle`, `ForumQContent`, `UserID`, `ForumQStatus`, `CreatedDateTime`, `UpdatedDateTime`, `category`) VALUES
-(1, '== vs ===', '<p>I am Getting confused in using ==\r\n and ===</br><b>When should i use == and ===\r\n in php</b><p>', 2, 0, '2018-03-04 18:31:12', '2018-04-23 03:57:45', ''),
-(14, '100% Bergaransi', '<p><span style=\"text-align: justify;\">Lorem Ipsum</span><span style=\"text-align: justify;\">&nbsp;is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</span><br></p>', 11, 0, '2021-08-22 13:27:45', NULL, 'Pengumuman');
+CREATE TABLE `level` (
+  `LevelID` char(1) NOT NULL,
+  `desc` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `level`
+--
+
+INSERT INTO `level` (`LevelID`, `desc`) VALUES
+('0', ''),
+('1', 'Pemula'),
+('2', 'Petualang'),
+('3', 'Pejuang'),
+('4', 'Petarung'),
+('5', 'Master');
 
 -- --------------------------------------------------------
 
@@ -127,14 +158,6 @@ CREATE TABLE `quiz` (
   `CourseID` int(11) NOT NULL,
   `date_create` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `quiz`
---
-
-INSERT INTO `quiz` (`QuizID`, `CourseID`, `date_create`) VALUES
-(1, 14, '2021-08-25 04:47:46'),
-(2, 14, '2021-08-25 04:47:46');
 
 -- --------------------------------------------------------
 
@@ -155,14 +178,6 @@ CREATE TABLE `quiz_question` (
   `Score` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `quiz_question`
---
-
-INSERT INTO `quiz_question` (`QuestionID`, `QuizID`, `Question`, `question_img`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `TrueOption`, `Score`) VALUES
-(2, 14, '1. Kumpulan dari method-method yang belum terdapat operasi di dalam tubuh method tersebut disebut ...', NULL, 'A. Interface', 'B. Inheritance', 'C. Method abstract', 'D. Interface', 'C', 50),
-(3, 14, '2. Stream yang berguna untuk mengirim keluaran ke layar adalah...', NULL, 'A. System.in', 'B. System.out', 'C. System.err', 'D. System.exit', 'B', 50);
-
 -- --------------------------------------------------------
 
 --
@@ -178,15 +193,18 @@ CREATE TABLE `users` (
   `UserContactNo` varchar(20) NOT NULL,
   `CreatedDateTime` datetime NOT NULL DEFAULT current_timestamp(),
   `UserXP` int(11) NOT NULL DEFAULT 0,
-  `UserRole` enum('guru','siswa') NOT NULL
+  `UserRole` enum('guru','siswa') NOT NULL,
+  `Level` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`UserID`, `UserName`, `UserEmail`, `UserPassword`, `UserAvatar`, `UserContactNo`, `CreatedDateTime`, `UserXP`, `UserRole`) VALUES
-(11, 'Hafizh Arrozaq B.', 'hafizh.arrozaq@gmail.com', '$2y$10$zb8ZhL9ui0Xc3yPmVL2RuuIrZt.vIA/w2wmvG4GtTePKurTCLHFKq', 'ava2.png', '08113030442', '2021-08-21 17:13:41', 0, 'siswa');
+INSERT INTO `users` (`UserID`, `UserName`, `UserEmail`, `UserPassword`, `UserAvatar`, `UserContactNo`, `CreatedDateTime`, `UserXP`, `UserRole`, `Level`) VALUES
+(1, 'Lulu Iwana', 'siswa@classmate.com', '$2y$10$c/FnAfDqYMLHJqFDEnfxJON7bePcYbgbxh7SFTYJeXuJQwarVSZny', 'ava1.png', '08656565756', '2021-08-28 13:33:55', 0, 'siswa', '0'),
+(2, 'Novianto Hendrawan S.Pd.', 'guru@classmate.com', '$2y$10$z9JArRp.T3Ae4/NNTtuPRuQR.UVe2T5uT/qS6ikeK8gjp9FL4XPbC', 'default.jpg', '08656565756', '2021-08-28 13:34:07', 0, 'guru', '1'),
+(3, 'Nama Saya Lengkap', 'siswa2@classmate.com', '$2y$10$DoUNYl2M0ADK6eWZRIsSsOVdVgCjwyMJMMtKTlGN8D2h.7NiiVH8m', 'ava8.png', '08656565756', '2021-08-30 10:57:07', 0, 'siswa', '0');
 
 -- --------------------------------------------------------
 
@@ -197,20 +215,38 @@ INSERT INTO `users` (`UserID`, `UserName`, `UserEmail`, `UserPassword`, `UserAva
 CREATE TABLE `user_course` (
   `UserID` char(5) NOT NULL,
   `CourseID` char(5) NOT NULL,
-  `JoinDate` datetime NOT NULL DEFAULT current_timestamp()
+  `JoinDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `courseXP` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `user_course`
 --
 
-INSERT INTO `user_course` (`UserID`, `CourseID`, `JoinDate`) VALUES
-('1', '3', '2021-08-17 16:51:54'),
-('1', '4', '2021-08-17 16:52:12'),
-('3', '3', '2021-08-17 17:03:51'),
-('9', '3', '2021-08-17 21:42:23'),
-('10', '4', '2021-08-19 12:27:11'),
-('11', '3', '2021-08-22 00:45:03');
+INSERT INTO `user_course` (`UserID`, `CourseID`, `JoinDate`, `courseXP`) VALUES
+('1', '1', '2021-09-14 17:34:37', 400),
+('1', '2', '2021-09-14 17:54:02', 200);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user_lesson`
+--
+
+CREATE TABLE `user_lesson` (
+  `UserID` char(10) NOT NULL,
+  `LessonID` char(10) NOT NULL,
+  `Score` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `user_lesson`
+--
+
+INSERT INTO `user_lesson` (`UserID`, `LessonID`, `Score`) VALUES
+('1', '1', 200),
+('1', '2', 200),
+('1', '4', 200);
 
 -- --------------------------------------------------------
 
@@ -228,6 +264,12 @@ CREATE TABLE `user_quiz` (
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indeks untuk tabel `competencies`
+--
+ALTER TABLE `competencies`
+  ADD PRIMARY KEY (`CompetenciesID`);
 
 --
 -- Indeks untuk tabel `course`
@@ -254,6 +296,12 @@ ALTER TABLE `forum_question`
   ADD PRIMARY KEY (`ForumQID`);
 
 --
+-- Indeks untuk tabel `level`
+--
+ALTER TABLE `level`
+  ADD PRIMARY KEY (`LevelID`);
+
+--
 -- Indeks untuk tabel `quiz`
 --
 ALTER TABLE `quiz`
@@ -276,46 +324,52 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT untuk tabel `competencies`
+--
+ALTER TABLE `competencies`
+  MODIFY `CompetenciesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT untuk tabel `course`
 --
 ALTER TABLE `course`
-  MODIFY `CourseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `CourseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `course_lesson`
 --
 ALTER TABLE `course_lesson`
-  MODIFY `LessonID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `LessonID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `forum_answer`
 --
 ALTER TABLE `forum_answer`
-  MODIFY `ForumAID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `ForumAID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `forum_question`
 --
 ALTER TABLE `forum_question`
-  MODIFY `ForumQID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ForumQID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `quiz`
 --
 ALTER TABLE `quiz`
-  MODIFY `QuizID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `QuizID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `quiz_question`
 --
 ALTER TABLE `quiz_question`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
