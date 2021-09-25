@@ -1,43 +1,100 @@
 <div class="container-fluid py-4">
-
-    <div class="justify-content-md-end">
-        <a href="<?= base_url() ?>siswa/add_discussion" class="btn btn-primary me-md-2" type="button">Add Discussion</a>
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a href="<?=base_url()?>discussion"
+                        class="text-primary fw-bold">Diskusi</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Diskusi <?=$CourseName?></li>
+            </ol>
+        </nav>
     </div>
-
-    <?php foreach ($diskusi as $row) : ?>
-        <div class="card-forum mt-3">
-
-            <div class="row">
-                <div class="col-md-1">
-                    <div class="left-user12923 left-user12923-repeat">
-                        <a href="#"><img src="<?= base_url('assets/img/team-3.jpg') ?>" alt="image"> </a> <a href="#"><i class="fa fa-check " aria-hidden="true"></i></a>
+    <div class="row mx-0">
+        <div class="card">
+            <div class="card-body p-0 py-2">
+                <a href="<?=base_url()?>discussion/all/<?=$course_id?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none  <?php if ($title=="Semua Topik") {echo "active-menu";}?>">Semua</a>
+                <a href="<?=base_url()?>discussion/topik/Pengumuman/<?=$course_id?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none  <?php if ($title=="Pengumuman") {echo "active-menu";}?>">Pengumuman</a>
+                <a href="<?=base_url()?>discussion/topik/Tugas/<?=$course_id?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none  <?php if ($title=="Tugas") {echo "active-menu";}?>">Tugas</a>
+                <a href="<?=base_url()?>discussion/topik/Pertanyaan/<?=$course_id?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none  <?php if ($title=="Pertanyaan") {    echo "active-menu";}?>">Pertanyaan</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card-forum mt-3 p-0 bg-darkpurple">
+                <form action="<?=base_url()?>discussion/adddatadiskusi" method="post" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <textarea name="content" id="add_question" class=" form-control" required></textarea>
                     </div>
-                </div>
+                    <div class="form-group row btn-diskusi px-3" style="display:none">
+                        <div class="w-50">
 
-                <div class="col-md-11">
-                    <div class="right-description893">
-                        <div id="que-hedder2983">
-                            <h3><a class='text-white' href="<?= base_url('discussion/detail_discussion/' . $row->ForumQID) ?>" target="_blank"><?= $row->ForumQTitle ?></a></h3>
+                            <select name="kategori" class="form-control  border-0 bg-primary fw-bold "
+                                style="width:auto" required>
+                                <option value="">Pilih Kategori</option>
+                                <option value="Pengumuman">Pengumuman</option>
+                                <option value="Tugas">Tugas</option>
+                                <option value="Pertanyaan">Pertanyaan</option>
+                            </select>
                         </div>
-                        <div class="ques-details10018">
-                            <?= $row->ForumQContent ?>
+
+                        <div class="w-50">
+                            <input type="hidden" name="courseid" value="<?=$course_id?>">
+                            <input type="submit" class="btn bg-warning float-end" value="Kirim">
                         </div>
-                        <hr>
-                        <div class="ques-icon-info3293 tex"> <a href="#" class="text-white"><i class=" text-white fa fa-clock-o" aria-hidden="true"> 4 min
+                    </div>
+                </form>
+            </div>
+            <?php if(!empty($diskusi)):?>
+            <?php foreach ($diskusi as $row) : ?>
+            <a href="<?=base_url()?>discussion/detail_discussion/<?= $row->ForumQID ?>/<?=$course_id?>" class="text-secondary">
+                <div class="card-forum mt-3 ">
+                    <div class="row">
+                        <div class="w-10 ava-space pe-0">
+                            <img src="<?= base_url() ?>media/avatar/<?=$row->UserAvatar?>" alt="image"
+                                class="w-100 my-auto">
+                        </div>
+                        <div class="w-90 name-space ">
+
+                            <div class="fw-bolder"><?=$row->UserName?></div>
+                            <div class="text-secondary small">
+                                <span class="me-3"><?=$row->CreatedDateTime?></span>
+                                <span class="badge bg-warning"><?=$row->category?></span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="mt-3 fs-5 fw-bold">
+                        <?= $row->ForumQTitle ?>
+                    </div>
+                    <div class="text-white isi-diskusi">
+                        <?= $row->ForumQContent ?>
+                    </div>
+                    <!-- <hr> -->
+                    <div class="text-secondary isi-diskusi">
+                        <i class="fas fa-reply"></i> 14 Komentar
+                    </div>
+                    <!-- <div class="ques-icon-info3293 tex"> <a href="#" class="text-white"><i class=" text-white fa fa-clock-o" aria-hidden="true"> 4 min
                                     ago</i></a> <a href="#" class="text-white"><i class="text-white fa fa-question-circle-o" aria-hidden="true"> Question</i></a>
                             <a href="#" class="text-white">
                                 <i class="fa fa-commen text" aria-hidden="true"> 333335 answer</i>
                             </a>
 
-                        </div>
-                    </div>
+                        </div> -->
                 </div>
-                <div class="col-md-2">
-                    <div class="ques-type302">
-
-                    </div>
-                </div>
-            </div>
+            </a>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
+    </div>
+    <?php else:?>
+    <div class="card mt-2">
+        <div class="card-body">
+            <p>Belum ada diskusi</p>
+
+        </div>
+    </div>
+    <?php endif;?>
 </div>

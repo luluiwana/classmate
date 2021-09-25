@@ -1,61 +1,89 @@
 <div class="container-fluid">
-    <div class="card-forum">
-        <div class="details-header923">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="post-title-left129 ">
-                        <h3 class="text-white"><?= $thread->ForumQTitle ?></h3>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="post-que-rep-rihght320"> <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Question</a> </div>
-                </div>
-            </div>
-            <div class="post-footer29032">
-                <div class="l-side2023"> <i class="fa fa-check check2" aria-hidden="true"> solved</i> <a href="#"></a> <i class="fa fa-clock-o clock2 text-white" aria-hidden="true"> 4 min ago</i> <a href="#"><i class="fa fa-commenting commenting2 text-white" aria-hidden="true"> 5 answer</i></a> </div>
-
-            </div>
-        </div>
-        <div class="post-details-info1982">
-            <?= $thread->ForumQContent ?>
-            <hr>
-
-            <h5 class="text-white mb-3"> COMMENTS</h5>
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <?php foreach ($comments as $row) : ?>
-                                <div class="col-1">
-                                    <div class="left-user12923 ">
-                                        <a href="#" class="mx-auto"><img src="<?= base_url('assets/img/team-3.jpg') ?>" alt="image"> </a>
-                                    </div>
-                                </div>
-                                <div class="col-11">
-                                    <h6 class="card-title text-white"><?= $row->UserName ?></h6>
-                                    <p class="card-text mb-2" style="font-size: 0.2rem;"><?= $row->ForumAContent ?></p>
-                                    <!-- <a href="#" class="card-text text-white" style="font-size: 0.7rem;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"><i class="fa fa-commenting card-text text-white " style="font-size: 0.7rem;" aria-hidden="true">&nbsp; </i>Edit Komentar </a> -->
-                                </div>
-                            <?php endforeach; ?>
+    <div class="row">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page">
+                    <a href="<?=base_url()?>discussion" class="text-primary fw-bold">Diskusi</a>
+                </li>
+                <li class="breadcrumb-item" aria-current="page">
+                    <a href="<?=base_url()?>discussion/all/<?=$CourseID?>" class="text-primary fw-bold">Diskusi
+                        <?=$CourseName?></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <?=$thread->UserName?>
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card-forum">
+                <div class="row mb-3">
+                    <div class="w-90 row">
+                        <div class="pe-0 w-auto">
+                            <img src="<?= base_url() ?>media/avatar/<?=$thread->UserAvatar?>" alt="image"
+                                class="my-auto" style="width:45px">
+                        </div>
+                        <div class="w-80 name-space ">
+                            <div class="fw-bolder"><?=$thread->UserName?></div>
+                            <div class="text-secondary small">
+                                <span class="me-3"><?=$thread->CreatedDateTime?></span>
+                                <span class="badge bg-warning"><?=$thread->category?></span>
+                            </div>
 
                         </div>
+                    </div>
+                    <div class="w-10 text-end">
+                        <div class="dropdown">
+                            <a class="dropdown-toggle text-white fw-bold small" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Opsi
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Edit</a></li>
+                                <li><a class="dropdown-item" href="#">Hapus</a></li>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+                <p><?= $thread->ForumQContent ?></p>
+                <div class="mt-5">
+                    <form action="<?= base_url('discussion/addComments/' . $thread->ForumQID) ?>" method="post">
+                        <div class="form-group row">
+                            <textarea name="content" id="add_answer" class=" form-control" required></textarea>
+                        </div>
+                        <input type="hidden" name="CourseID" value="<?=$CourseID?>">
+                        <button type="submit" class="btn btn-block bg-warning btn-diskusi"
+                            style="display:none">Tambahkan
+                            Komentar</button>
+                    </form>
+                </div>
+            </div>
+            <?php if(!empty($comments)):?>
+            <div class="col-md-12">
+                <p class="fw-bold text-white small mt-3"> <i class="fas fa-dot-circle text-warning me-1"></i> 4 Komentar
+                </p>
+                <div class="card">
+                    <div class="card-body">
+                        <?php foreach ($comments as $row) : ?>
+                        <div class="row mb-3">
+                            <div class="pe-0 w-auto">
+                                <img src="<?= base_url() ?>media/avatar/<?=$row->UserAvatar?>" alt="image"
+                                    class="my-auto" style="width:45px">
+                            </div>
+                            <div class="w-80">
+                                <p class="card-title text-white fw-bold mb-0"><?= $row->UserName ?> . <span
+                                        class="me-3 fw-light text-secondary"><?=$thread->CreatedDateTime?></span></p>
+                                <div class="card-text text-white small fs-15"><?= $row->ForumAContent ?></div>
 
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
+            <?php endif;?>
         </div>
-    </div>
-
-
-    <div class="card-forum">
-        <form action="<?= base_url('discussion/addComments/' . $thread->ForumQID) ?>" method="post">
-            <h5 class="text-white mb-3">ADD COMMENTS</h5>
-            <div class="form-group row">
-                <textarea name="content" id="add_question" class=" form-control" required></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-block btn-primary">Comment</button>
-        </form>
     </div>
 </div>

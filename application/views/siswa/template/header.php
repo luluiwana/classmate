@@ -22,7 +22,6 @@
     <link id="pagestyle" href="<?= base_url() ?>assets/css/editor_forum.css" rel="stylesheet" />
     <link id="pagestyle" href="<?= base_url() ?>assets/css/responsive_forum.css" rel="stylesheet" />
     <link id="pagestyle" href="<?= base_url() ?>assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/quiz.css">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
@@ -31,10 +30,13 @@
 </head>
 
 <body class="g-sidenav-show ">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+        id="sidenav-main">
         <div class="sidenav-header  ">
-            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html" target="_blank">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+                aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
+                target="_blank">
                 <img src="<?= base_url() ?>assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
                 <span class="ms-1 font-weight-bold text-white">Classmate</span>
             </a>
@@ -63,7 +65,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="<?= base_url('discussion') ?>">
+                    <a class="nav-link  <?php if ($menu == 'Diskusi') {
+                                            echo 'active';
+                                        } ?>" href="<?= base_url('discussion') ?>">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-comments "></i>
                         </div>
@@ -71,7 +75,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="<?= base_url('siswa/livecode') ?>">
+                    <a class="nav-link  <?php if ($menu == 'Live Code') {
+                                            echo 'active';
+                                        } ?>" href="<?= base_url('siswa/livecode') ?>">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-code "></i>
                         </div>
@@ -107,7 +113,8 @@
 
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <!-- Navbar -->
-        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+            navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
 
                 <h6 class="font-weight-bolder mb-0 text-white"><?= $title ?></h6>
@@ -119,7 +126,8 @@
                     <ul class="navbar-nav  justify-content-end">
                         <li class="nav-item d-flex align-items-center">
                             <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
-                                <i class="fa fa-user me-sm-1 text-white"></i>
+                                <!-- <i class="fa fa-user me-sm-1 text-white"></i> -->
+                                <img src="<?=base_url()?>media/avatar/<?=$this->session->userdata('ava')?>" id="ava-header">
                                 <span class="d-sm-inline d-none text-white"><?=
                                                                             $this->session->userdata('nama');
                                                                             ?></span>

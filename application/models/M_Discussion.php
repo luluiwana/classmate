@@ -14,14 +14,19 @@ class M_Discussion extends CI_Model
         $this->db->insert('forum_question', $data);
     }
 
-    public function getDisscussionById($id)
+    public function getDisscussionById($Forum_ID)
     {
-        return $this->db->get_where('forum_question', array('ForumQID' => $id))->row_object();
+        $id = $this->session->userdata('id_user');
+        $this->db->join('user_course', 'user_course.CourseID=forum_question.CourseID');
+        $this->db->join('users', 'forum_question.UserID=users.UserID');
+        $this->db->where('user_course.UserID', $id);
+        $this->db->where('forum_question.ForumQID', $Forum_ID);
+
+        return $this->db->get('forum_question')->row();
     }
 
     public function getCommentsById($id)
     {
-        $this->db->select('*');
         $this->db->join('users', 'users.UserID=forum_answer.UserID');
         return $this->db->get_where('forum_answer', array('ForumQID' => $id))->result_object();
     }
@@ -31,8 +36,37 @@ class M_Discussion extends CI_Model
         $this->db->insert('forum_answer', $data);
     }
 
-    public function getDiskusi()
+    public function getDiskusi($CourseID)
     {
-        return $this->db->get('forum_question')->result_object();
+        $id = $this->session->userdata('id_user');
+        $this->db->join('user_course', 'user_course.CourseID=forum_question.CourseID');
+        $this->db->join('users', 'forum_question.UserID=users.UserID');
+        
+        $this->db->where('user_course.UserID', $id);
+        $this->db->where('forum_question.CourseID', $CourseID);
+        $this->db->order_by('ForumQID', 'desc');
+
+        return $this->db->get('forum_question')->result();
+    }
+    public function getTopik($topik,$CourseID)
+    {
+         $id = $this->session->userdata('id_user');
+        $this->db->join('user_course', 'user_course.CourseID=forum_question.CourseID');
+        $this->db->join('users', 'forum_question.UserID=users.UserID');
+
+        $this->db->where('user_course.UserID', $id);
+        $this->db->where('forum_question.CourseID', $CourseID);
+        $this->db->where('forum_question.category', $topik);
+        $this->db->order_by('ForumQID', 'desc');
+        
+        return $this->db->get('forum_question')->result();
+
+    }
+    public function getCourseName($CourseID)
+    {
+        $this->db->where('CourseID', $CourseID);
+        $row = $this->db->get('course')->row();
+        return $row->CourseName;
+        
     }
 }

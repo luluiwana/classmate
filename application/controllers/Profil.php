@@ -52,8 +52,14 @@ class Profil extends CI_Controller
                 'UserName' => $this->input->post('nama'),
                 'UserEmail' => $this->input->post('email'),
                 'UserContactNo' => $this->input->post('telp'),
-            ];
+            ];            
             $this->M_Auth->update($update_data);
+             $array = array(
+                'nama' => $this->input->post('nama')
+            );
+            
+            $this->session->set_userdata($array);
+
             redirect('profil', 'refresh');
         }
     }
@@ -129,6 +135,13 @@ class Profil extends CI_Controller
        $data = array(
            'UserAvatar' => $file
        );
+       
+       $array = array(
+           'ava' => $file
+       );
+       
+       $this->session->set_userdata( $array );
+       
        $this->M_Auth->update($data);
        
        redirect('profil','refresh');

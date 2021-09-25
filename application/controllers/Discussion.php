@@ -9,6 +9,7 @@ class Discussion extends CI_Controller
   {
     parent::__construct();
     $this->load->model('M_Discussion');
+    $this->load->model('Course_model');
     if (($this->session->userdata('role')) != 'siswa' && ($this->session->userdata('role')) != 'guru') {
       redirect('auth', 'refresh');
     }
@@ -19,21 +20,50 @@ class Discussion extends CI_Controller
     $data = array(
       'title' => "Diskusi",
       'menu'  => 'Diskusi',
+      'courseList' => $this->Course_model->getCourseSiswa()
     );
-
-    $data['diskusi'] = $this->M_Discussion->getDiskusi();
-
-
+    $this->load->view('siswa/template/header', $data);
+    $this->load->view('siswa/diskusi/diskusi');
+    $this->load->view('siswa/template/footer');
+    # code...
+  }
+  public function all($CourseID)
+  {
+    $data = array(
+      'title' => "Semua Topik",
+      'menu'  => 'Diskusi',
+      'course_id'=>$CourseID,
+      'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
+    );
+    date_default_timezone_set('Asia/Jakarta');
+    $data['diskusi'] = $this->M_Discussion->getDiskusi($CourseID);
     $this->load->view('siswa/template/header', $data);
     $this->load->view('siswa/diskusi/lihat_diskusi');
     $this->load->view('siswa/template/footer');
     # code...
   }
-  public function detail_discussion($id)
+  public function topik($topik,$CourseID)
+  {
+    $data = array(
+      'title' => $topik,
+      'menu'  => 'Diskusi',
+      'course_id'=>$CourseID,
+      'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
+    );
+
+    $data['diskusi'] = $this->M_Discussion->getTopik($topik,$CourseID);
+    $this->load->view('siswa/template/header', $data);
+    $this->load->view('siswa/diskusi/lihat_diskusi');
+    $this->load->view('siswa/template/footer');
+    # code...
+  }
+  public function detail_discussion($id,$CourseID)
   {
     $data = array(
       'title' => "Diskusi",
       'menu'  => 'Diskusi',
+      'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
+      'CourseID'=>$CourseID
     );
 
     $data['thread'] = $this->M_Discussion->getDisscussionById($id);
@@ -46,41 +76,33 @@ class Discussion extends CI_Controller
     # code...
   }
 
-  public function add_discussion()
-  {
-    $data = array(
-      'title' => "Tambah Diskusi",
-      'menu'  => 'Diskusi',
-    );
-    $this->load->view('siswa/template/header', $data);
-    $this->load->view('siswa/diskusi/add_diskusi');
-    $this->load->view('siswa/template/footer');
-    # code...
-  }
-
   public function addDataDiskusi()
   {
+    $CourseID = $this->input->post('courseid');
     $insert_data = [
-      'ForumQtitle' => $this->input->post('judul'),
+      // 'ForumQtitle' => $this->input->post('judul'),
+      'CourseID' => $CourseID,
       'ForumQContent' => $this->input->post('content'),
       'UserID' =>  $this->session->userdata('id_user'),
-      'Category' => $this->input->post('kategori')
+      'Category' => $this->input->post('kategori'),
+      // 'CreatedDateTime'=>Date('Y-m-d h:i:s')
     ];
     $this->M_Discussion->addDiscussion($insert_data);
-    redirect('siswa/discussion');
+    redirect('discussion/all/'.$CourseID);
   }
 
-  public function addComments($id_comment)
+  public function addComments($ForumQID)
   {
     $insert_data = [
 
       'ForumAContent' => $this->input->post('content'),
       'UserID' =>  $this->session->userdata('id_user'),
-      'ForumQID' =>  $id_comment,
+      'ForumQID' =>  $ForumQID,
 
     ];
+    $CourseID = $this->input->post('CourseID');
     $this->M_Discussion->addComments($insert_data);
-    redirect('discussion/detail_discussion/' . $id_comment);
+    redirect('discussion/detail_discussion/' . $ForumQID.'/'.$CourseID);
   }
 }
 

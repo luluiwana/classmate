@@ -5,7 +5,7 @@
 	overflow: unset;
 }
 #sidenav-main {
-	background-color: #191b2a!important;
+	background-color: #191b2a !important;
 }
 .profil-ava {
 	width: 150px;
@@ -28,6 +28,13 @@ body {
 .bg-dark {
 	background-color: #141414 !important;
 }
+.bg-warning {
+	color: #000 !important;
+	background-color: #ffc700 !important;
+}
+.xx-small {
+	font-size: xx-small;
+}
 .navbar-vertical .navbar-nav > .nav-item .nav-link.active {
 	color: #ffffff;
 	background-color: #7200ff;
@@ -40,7 +47,7 @@ body {
 .progress-bar {
 	background-color: #ffc700;
 }
-.badges{
+.badges {
 	width: 50px;
 }
 .choose-ava {
@@ -160,8 +167,56 @@ table.dataTable tbody tr {
 	display: none;
 }
 .character {
-    width: 120%;
-    margin-top: -70px;
+	width: 120%;
+	margin-top: -70px;
+}
+.btn.btn-sm i,
+.btn-group-sm > .btn i {
+	font-size: 12px;
+}
+.note-editable p {
+	font-size: 14px !important;
+}
+.note-editable {
+	font-size: 14px !important;
+}
+.modal-content {
+	background-color: #191b2a;
+}
+#ava-header{
+	width: 20px;
+    margin-top: -5px;
+}
+.form-control,
+.form-control:focus {
+	background-color: #191b2a;
+	color: white;
+}
+.note-btn-group .note-btn {
+	color: white;
+}
+.modal-header {
+	display: none;
+}
+.modal-footer {
+	padding: 0;
+	border-top: none;
+}
+.note-editable a {
+	color: #ffc700;
+	font-weight: bold;
+}
+.note-image-input {
+	display: none;
+}
+.fs-15{
+	font-size: 15px;
+}
+p{
+	margin-bottom: 0;
+}
+.dropdown-menu > li > a{
+	font-family: inherit;
 }
 /* MEDIA */
 @media only screen and (max-width: 768px) {
@@ -174,14 +229,20 @@ table.dataTable tbody tr {
 	.course-info {
 		width: 75%;
 	}
-	.badges{
-	width: 40px;
-}
+	.badges {
+		width: 40px;
+	}
 	.choose-ava {
 		width: 30%;
 	}
 	.character {
-    width: 100px;
-    margin-top: 0px;
-}
+		width: 100px;
+		margin-top: 0px;
+	}
+	.ava-space {
+		width: 25% !important;
+	}
+	.name-space {
+		width: 75% !important;
+	}
 }

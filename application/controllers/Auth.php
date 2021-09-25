@@ -26,6 +26,7 @@ class Auth extends CI_Controller
                     'id_user'  => $data->UserID,
                     'nama'     => $data->UserName,
                     'role'     => $data->UserRole,
+                    'ava'     => $data->UserAvatar,
                 );
             $this->session->set_userdata($userdata);
             if ($data->UserRole == "siswa") {
