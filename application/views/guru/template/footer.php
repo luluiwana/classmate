@@ -27,3 +27,15 @@
       });
     });
   </script>
+
+  <script>
+    $("#add-quiz").submit(function(event) {
+
+      var amount = $('#jumlah').val();
+
+      for (let i = 0; i <= amount; i++) {
+
+        $('#div-input').append('');
+      }
+    });
+  </script>

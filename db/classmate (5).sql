@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 25 Sep 2021 pada 23.25
--- Versi server: 10.4.14-MariaDB
--- Versi PHP: 7.2.33
+-- Waktu pembuatan: 26 Sep 2021 pada 03.32
+-- Versi server: 10.4.13-MariaDB
+-- Versi PHP: 7.4.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,7 +41,8 @@ CREATE TABLE `competencies` (
 INSERT INTO `competencies` (`CompetenciesID`, `CourseID`, `CompetenciesName`, `date_created`) VALUES
 (1, 1, 'Struktur Hierarki Basis Data', '2021-08-28 06:37:32'),
 (2, 1, 'Normalisasi basis Data', '2021-08-28 07:08:01'),
-(3, 2, 'KD 5', '2021-09-14 10:52:31');
+(3, 2, 'KD 5', '2021-09-14 10:52:31'),
+(4, 2, 'KD 6 Halu', '2021-09-25 23:38:31');
 
 -- --------------------------------------------------------
 
@@ -107,20 +108,6 @@ CREATE TABLE `forum_answer` (
   `UpdatedDateTime` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data untuk tabel `forum_answer`
---
-
-INSERT INTO `forum_answer` (`ForumAID`, `ForumAContent`, `ForumQID`, `UserID`, `ForumAStatus`, `CreatedDateTime`, `UpdatedDateTime`) VALUES
-(1, '<p>hadeh bund</p>', 13, 1, 0, '2021-09-25 21:32:03', NULL),
-(2, 'Gatau ah cape deh', 13, 1, 0, '2021-09-25 21:51:28', NULL),
-(3, '<p>wkwkw sama</p>', 13, 1, 0, '2021-09-25 21:54:44', NULL),
-(4, '<p>xixixi bisa aja</p>', 13, 1, 0, '2021-09-25 21:56:28', NULL),
-(5, '<p>blm ade</p>', 12, 1, 0, '2021-09-25 22:03:29', NULL),
-(6, '<p>Gatau ge pusing juga<br><br></p>', 13, 3, 0, '2021-09-25 22:27:10', NULL),
-(7, '<p>hahahahahaha namanya juga idup</p>', 13, 3, 0, '2021-09-25 22:28:27', NULL),
-(8, '<p>sadasdas</p>', 13, 3, 0, '2021-09-25 22:28:57', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -129,8 +116,7 @@ INSERT INTO `forum_answer` (`ForumAID`, `ForumAContent`, `ForumQID`, `UserID`, `
 
 CREATE TABLE `forum_question` (
   `ForumQID` int(11) NOT NULL,
-  `CourseID` char(5) NOT NULL,
-  `ForumQTitle` text DEFAULT NULL,
+  `ForumQTitle` text NOT NULL,
   `ForumQContent` text NOT NULL,
   `UserID` int(11) NOT NULL,
   `ForumQStatus` tinyint(4) NOT NULL DEFAULT 0,
@@ -138,15 +124,6 @@ CREATE TABLE `forum_question` (
   `UpdatedDateTime` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `category` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `forum_question`
---
-
-INSERT INTO `forum_question` (`ForumQID`, `CourseID`, `ForumQTitle`, `ForumQContent`, `UserID`, `ForumQStatus`, `CreatedDateTime`, `UpdatedDateTime`, `category`) VALUES
-(11, '2', NULL, '<p>sdasdasdas</p>', 1, 0, '2021-09-23 20:12:09', NULL, 'Tugas'),
-(12, '2', NULL, '<p>dasdasdas</p>', 1, 0, '2021-09-23 20:12:21', NULL, 'Pengumuman'),
-(13, '2', NULL, '<p>Saya mau tanya tentang bla bla</p>', 1, 0, '2021-09-25 18:57:35', NULL, 'Pertanyaan');
 
 -- --------------------------------------------------------
 
@@ -179,9 +156,17 @@ INSERT INTO `level` (`LevelID`, `desc`) VALUES
 
 CREATE TABLE `quiz` (
   `QuizID` int(11) NOT NULL,
-  `CourseID` int(11) NOT NULL,
+  `CompetenciesID` int(11) NOT NULL,
+  `QuizTitle` text NOT NULL,
   `date_create` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `quiz`
+--
+
+INSERT INTO `quiz` (`QuizID`, `CompetenciesID`, `QuizTitle`, `date_create`) VALUES
+(1, 1, 'quiz pertama', '2021-09-25 20:27:27');
 
 -- --------------------------------------------------------
 
@@ -199,8 +184,23 @@ CREATE TABLE `quiz_question` (
   `OptionC` text NOT NULL,
   `OptionD` text NOT NULL,
   `TrueOption` text NOT NULL,
-  `Score` int(4) NOT NULL
+  `Score` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `quiz_question`
+--
+
+INSERT INTO `quiz_question` (`QuestionID`, `QuizID`, `Question`, `question_img`, `OptionA`, `OptionB`, `OptionC`, `OptionD`, `TrueOption`, `Score`) VALUES
+(2, 1, 'pertanyaan', NULL, '1', '2', '3', '4', 'A', 11),
+(3, 1, 'pertanyaan', NULL, 'a', 'b', 'c', 'd', 'A', 11),
+(4, 1, 'pertanyaan dengan gambar', NULL, '1', '2', '3', '4', 'A', 11),
+(5, 1, 'SIMPAN', NULL, '1', '2', '34', '5', 'A', 11),
+(6, 1, 'SIMPAN', NULL, '1', '2', '34', '5', 'A', 11),
+(7, 1, 'SIMPAN', NULL, '1', '2', '34', '5', 'A', 11),
+(8, 1, 'SIMPAN', NULL, '1', '2', '34', '5', 'A', 11),
+(9, 1, 'SIMPAN', NULL, '1', '2', '34', '5', 'A', 11),
+(10, 0, 'okee berubah', NULL, '1', '2', '3', '4', 'A', 0);
 
 -- --------------------------------------------------------
 
@@ -226,9 +226,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `UserName`, `UserEmail`, `UserPassword`, `UserAvatar`, `UserContactNo`, `CreatedDateTime`, `UserXP`, `UserRole`, `Level`) VALUES
-(1, 'Lulu Iwana21', 'siswa@classmate.com', '$2y$10$c/FnAfDqYMLHJqFDEnfxJON7bePcYbgbxh7SFTYJeXuJQwarVSZny', 'ava9.png', '08656565756', '2021-08-28 13:33:55', 0, 'siswa', '0'),
+(1, 'Lulu Iwana', 'siswa@classmate.com', '$2y$10$c/FnAfDqYMLHJqFDEnfxJON7bePcYbgbxh7SFTYJeXuJQwarVSZny', 'ava1.png', '08656565756', '2021-08-28 13:33:55', 0, 'siswa', '0'),
 (2, 'Novianto Hendrawan S.Pd.', 'guru@classmate.com', '$2y$10$z9JArRp.T3Ae4/NNTtuPRuQR.UVe2T5uT/qS6ikeK8gjp9FL4XPbC', 'default.jpg', '08656565756', '2021-08-28 13:34:07', 0, 'guru', '1'),
-(3, 'Nama Saya Lengkap', 'siswa2@classmate.com', '$2y$10$DoUNYl2M0ADK6eWZRIsSsOVdVgCjwyMJMMtKTlGN8D2h.7NiiVH8m', 'ava7.png', '08656565756', '2021-08-30 10:57:07', 0, 'siswa', '0');
+(3, 'Nama Saya Lengkap', 'siswa2@classmate.com', '$2y$10$DoUNYl2M0ADK6eWZRIsSsOVdVgCjwyMJMMtKTlGN8D2h.7NiiVH8m', 'ava8.png', '08656565756', '2021-08-30 10:57:07', 0, 'siswa', '0'),
+(4, 'hafizh', 'hafizh.arrozaq@gmail.com', '$2y$10$NHw5wQXXEpNAAuOKo4ogr.hGJlOISnO7F.cpnnN2pjMZGhwbm1NCS', 'default.jpg', '08112322232', '2021-09-14 20:37:24', 0, 'guru', '1');
 
 -- --------------------------------------------------------
 
@@ -248,10 +249,8 @@ CREATE TABLE `user_course` (
 --
 
 INSERT INTO `user_course` (`UserID`, `CourseID`, `JoinDate`, `courseXP`) VALUES
-('3', '1', '2021-09-22 14:44:05', 600),
-('1', '1', '2021-09-23 16:20:34', 0),
-('1', '2', '2021-09-23 16:21:28', 0),
-('3', '2', '2021-09-25 22:26:52', 0);
+('1', '1', '2021-09-14 17:34:37', 400),
+('1', '2', '2021-09-14 17:54:02', 200);
 
 -- --------------------------------------------------------
 
@@ -272,10 +271,7 @@ CREATE TABLE `user_lesson` (
 INSERT INTO `user_lesson` (`UserID`, `LessonID`, `Score`) VALUES
 ('1', '1', 200),
 ('1', '2', 200),
-('1', '4', 200),
-('3', '1', 200),
-('3', '2', 200),
-('3', '3', 200);
+('1', '4', 200);
 
 -- --------------------------------------------------------
 
@@ -356,7 +352,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `competencies`
 --
 ALTER TABLE `competencies`
-  MODIFY `CompetenciesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `CompetenciesID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `course`
@@ -374,31 +370,31 @@ ALTER TABLE `course_lesson`
 -- AUTO_INCREMENT untuk tabel `forum_answer`
 --
 ALTER TABLE `forum_answer`
-  MODIFY `ForumAID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ForumAID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `forum_question`
 --
 ALTER TABLE `forum_question`
-  MODIFY `ForumQID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ForumQID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `quiz`
 --
 ALTER TABLE `quiz`
-  MODIFY `QuizID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `QuizID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `quiz_question`
 --
 ALTER TABLE `quiz_question`
-  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `QuestionID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

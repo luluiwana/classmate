@@ -19,19 +19,34 @@
                                 <div id="collapse<?= $row['CompetenciesID'] ?>" class="accordion-collapse collapse bg-dark text-white" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body">
 
-                                        <?php foreach ($lesson[$row['CompetenciesID']] as $row2) :
+                                        <?php if (!empty($lesson[$row['CompetenciesID']])) {
+                                            foreach ($lesson[$row['CompetenciesID']] as $row2) :
                                         ?>
 
-                                            <a href="<?= base_url('guru/detail_lesson/' . $row2['LessonID']) ?>" class="text-white">
-                                                <p><?= $row2['LessonTitle'] ?></p>
-                                            </a>
+                                                <a href="<?= base_url('guru/detail_lesson/' . $row2['LessonID']) ?>" class="text-white">
+                                                    <p><?= $row2['LessonTitle'] ?></p>
+                                                </a>
                                         <?php
-                                        endforeach; ?>
+                                            endforeach;
+                                        } ?>
 
 
                                         <a href="<?= base_url('guru/Lesson/' . $row['CompetenciesID']) ?>" class="text-danger small ">Tambah Materi</a>
                                         <hr>
-                                        Daftar Quiz
+
+                                        <?php if (!empty($quiz[$row['CompetenciesID']])) {
+                                            foreach ($quiz[$row['CompetenciesID']] as $row3) :
+                                        ?>
+
+                                                <a href="<?= base_url('guru/list_question/' . $row3['QuizID']) ?>" class="text-white">
+                                                    <p><?= $row3['QuizTitle'] ?></p>
+                                                </a>
+                                        <?php
+                                            endforeach;
+                                        } ?>
+
+                                        <a href="<?= base_url('guru/create_quiz/' . $row['CompetenciesID']) ?>" class="text-danger small ">Tambah Quiz</a>
+
                                     </div>
                                 </div>
                             </div>

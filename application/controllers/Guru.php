@@ -11,6 +11,7 @@ class Guru extends CI_Controller
             redirect('auth', 'refresh');
         }
         $this->load->model('Course_model');
+        $this->load->model('M_Quiz');
     }
 
     public function index()
@@ -129,6 +130,14 @@ class Guru extends CI_Controller
                 $data['lesson'][$row['CompetenciesID']] = $lesson_result;
             }
         }
+        foreach ($data['competencies'] as $row) {
+            $quiz_result = $this->Course_model->getQuizByCompetenciesID($row['CompetenciesID']);
+            if ($quiz_result) {
+                $data['quiz'][$row['CompetenciesID']] = $quiz_result;
+            }
+        }
+
+
         $this->load->view('guru/template/header', $data);
         $this->load->view('guru/template/course_menu');
         $this->load->view('guru/course/course');
@@ -266,6 +275,236 @@ class Guru extends CI_Controller
 
         $this->load->view('guru/course/pengaturan');
         $this->load->view('guru/template/footer');
+    }
+
+    public function create_quiz($CompetenciesID)
+    {
+        $this->form_validation->set_rules('judul', 'Judul', 'required');
+        if ($this->form_validation->run() == false) {
+            $data = array(
+                'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+                'menu'      => 'Tambah Quiz',
+                'course_menu' => "Tambah Quiz",
+                'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
+                'id' => $CompetenciesID
+            );
+
+            $this->load->view('guru/template/header', $data);
+
+            $this->load->view('guru/course/create_quiz');
+            $this->load->view('guru/template/footer');
+        } else {
+            $insert_data = [
+                'CompetenciesID' => $CompetenciesID,
+                'QuizTitle' => $this->input->post('judul'),
+
+            ];
+
+            $QuizID =   $this->M_Quiz->createQuiz($insert_data);
+            redirect('guru/create_question/' . $QuizID);
+        }
+    }
+
+    public function create_question($QuizID)
+    {
+        $this->form_validation->set_rules('soal', 'Soal', 'required');
+        if ($this->form_validation->run() == false) {
+            $data = array(
+
+                'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+                'menu'      => 'Tambah Quiz',
+                'course_menu' => "Tambah Quiz",
+                'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
+                'id' => $QuizID,
+                'nomor_soal' => $this->M_Quiz->getQuizCount($QuizID)
+            );
+
+            $this->load->view('guru/template/header', $data);
+            $this->load->view('guru/course/create_question');
+            $this->load->view('guru/template/footer');
+        } else {
+            $choose_option = $this->input->post('processed');
+            if ($choose_option == 'Tambah Soal') {
+                $temp = explode(".", $_FILES["file"]["name"]);
+                $newfilename = round(microtime(true)) . '.' . $temp[1];
+
+                $config['file_name']            = $newfilename;
+
+                $config['upload_path']          = "media/soal/";
+                $config['allowed_types']          = '*';
+
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('file')) {
+
+                    $insert_data = array(
+                        'QuizID' => $QuizID,
+                        'Question' => $this->input->post('soal'),
+                        'OptionA' => $this->input->post('jawaban_1'),
+                        'OptionB' => $this->input->post('jawaban_2'),
+                        'OptionC' => $this->input->post('jawaban_3'),
+                        'OptionD' => $this->input->post('jawaban_4'),
+                        'TrueOption' => $this->input->post('TrueOption'),
+                    );
+                    $this->M_Quiz->saveQuestion($insert_data, $QuizID);
+                    redirect('guru/create_question/' . $QuizID);
+                } else {
+                    $insert_data = array(
+                        'QuizID' => $QuizID,
+                        'Question' => $this->input->post('soal'),
+                        'OptionA' => $this->input->post('jawaban_1'),
+                        'OptionB' => $this->input->post('jawaban_2'),
+                        'OptionC' => $this->input->post('jawaban_3'),
+                        'OptionD' => $this->input->post('jawaban_4'),
+                        'TrueOption' => $this->input->post('TrueOption'),
+
+                        'question_img' => $config['file_name'],
+                    );
+                    $this->M_Quiz->saveQuestion($insert_data, $QuizID);
+                    redirect('guru/create_question/' . $QuizID);
+                }
+            } elseif ($choose_option == 'Simpan') {
+                $temp = explode(".", $_FILES["file"]["name"]);
+                $newfilename = round(microtime(true)) . '.' . $temp[1];
+
+                $config['file_name']            = $newfilename;
+
+                $config['upload_path']          = "media/soal/";
+                $config['allowed_types']          = '*';
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('file')) {
+                    $insert_data = array(
+                        'QuizID' => $QuizID,
+                        'Question' => $this->input->post('soal'),
+                        'OptionA' => $this->input->post('jawaban_1'),
+                        'OptionB' => $this->input->post('jawaban_2'),
+                        'OptionC' => $this->input->post('jawaban_3'),
+                        'OptionD' => $this->input->post('jawaban_4'),
+                        'TrueOption' => $this->input->post('TrueOption'),
+                    );
+                    $this->M_Quiz->saveQuestion($insert_data, $QuizID);
+                    redirect('guru');
+                } else {
+                    $insert_data = array(
+                        'QuizID' => $QuizID,
+                        'Question' => $this->input->post('soal'),
+                        'OptionA' => $this->input->post('jawaban_1'),
+                        'OptionB' => $this->input->post('jawaban_2'),
+                        'OptionC' => $this->input->post('jawaban_3'),
+                        'OptionD' => $this->input->post('jawaban_4'),
+                        'TrueOption' => $this->input->post('TrueOption'),
+
+                        'question_img' => $config['file_name'],
+                    );
+                    $this->M_Quiz->saveQuestion($insert_data, $QuizID);
+                    redirect('guru');
+                }
+            }
+        }
+    }
+
+
+
+    public function list_question($QuizID)
+    {
+        $data = array(
+            'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+            'menu'      => 'Daftar Pertanyaan',
+            'course_menu' => "Daftar Pertanyaan",
+            'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
+            'id' => $QuizID
+        );
+
+        $data['question'] = $this->M_Quiz->getListQuestionByQuizID($QuizID);
+        $this->load->view('guru/template/header', $data);
+
+        $this->load->view('guru/course/list_question');
+        $this->load->view('guru/template/footer');
+    }
+
+    public function edit_question($QuestionID)
+    {
+        $this->form_validation->set_rules('soal', 'Soal', 'required');
+        if ($this->form_validation->run() == false) {
+            $data = array(
+
+                'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+                'menu'      => 'Tambah Quiz',
+                'course_menu' => "Tambah Quiz",
+                'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
+                'id' => $QuestionID,
+                // 'nomor_soal' => $this->M_Quiz->getQuizCount($QuestionID)
+            );
+            $data['result'] = $this->M_Quiz->getDetailQuestion($QuestionID);
+            $this->load->view('guru/template/header', $data);
+            $this->load->view('guru/course/edit_question');
+            $this->load->view('guru/template/footer');
+        } else {
+            $temp = explode(".", $_FILES["file"]["name"]);
+            $newfilename = round(microtime(true)) . '.' . $temp[1];
+
+            $config['upload_path']          = "media/soal/";
+            $config['allowed_types']          = '*';
+
+
+            $config['file_name']            = $newfilename;
+
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('file')) {
+
+                // $error = array('error' => $this->upload->display_errors());
+
+                // return $error;
+
+                $raw = $this->M_Quiz->getQuizCount($this->input->post('quizid'));
+                $jumlah = $raw->jumlah;
+                (float)$total = 100 / $jumlah . (float)$jumlah;
+
+                $insert_data = array(
+
+                    'Question' => $this->input->post('soal'),
+                    'OptionA' => $this->input->post('jawaban_1'),
+                    'OptionB' => $this->input->post('jawaban_2'),
+                    'OptionC' => $this->input->post('jawaban_3'),
+                    'OptionD' => $this->input->post('jawaban_4'),
+                    'TrueOption' => $this->input->post('TrueOption'),
+                    'Score' => $total
+                );
+                $this->M_Quiz->EditQuestion($insert_data, $QuestionID);
+                redirect('guru/list_question/' . $this->input->post('quizid'));
+            } else {
+                $raw = $this->M_Quiz->getQuizCount($this->input->post('quizid'));
+                $jumlah = $raw->jumlah;
+                (float)$total = 100 / $jumlah . (float)$jumlah;
+                $insert_data = array(
+
+                    'Question' => $this->input->post('soal'),
+                    'OptionA' => $this->input->post('jawaban_1'),
+                    'OptionB' => $this->input->post('jawaban_2'),
+                    'OptionC' => $this->input->post('jawaban_3'),
+                    'OptionD' => $this->input->post('jawaban_4'),
+                    'TrueOption' => $this->input->post('TrueOption'),
+                    'question_img' => $config['file_name'],
+                    'Score' => $total,
+                );
+
+                $this->M_Quiz->EditQuestion($insert_data, $QuestionID);
+                redirect('guru/list_question/' . $this->input->post('quizid'));
+            }
+        }
+    }
+
+    public function hapus_soal($QuizID, $QuestionID)
+    {
+        $this->db->delete('quiz_question', array('QuestionID' => $QuestionID));
+        redirect('guru/list_question/' . $QuizID);
     }
 }
         
