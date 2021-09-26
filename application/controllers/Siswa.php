@@ -67,6 +67,7 @@ class Siswa extends CI_Controller
     public function quit($CourseID)
     {
         $this->Course_model->quit($CourseID);
+        $this->Course_model->deleteUserLesson($CourseID);
 
         redirect('siswa/kelas', 'refresh');
     }
@@ -107,9 +108,8 @@ class Siswa extends CI_Controller
             'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Informasi',
-            'course'    => $this->Course_model->course($CourseID),
+            'course'    => $this->Course_model->courseInfo($CourseID),
             'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
-
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');

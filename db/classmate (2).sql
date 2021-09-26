@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Sep 2021 pada 03.32
--- Versi server: 10.4.13-MariaDB
--- Versi PHP: 7.4.8
+-- Waktu pembuatan: 26 Sep 2021 pada 23.44
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -90,7 +90,8 @@ INSERT INTO `course_lesson` (`LessonID`, `CompetenciesID`, `LessonTitle`, `Lesso
 (1, 1, 'Where does it come from?', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.', '', '2021-08-28 06:38:20'),
 (2, 1, 'sasasasasa', '<p>sasasasa</p>', '2_1630331823.', '2021-08-30 13:57:03'),
 (3, 1, 'dsasdsa', '<p>ddasdsa</p>', '2_1630331878.', '2021-08-30 13:57:57'),
-(4, 3, 'cara membangunkan katak', 'absdasd asd asd asd as', '', '2021-09-14 10:53:42');
+(4, 3, 'cara membangunkan katak', 'absdasd asd asd asd as', '', '2021-09-14 10:53:42'),
+(5, 1, 'sasdasd11', 'asdas', '', '2021-09-26 12:27:27');
 
 -- --------------------------------------------------------
 
@@ -108,6 +109,17 @@ CREATE TABLE `forum_answer` (
   `UpdatedDateTime` datetime DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data untuk tabel `forum_answer`
+--
+
+INSERT INTO `forum_answer` (`ForumAID`, `ForumAContent`, `ForumQID`, `UserID`, `ForumAStatus`, `CreatedDateTime`, `UpdatedDateTime`) VALUES
+(8, '<p>uyuyu</p>', 4, 1, 0, '2021-09-26 14:30:52', NULL),
+(10, '<p>asdsa dasdn a ssanf sdag</p>', 5, 1, 0, '2021-09-26 15:19:43', NULL),
+(11, '<p>sfjsd fsdf sfjas fasf asfsd</p>', 5, 1, 0, '2021-09-26 15:19:48', NULL),
+(13, '<p>apasih</p>', 5, 3, 0, '2021-09-26 17:29:05', NULL),
+(14, '<p>hahahaha aneh deh<br><br>&nbsp;<img src=\"https://avatars.githubusercontent.com/u/16160143?s=88&amp;v=4\" style=\"width: 88px;\"></p>', 5, 3, 0, '2021-09-26 22:55:39', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -116,6 +128,7 @@ CREATE TABLE `forum_answer` (
 
 CREATE TABLE `forum_question` (
   `ForumQID` int(11) NOT NULL,
+  `CourseID` char(5) NOT NULL,
   `ForumQTitle` text NOT NULL,
   `ForumQContent` text NOT NULL,
   `UserID` int(11) NOT NULL,
@@ -124,6 +137,15 @@ CREATE TABLE `forum_question` (
   `UpdatedDateTime` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   `category` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `forum_question`
+--
+
+INSERT INTO `forum_question` (`ForumQID`, `CourseID`, `ForumQTitle`, `ForumQContent`, `UserID`, `ForumQStatus`, `CreatedDateTime`, `UpdatedDateTime`, `category`) VALUES
+(4, '2', '', '<p>Dahla</p>', 1, 0, '2021-09-26 14:20:57', NULL, 'Tugas'),
+(5, '2', '', '                                                                                                         <p>editan 234</p>                                                                                ', 1, 0, '2021-09-26 14:42:20', '2021-09-26 15:02:37', 'Tugas'),
+(6, '1', '', '<p>gaada bung</p>', 3, 0, '2021-09-26 17:28:48', NULL, 'Pengumuman');
 
 -- --------------------------------------------------------
 
@@ -228,7 +250,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`UserID`, `UserName`, `UserEmail`, `UserPassword`, `UserAvatar`, `UserContactNo`, `CreatedDateTime`, `UserXP`, `UserRole`, `Level`) VALUES
 (1, 'Lulu Iwana', 'siswa@classmate.com', '$2y$10$c/FnAfDqYMLHJqFDEnfxJON7bePcYbgbxh7SFTYJeXuJQwarVSZny', 'ava1.png', '08656565756', '2021-08-28 13:33:55', 0, 'siswa', '0'),
 (2, 'Novianto Hendrawan S.Pd.', 'guru@classmate.com', '$2y$10$z9JArRp.T3Ae4/NNTtuPRuQR.UVe2T5uT/qS6ikeK8gjp9FL4XPbC', 'default.jpg', '08656565756', '2021-08-28 13:34:07', 0, 'guru', '1'),
-(3, 'Nama Saya Lengkap', 'siswa2@classmate.com', '$2y$10$DoUNYl2M0ADK6eWZRIsSsOVdVgCjwyMJMMtKTlGN8D2h.7NiiVH8m', 'ava8.png', '08656565756', '2021-08-30 10:57:07', 0, 'siswa', '0'),
+(3, 'Nama Saya Lengkap', 'siswa2@classmate.com', '$2y$10$DoUNYl2M0ADK6eWZRIsSsOVdVgCjwyMJMMtKTlGN8D2h.7NiiVH8m', 'ava8.png', '08656565756', '2021-08-30 10:57:07', 0, 'siswa', '2'),
 (4, 'hafizh', 'hafizh.arrozaq@gmail.com', '$2y$10$NHw5wQXXEpNAAuOKo4ogr.hGJlOISnO7F.cpnnN2pjMZGhwbm1NCS', 'default.jpg', '08112322232', '2021-09-14 20:37:24', 0, 'guru', '1');
 
 -- --------------------------------------------------------
@@ -250,7 +272,9 @@ CREATE TABLE `user_course` (
 
 INSERT INTO `user_course` (`UserID`, `CourseID`, `JoinDate`, `courseXP`) VALUES
 ('1', '1', '2021-09-14 17:34:37', 400),
-('1', '2', '2021-09-14 17:54:02', 200);
+('1', '2', '2021-09-14 17:54:02', 200),
+('3', '1', '2021-09-26 17:27:39', 800),
+('3', '2', '2021-09-26 17:28:53', 200);
 
 -- --------------------------------------------------------
 
@@ -261,6 +285,7 @@ INSERT INTO `user_course` (`UserID`, `CourseID`, `JoinDate`, `courseXP`) VALUES
 CREATE TABLE `user_lesson` (
   `UserID` char(10) NOT NULL,
   `LessonID` char(10) NOT NULL,
+  `CourseID` char(10) NOT NULL,
   `Score` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -268,10 +293,12 @@ CREATE TABLE `user_lesson` (
 -- Dumping data untuk tabel `user_lesson`
 --
 
-INSERT INTO `user_lesson` (`UserID`, `LessonID`, `Score`) VALUES
-('1', '1', 200),
-('1', '2', 200),
-('1', '4', 200);
+INSERT INTO `user_lesson` (`UserID`, `LessonID`, `CourseID`, `Score`) VALUES
+('3', '1', '1', 200),
+('3', '4', '2', 200),
+('3', '2', '1', 200),
+('3', '3', '1', 200),
+('3', '5', '1', 200);
 
 -- --------------------------------------------------------
 
@@ -364,19 +391,19 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT untuk tabel `course_lesson`
 --
 ALTER TABLE `course_lesson`
-  MODIFY `LessonID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `LessonID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `forum_answer`
 --
 ALTER TABLE `forum_answer`
-  MODIFY `ForumAID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ForumAID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `forum_question`
 --
 ALTER TABLE `forum_question`
-  MODIFY `ForumQID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ForumQID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `quiz`

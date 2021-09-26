@@ -23,7 +23,7 @@
                             </tr>
                             <tr>
                                 <td>Guru</td>
-                                <td><?=$course->TeacherID?></td>
+                                <td><?=$course->UserName?></td>
                             </tr>
                         </table>
                         <a href="" class="btn btn-danger" data-bs-toggle="modal"
@@ -31,7 +31,7 @@
                         <!-- Modal Keluar-->
                         <div class="modal fade" id="quit" tabindex="-1" aria-labelledby="quitLabel"
                             aria-hidden="true">
-                            <div class="modal-dialog">
+                            <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content modal-danger">
                                     <div class="modal-body">
                                         <div class="row">
@@ -39,7 +39,7 @@
                                                 <i class="fas fa-exclamation-triangle fs-1 text-danger"></i>
                                             </div>
                                             <div class="col-md-10">
-                                                <p class="text-danger fw-bold">Kamu yakin ingin keluar dari kelas?</p>
+                                                <p class="text-danger fw-bold mb-4">Kamu yakin ingin keluar dari kelas?</p>
                                                
 
                                                 <a href="<?=base_url()?>siswa/quit/<?=$course->CourseID?>"

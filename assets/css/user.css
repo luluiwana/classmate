@@ -218,11 +218,22 @@ p{
 .dropdown-menu > li > a{
 	font-family: inherit;
 }
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+    pointer-events: none;
+    opacity: 1;
+}
+.vector-teman{
+	    width: 110%;
+    margin-top: -113px;
+}
 /* MEDIA */
 @media only screen and (max-width: 768px) {
 	.course-menu {
 		width: 100%;
 	}
+	.navbar-vertical.navbar-expand-xs {
+	top: 60px;
+}
 	.course-logo {
 		width: 25%;
 	}

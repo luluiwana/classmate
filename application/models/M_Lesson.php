@@ -16,11 +16,27 @@ class M_Lesson extends CI_Model
     }
     public function getLessons($CompetencyID)
     {
-        // SELECT * FROM `course_lesson` WHERE CompetenciesID=1
-        $this->db->select('*, course_lesson.LessonID as IDLesson');
+        // SELECT * FROM `course_lesson` WHERE CompetenciesID=1\
+        $id = $this->session->userdata('id_user');
+        // $this->db->select('*, course_lesson.LessonID as IDLesson');
         $this->db->where('CompetenciesID', $CompetencyID);
-        $this->db->join('user_lesson', 'course_lesson.LessonID=user_lesson.LessonID', 'left');
+        // $this->db->where('UserID', $id);
+        // $this->db->join('user_lesson', 'course_lesson.LessonID=user_lesson.LessonID', 'left');
         return $this->db->get('course_lesson')->result();
+    }
+    
+    public function isLessonComplete($LessonID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('UserID', $id);
+        $this->db->where('LessonID', $LessonID);
+        $row = $this->db->get('user_lesson')->row();
+        if (!empty($row)) {
+            return true;
+        }else {
+            return false;
+        }
+        
     }
     public function getLesson($LessonID)
     {

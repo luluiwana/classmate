@@ -17,7 +17,8 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->from('course');
         $this->db->where('TeacherID', $id);
-        return $this->db->count_all_results();;
+        return $this->db->count_all_results();
+        ;
     }
     public function getUser()
     {
@@ -99,6 +100,14 @@ class Course_model extends CI_Model
         $this->db->where('course.CourseID', $CourseID);
         return $this->db->get('course')->row();
     }
+    public function courseInfo($CourseID)
+    {
+        $this->db->join('users', 'users.UserID=course.TeacherID');
+        $this->db->where('CourseID', $CourseID);
+        return $this->db->get('course')->row();
+        
+        
+    }
     public function courseByGuru($CourseID)
     {
         $id = $this->session->userdata('id_user');
@@ -162,6 +171,15 @@ class Course_model extends CI_Model
         $this->db->where('UserID', $id);
         $this->db->delete('user_course');
     }
+    public function deleteUserLesson($CourseID)
+    {
+        // SELECT * FROM `user_lesson` INNER JOIN course_lesson ON course_lesson.LessonID=user_lesson.LessonID INNER JOIN competencies ON competencies.CompetenciesID=course_lesson.CompetenciesID WHERE user_lesson.UserID=3 AND competencies.CourseID=1
+        $id = $this->session->userdata('id_user');
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->delete('user_lesson');
+        
+    }
 
     public function getCompetenciesByID($CourseID)
     {
@@ -210,6 +228,28 @@ class Course_model extends CI_Model
         $this->db->where('UserID', $id);
         $row = $this->db->get('user_course')->row();
         return $row->xp;
+    }
+    public function setLevel($XP)
+    {
+        $id = $this->session->userdata('id_user');
+        if ($XP<500) {
+            $level=0;
+        }elseif ($XP<1000) {
+            $level=1;
+        }elseif ($XP<2000) {
+            $level=2;
+        }elseif ($XP<4000) {
+            $level=3;
+        }elseif ($XP<8000) {
+            $level=4;
+        }else {
+            $level=5;
+        }
+        $data = array(
+            'level' => $level
+        );
+        $this->db->where('UserID', $id);
+        $this->db->update('users', $data);
     }
 }
                         

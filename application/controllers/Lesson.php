@@ -46,14 +46,16 @@ class Lesson extends CI_Controller
     }
     public function complete()
     {
+       $CourseID=$this->input->post('course');
        $data = array(
            'UserID' => $this->session->userdata('id_user'),
            'LessonID'=>$this->input->post('lesson'),
-           'Score'=>200
+           'Score'=>200,
+           'CourseID'=>$CourseID
        );
-       $CourseID=$this->input->post('course');
        $this->M_Lesson->complete($data,$CourseID);
-       
+       $totalXP = $this->Course_model->totalXP();
+       $this->Course_model->setLevel($totalXP);
        redirect('lesson/course/'.$CourseID,'refresh');
        
        

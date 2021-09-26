@@ -88,6 +88,11 @@
             </a>
             <?php endforeach; ?>
         </div>
+        <div class="col-md-4">
+            <div class="card-forum mt-3 bg-darkpurple">
+                <p>Paling Aktif</p>
+            </div>
+        </div>
     </div>
     <?php else:?>
     <div class="card mt-2">
