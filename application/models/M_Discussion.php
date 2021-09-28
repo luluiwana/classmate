@@ -106,4 +106,71 @@ class M_Discussion extends CI_Model
         $this->db->where('UserID', $id);
         $this->db->delete('forum_answer');
     }
+    public function checkForumScore($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->where('UserID', $id);
+        $this->db->where('CourseID', $CourseID);
+        return $this->db->get('forum_score')->row();
+    }
+    public function addForumScore($CourseID,$XP)
+    {
+        //add score
+        $id = $this->session->userdata('id_user');
+        $data = array(
+            'UserID' => $id,
+            'CourseID'=>$CourseID,
+            'Score'=>$XP
+        );
+        $this->db->insert('forum_score', $data);
+        //add XP
+        $this->db->set('courseXP', 'courseXP+'.$XP, false);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->update('user_course');
+
+    }
+    public function updateForumScore($CourseID,$addXP)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->set('Score', 'Score+'.$addXP, false);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->update('forum_score');
+         //add XP
+        $this->db->set('courseXP', 'courseXP+'.$addXP, false);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->update('user_course');
+    }
+     public function decreaseForumScore($CourseID,$minusXP)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->set('Score', 'Score -'.$minusXP, false);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->update('forum_score');
+         //add XP
+        $this->db->set('courseXP', 'courseXP-'.$minusXP, false);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->update('user_course');
+    }
+    public function getForumLeaderboard($CourseID)
+    {
+        // SELECT * FROM `forum_score` INNER JOIN users ON users.UserID=forum_score.UserID WHERE CourseID=1 ORDER BY forum_score.Score DESC
+        $this->db->join('users', 'users.UserID=forum_score.UserID');
+        $this->db->where('CourseID', $CourseID);
+        $this->db->order_by('forum_score.Score', 'desc');
+        $this->db->limit(10);
+        return $this->db->get('forum_score')->result();
+    }
+    public function countComments($ForumQID)
+    {
+        # SELECT *,COUNT(ForumAID) FROM `forum_answer` GROUP BY ForumQID
+        $this->db->select('count(ForumAID) as countComments');
+        $this->db->where('ForumQID', $ForumQID);
+        $row = $this->db->get('forum_answer')->row();
+        return $row->countComments;
+    }
 }

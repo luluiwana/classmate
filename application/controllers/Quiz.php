@@ -37,10 +37,8 @@ class Quiz extends CI_Controller
     $data = array(
       'title' => "Quiz",
       'menu'  => 'Quiz',
+      
     );
-
-
-
     $data['question'] = $this->quiz->getQuizByID($quizID);
 
     $this->load->view('siswa/template/header', $data);

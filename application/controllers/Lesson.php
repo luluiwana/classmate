@@ -17,7 +17,7 @@ class Lesson extends CI_Controller
     public function course($CourseID)
     {
          $data = array(
-            'title'     => $this->Course_model->course($CourseID)->CourseName,
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Kelas',
             'course'    => $this->Course_model->course($CourseID),

@@ -51,7 +51,7 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content modal-warning">
                                         <div class="modal-body text-center">
-                                            <p class="text-white fw-bold mb-4">Kamu yakin ingin menghapus?
+                                            <p class="text-white fw-bold mb-4">Yakin ingin menghapus? Kamu akan kehilangan 20XP dan skor keaktifan
                                             </p>
                                             <a href="<?=base_url()?>discussion/delete/<?=$thread->ForumQID?>/<?=$thread->CourseID?>"
                                                 class="btn btn-warning btn-sm me-5">Hapus</a>
@@ -83,7 +83,7 @@
             </div>
             <?php if(!empty($comments)):?>
             <div class="col-md-12">
-                <p class="fw-bold text-white small mt-3"> <i class="fas fa-dot-circle text-warning me-1"></i> 4 Komentar
+                <p class="fw-bold text-white small mt-3"> <i class="fas fa-dot-circle text-warning me-1"></i> <?=$countComments?> Komentar
                 </p>
                 <div class="card">
                     <div class="card-body">
@@ -111,7 +111,7 @@
                                             <div class="modal-content modal-warning">
                                                 <div class="modal-body text-center">
                                                     <p class="text-white fw-bold mb-4">Kamu yakin ingin menghapus
-                                                        komentar ini?
+                                                        komentar ini? Kamu akan kehilangan 20XP dan skor keaktifan
                                                     </p>
                                                     <a href="<?=base_url()?>discussion/deletecomment/<?=$thread->CourseID?>/<?=$row->ForumQID?>/<?=$row->ForumAID?>"
                                                         class="btn btn-warning btn-sm me-5">Hapus</a>
@@ -134,6 +134,36 @@
                 </div>
             </div>
             <?php endif;?>
+        </div>
+        <div class="col-md-4">
+            <div class="card-forum mt-3 bg-primary">
+                Dapatkan ekstra <b class="text-warning">20XP</b> setiap memberikan komentar dan berdiskusi
+            </div>
+            <div class="card-forum mt-3">
+                <div class="row">
+                    <span class="fw-bold text-white small mt-2 w-60"> <i
+                            class="fas fa-dot-circle text-warning me-1"></i>SISWA TERAKTIF</span>
+                    <span class="fw-bold text-white small mt-2 w-40 text-end"> <i class="fas fa-star text-warning"></i>
+                        SKOR</sp>
+                </div>
+                <div class="mt-4 ">
+                    <?php foreach($leaderboard as $lb):?>
+                    <div class="row bg-darkgreen py-3 border-end border-success border-3">
+                        <div class="lb-forum w-20 my-auto">
+                            <img src="<?= base_url() ?>media/avatar/<?=$lb->UserAvatar?>" alt="image"
+                                class="w-35px my-auto">
+                        </div>
+                        <div class="nama-lb-forum w-60 my-auto">
+                            <div class=" my-auto small"><?=$lb->UserName?></div>
+                        </div>
+                        <div class="skor-forum w-20 my-auto">
+                            <div class="fw-bolder small"><?=$lb->Score?></div>
+                        </div>
+                    </div>
+                    <?php endforeach;?>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

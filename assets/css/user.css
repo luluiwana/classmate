@@ -226,6 +226,9 @@ p{
 	    width: 110%;
     margin-top: -113px;
 }
+.w-35px{
+	width:35px
+}
 /* MEDIA */
 @media only screen and (max-width: 768px) {
 	.course-menu {

@@ -78,6 +78,12 @@ class M_Lesson extends CI_Model
         $row = $this->db->get('user_course')->row();
         return $row->courseXP;
     }
+    public function getQuiz($CompetencyID)
+    {
+        # code...SELECT * FROM `quiz` WHERE CompetenciesID=1
+        $this->db->where('CompetenciesID', $CompetencyID);
+        return $this->db->get('quiz')->result();
+    }
 }
                         
 /* End of file lesson.php */

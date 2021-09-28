@@ -29,12 +29,12 @@ class Discussion extends CI_Controller
     public function all($CourseID)
     {
         $data = array(
-      'title' => "Semua Topik",
-      'menu'  => 'Diskusi',
-      'course_id'=>$CourseID,
-      'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
-    );
-        date_default_timezone_set('Asia/Jakarta');
+          'title' => "Semua Topik",
+          'menu'  => 'Diskusi',
+          'course_id'=>$CourseID,
+          'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
+          'leaderboard'=>$this->M_Discussion->getForumLeaderboard($CourseID)
+        );
         $data['diskusi'] = $this->M_Discussion->getDiskusi($CourseID);
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/diskusi/lihat_diskusi');
@@ -43,12 +43,13 @@ class Discussion extends CI_Controller
     }
     public function topik($topik, $CourseID)
     {
-        $data = array(
-      'title' => $topik,
-      'menu'  => 'Diskusi',
-      'course_id'=>$CourseID,
-      'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
-    );
+      $data = array(
+        'title' => $topik,
+        'menu'  => 'Diskusi',
+        'course_id'=>$CourseID,
+        'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
+        'leaderboard'=>$this->M_Discussion->getForumLeaderboard($CourseID)
+      );
 
         $data['diskusi'] = $this->M_Discussion->getTopik($topik, $CourseID);
         $this->load->view('siswa/template/header', $data);
@@ -59,11 +60,13 @@ class Discussion extends CI_Controller
     public function detail_discussion($id, $CourseID)
     {
         $data = array(
-      'title' => "Diskusi",
-      'menu'  => 'Diskusi',
-      'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
-      'CourseID'=>$CourseID
-    );
+          'title' => "Diskusi",
+          'menu'  => 'Diskusi',
+          'CourseName'=>$this->M_Discussion->getCourseName($CourseID),
+          'CourseID'=>$CourseID,
+          'leaderboard'=>$this->M_Discussion->getForumLeaderboard($CourseID),
+          'countComments'=>$this->M_Discussion->countComments($id)
+        );
 
         $data['thread'] = $this->M_Discussion->getDisscussionById($id);
         $data['comments'] = $this->M_Discussion->getCommentsById($id);
@@ -78,40 +81,55 @@ class Discussion extends CI_Controller
     public function addDataDiskusi()
     {
         $CourseID = $this->input->post('courseid');
+        $id = $this->session->userdata('id_user');
+        //start insert discussion
         $insert_data = [
-      // 'ForumQtitle' => $this->input->post('judul'),
-      'CourseID' => $CourseID,
-      'ForumQContent' => $this->input->post('content'),
-      'UserID' =>  $this->session->userdata('id_user'),
-      'Category' => $this->input->post('kategori'),
-      // 'CreatedDateTime'=>Date('Y-m-d h:i:s')
-    ];
+          'CourseID' => $CourseID,
+          'ForumQContent' => $this->input->post('content'),
+          'UserID' =>  $id,
+          'Category' => $this->input->post('kategori'),
+        ];
         $this->M_Discussion->addDiscussion($insert_data);
+        //insert or update forum_score
+        $checkForumScore = $this->M_Discussion->checkForumScore($CourseID);
+        if (!empty($checkForumScore)) {
+            $this->M_Discussion->updateForumScore($CourseID, 20);
+        } else {
+            $this->M_Discussion->addForumScore($CourseID,20);
+        }
         redirect('discussion/all/'.$CourseID);
     }
 
     public function addComments($ForumQID)
     {
         $insert_data = [
-
-      'ForumAContent' => $this->input->post('content'),
-      'UserID' =>  $this->session->userdata('id_user'),
-      'ForumQID' =>  $ForumQID,
-
-    ];
+          'ForumAContent' => $this->input->post('content'),
+          'UserID' =>  $this->session->userdata('id_user'),
+          'ForumQID' =>  $ForumQID,
+        ];
         $CourseID = $this->input->post('CourseID');
         $this->M_Discussion->addComments($insert_data);
+        //insert or update forum_score
+        $checkForumScore = $this->M_Discussion->checkForumScore($CourseID);
+        if (!empty($checkForumScore)) {
+            $this->M_Discussion->updateForumScore($CourseID, 20);
+        } else {
+            $this->M_Discussion->addForumScore($CourseID);
+        }
+
         redirect('discussion/detail_discussion/' . $ForumQID.'/'.$CourseID);
     }
     public function delete($ForumQID, $CourseID)
     {
         $this->M_Discussion->deleteThread($ForumQID);
         $this->M_Discussion->deleteComments($ForumQID);
+        $this->M_Discussion->decreaseForumScore($CourseID, 20);
         redirect('discussion/all/'.$CourseID, 'refresh');
     }
     public function deletecomment($CourseID, $ForumQID, $ForumAID)
     {
         $this->M_Discussion->deleteComment($ForumAID);
+        $this->M_Discussion->decreaseForumScore($CourseID, 20);
         redirect('discussion/detail_discussion/'.$ForumQID.'/'.$CourseID, 'refresh');
     }
     public function editDiskusi($ForumQID, $CourseID)
@@ -137,7 +155,7 @@ class Discussion extends CI_Controller
         $this->M_Discussion->editDiscussion($ForumQID, $data);
         redirect('discussion/detail_discussion/'.$ForumQID.'/'.$CourseID, 'refresh');
     }
-     public function editKomentar($ForumAID, $ForumQID, $CourseID)
+    public function editKomentar($ForumAID, $ForumQID, $CourseID)
     {
         $data = array(
           'title' => "Edit Komentar",
@@ -152,7 +170,7 @@ class Discussion extends CI_Controller
         $this->load->view('siswa/template/footer');
         # code...
     }
-     public function editcomment__($ForumAID,$ForumQID, $CourseID)
+    public function editcomment__($ForumAID, $ForumQID, $CourseID)
     {
         $data = [
           'ForumAContent' => $this->input->post('content'),
@@ -160,7 +178,6 @@ class Discussion extends CI_Controller
         $this->M_Discussion->updateComment($ForumAID, $data);
         redirect('discussion/detail_discussion/'.$ForumQID.'/'.$CourseID, 'refresh');
     }
-    
 }
 
 

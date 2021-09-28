@@ -50,7 +50,8 @@
             </div>
             <?php if(!empty($diskusi)):?>
             <?php foreach ($diskusi as $row) : ?>
-            <a href="<?=base_url()?>discussion/detail_discussion/<?= $row->ForumQID ?>/<?=$course_id?>" class="text-secondary">
+            <a href="<?=base_url()?>discussion/detail_discussion/<?= $row->ForumQID ?>/<?=$course_id?>"
+                class="text-secondary">
                 <div class="card-forum mt-3 ">
                     <div class="row">
                         <div class="w-10 ava-space pe-0">
@@ -58,13 +59,13 @@
                                 class="w-100 my-auto">
                         </div>
                         <div class="w-90 name-space ">
-
+                        
                             <div class="fw-bolder"><?=$row->UserName?></div>
                             <div class="text-secondary small">
                                 <span class="me-3"><?=$row->CreatedDateTime?></span>
                                 <span class="badge bg-warning"><?=$row->category?></span>
                             </div>
-                            
+
                         </div>
                     </div>
                     <div class="mt-3 fs-5 fw-bold">
@@ -75,7 +76,7 @@
                     </div>
                     <!-- <hr> -->
                     <div class="text-secondary isi-diskusi">
-                        <i class="fas fa-reply"></i> 14 Komentar
+                        <i class="fas fa-comment small"></i> <?=$this->M_Discussion->countComments($row->ForumQID)?> Komentar
                     </div>
                     <!-- <div class="ques-icon-info3293 tex"> <a href="#" class="text-white"><i class=" text-white fa fa-clock-o" aria-hidden="true"> 4 min
                                     ago</i></a> <a href="#" class="text-white"><i class="text-white fa fa-question-circle-o" aria-hidden="true"> Question</i></a>
@@ -89,8 +90,33 @@
             <?php endforeach; ?>
         </div>
         <div class="col-md-4">
-            <div class="card-forum mt-3 bg-darkpurple">
-                <p>Paling Aktif</p>
+            <div class="card-forum mt-3 bg-primary">
+                Dapatkan ekstra <b class="text-warning">20XP</b> setiap memberikan komentar dan berdiskusi
+            </div>
+            <div class="card-forum mt-3">
+                <div class="row">
+                    <span class="fw-bold text-white small mt-2 w-60"> <i
+                            class="fas fa-dot-circle text-warning me-1"></i>SISWA TERAKTIF</span>
+                    <span class="fw-bold text-white small mt-2 w-40 text-end"> <i class="fas fa-star text-warning"></i>
+                        SKOR</sp>
+                </div>
+                <div class="mt-4 ">
+                    <?php foreach($leaderboard as $lb):?>
+                    <div class="row bg-darkgreen py-3 border-end border-success border-3">
+                        <div class="lb-forum w-20 my-auto">
+                            <img src="<?= base_url() ?>media/avatar/<?=$lb->UserAvatar?>" alt="image"
+                                class="w-35px my-auto">
+                        </div>
+                        <div class="nama-lb-forum w-60 my-auto">
+                            <div class=" my-auto small"><?=$lb->UserName?></div>
+                        </div>
+                        <div class="skor-forum w-20 my-auto">
+                            <div class="fw-bolder small"><?=$lb->Score?></div>
+                        </div>
+                    </div>
+                    <?php endforeach;?>
+                </div>
+
             </div>
         </div>
     </div>
