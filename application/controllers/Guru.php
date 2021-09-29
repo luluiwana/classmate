@@ -120,6 +120,7 @@ class Guru extends CI_Controller
             'course_menu' => "Kelas",
             // 'competencies' => $this->Course_model->getCompetenciesByID($CourseID),
             'course'    => $this->Course_model->courseByGuru($CourseID),
+            'id' => $CourseID
             // 'lesson' => $this->Course_model->getAllCourse()
         );
 
@@ -277,16 +278,17 @@ class Guru extends CI_Controller
         $this->load->view('guru/template/footer');
     }
 
-    public function create_quiz($CompetenciesID)
+    public function create_quiz($CourseID, $CompetenciesID)
     {
         $this->form_validation->set_rules('judul', 'Judul', 'required');
         if ($this->form_validation->run() == false) {
             $data = array(
-                'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+                'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
                 'menu'      => 'Tambah Quiz',
                 'course_menu' => "Tambah Quiz",
-                'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
-                'id' => $CompetenciesID
+                'course'    => $this->Course_model->courseByGuru($CourseID),
+                'id' => $CompetenciesID,
+                'courseID' => $CourseID
             );
 
             $this->load->view('guru/template/header', $data);
@@ -301,22 +303,23 @@ class Guru extends CI_Controller
             ];
 
             $QuizID =   $this->M_Quiz->createQuiz($insert_data);
-            redirect('guru/create_question/' . $QuizID);
+            redirect('guru/create_question/' . $CourseID . '/' . $QuizID);
         }
     }
 
-    public function create_question($QuizID)
+    public function create_question($CourseID, $QuizID)
     {
         $this->form_validation->set_rules('soal', 'Soal', 'required');
         if ($this->form_validation->run() == false) {
             $data = array(
 
-                'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+                'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
                 'menu'      => 'Tambah Quiz',
                 'course_menu' => "Tambah Quiz",
-                'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
+                'course'    => $this->Course_model->courseByGuru($CourseID),
                 'id' => $QuizID,
-                'nomor_soal' => $this->M_Quiz->getQuizCount($QuizID)
+                'nomor_soal' => $this->M_Quiz->getQuizCount($QuizID),
+                'courseID' => $CourseID,
             );
 
             $this->load->view('guru/template/header', $data);
@@ -349,7 +352,7 @@ class Guru extends CI_Controller
                         'TrueOption' => $this->input->post('TrueOption'),
                     );
                     $this->M_Quiz->saveQuestion($insert_data, $QuizID);
-                    redirect('guru/create_question/' . $QuizID);
+                    redirect('guru/create_question/' . $CourseID . '/' . $QuizID);
                 } else {
                     $insert_data = array(
                         'QuizID' => $QuizID,
@@ -363,7 +366,7 @@ class Guru extends CI_Controller
                         'question_img' => $config['file_name'],
                     );
                     $this->M_Quiz->saveQuestion($insert_data, $QuizID);
-                    redirect('guru/create_question/' . $QuizID);
+                    redirect('guru/create_question/' . $CourseID . '/' . $QuizID);
                 }
             } elseif ($choose_option == 'Simpan') {
                 $temp = explode(".", $_FILES["file"]["name"]);
@@ -388,7 +391,7 @@ class Guru extends CI_Controller
                         'TrueOption' => $this->input->post('TrueOption'),
                     );
                     $this->M_Quiz->saveQuestion($insert_data, $QuizID);
-                    redirect('guru');
+                    redirect('guru/list_question/' . $CourseID . '/' . $QuizID);
                 } else {
                     $insert_data = array(
                         'QuizID' => $QuizID,
@@ -402,7 +405,7 @@ class Guru extends CI_Controller
                         'question_img' => $config['file_name'],
                     );
                     $this->M_Quiz->saveQuestion($insert_data, $QuizID);
-                    redirect('guru');
+                    redirect('guru/list_question/' . $CourseID . '/' . $QuizID);
                 }
             }
         }
@@ -410,14 +413,15 @@ class Guru extends CI_Controller
 
 
 
-    public function list_question($QuizID)
+    public function list_question($CourseID, $QuizID)
     {
         $data = array(
-            'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+            'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
             'menu'      => 'Daftar Pertanyaan',
             'course_menu' => "Daftar Pertanyaan",
-            'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
-            'id' => $QuizID
+            'course'    => $this->Course_model->courseByGuru($CourseID),
+            'id' => $QuizID,
+            'courseID' => $CourseID,
         );
 
         $data['question'] = $this->M_Quiz->getListQuestionByQuizID($QuizID);
@@ -427,17 +431,18 @@ class Guru extends CI_Controller
         $this->load->view('guru/template/footer');
     }
 
-    public function edit_question($QuestionID)
+    public function edit_question($CourseID, $QuestionID)
     {
         $this->form_validation->set_rules('soal', 'Soal', 'required');
         if ($this->form_validation->run() == false) {
             $data = array(
 
-                'title'     => $this->Course_model->courseByGuru($this->session->userdata('id_user'))->CourseName . " - " . $this->Course_model->courseByGuru($this->session->userdata('id_user'))->ClassName,
+                'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
                 'menu'      => 'Tambah Quiz',
                 'course_menu' => "Tambah Quiz",
-                'course'    => $this->Course_model->courseByGuru($this->session->userdata('id_user')),
+                'course'    => $this->Course_model->courseByGuru($CourseID),
                 'id' => $QuestionID,
+                'courseID' => $CourseID
                 // 'nomor_soal' => $this->M_Quiz->getQuizCount($QuestionID)
             );
             $data['result'] = $this->M_Quiz->getDetailQuestion($QuestionID);
@@ -478,7 +483,7 @@ class Guru extends CI_Controller
                     'Score' => $total
                 );
                 $this->M_Quiz->EditQuestion($insert_data, $QuestionID);
-                redirect('guru/list_question/' . $this->input->post('quizid'));
+                redirect('guru/list_question/' . $CourseID . '/' . $this->input->post('quizid'));
             } else {
                 $raw = $this->M_Quiz->getQuizCount($this->input->post('quizid'));
                 $jumlah = $raw->jumlah;
@@ -496,7 +501,7 @@ class Guru extends CI_Controller
                 );
 
                 $this->M_Quiz->EditQuestion($insert_data, $QuestionID);
-                redirect('guru/list_question/' . $this->input->post('quizid'));
+                redirect('guru/list_question/' . $CourseID . '/' . $this->input->post('quizid'));
             }
         }
     }

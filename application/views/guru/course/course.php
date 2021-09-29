@@ -23,7 +23,7 @@
                                             foreach ($lesson[$row['CompetenciesID']] as $row2) :
                                         ?>
 
-                                                <a href="<?= base_url('guru/detail_lesson/' . $row2['LessonID']) ?>" class="text-white">
+                                                <a href="<?= base_url('guru/detail_lesson/'  . $row2['LessonID']) ?>" class="text-white">
                                                     <p><?= $row2['LessonTitle'] ?></p>
                                                 </a>
                                         <?php
@@ -38,14 +38,14 @@
                                             foreach ($quiz[$row['CompetenciesID']] as $row3) :
                                         ?>
 
-                                                <a href="<?= base_url('guru/list_question/' . $row3['QuizID']) ?>" class="text-white">
+                                                <a href="<?= base_url('guru/list_question/' . $id . '/' . $row3['QuizID']) ?>" class="text-white">
                                                     <p><?= $row3['QuizTitle'] ?></p>
                                                 </a>
                                         <?php
                                             endforeach;
                                         } ?>
 
-                                        <a href="<?= base_url('guru/create_quiz/' . $row['CompetenciesID']) ?>" class="text-danger small ">Tambah Quiz</a>
+                                        <a href="<?= base_url('guru/create_quiz/' . $id . '/' . $row['CompetenciesID']) ?>" class="text-danger small ">Tambah Quiz</a>
 
                                     </div>
                                 </div>
@@ -66,14 +66,11 @@
                                     Tidak ada Kompetensi Dasar Tersedia
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse bg-dark text-white" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <!-- <div id="flush-collapseOne" class="accordion-collapse collapse bg-dark text-white" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    Tidak ada Daftar Materi Tersedia
-                                    <a href="<?= base_url('guru/Lesson/' . $row->CompetenciesID) ?>" class="text-danger small ">Tambah Materi</a>
-                                    <hr>
-                                    Tidak ada Daftar Quiz Tersedia
+                                  
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                     </div>
@@ -82,9 +79,7 @@
         <?php
         } ?>
 
-
     </div>
-
 
     <div class="col-md-3">
         <div class="card mb-4">

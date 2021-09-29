@@ -24,7 +24,7 @@
     <div class="card">
         <div class="container">
             <h3 class="mx-auto text-center mb-3">Buat Quiz</h3>
-            <form id="add-quiz" method="post" action="<?= base_url('guru/create_quiz/' . $id) ?>" enctype="multipart/form-data">
+            <form id="add-quiz" method="post" action="<?= base_url('guru/create_quiz/' . $courseID . '/' . $id) ?>" enctype="multipart/form-data">
                 <div class="mb-2 row mx-auto">
                     <div class="col-sm-1">
                         <label class="col-form-label ">Judul </label>
