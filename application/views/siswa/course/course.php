@@ -41,7 +41,7 @@
                                 <?php endforeach;?>
                                 <?php $quiz = $this->M_Lesson->getQuiz($row->CompetenciesID)?>
                                 <?php foreach($quiz as $q):?>
-                                <a href="<?=base_url()?>quiz/quiz_detail/<?=$q->QuizID?>"><div class="mt-2 text-secondary"> <i class="fas fa-gamepad me-2 fs-5"></i> <?=$q->QuizTitle?></div></a>
+                                <a href="<?=base_url()?>quiz/quiz_detail/<?=$q->QuizID?>/<?=$course->CourseID?>"><div class="mt-2 text-secondary"> <i class="fas fa-gamepad me-2 fs-5"></i> <?=$q->QuizTitle?></div></a>
                                 <hr>
                                 <?php endforeach;?>
                             </div>

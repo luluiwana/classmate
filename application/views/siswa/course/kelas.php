@@ -30,7 +30,7 @@
 
         </div>
         <div class="col-md-6 d-none d-sm-block">
-            <img src="<?=base_url()?>assets/img/vector/Innovation-amico (1).svg" class="w-100" alt="">
+            <img src="<?=base_url()?>assets/img/vector/Course app-pana.svg" class="w-100" alt="">
         </div>
         <?php else:?>
         <div class="card">

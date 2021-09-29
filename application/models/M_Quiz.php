@@ -85,6 +85,24 @@ class M_Quiz extends CI_Model
   }
 
   // ------------------------------------------------------------------------
+  public function getQuiz($QuizID)
+  {
+    // SELECT * FROM `quiz` INNER JOIN Competencies ON  INNER JOIN user_course ON  WHERE QuizID=1 AND =1
+    $id = $this->session->userdata('id_user');
+    $this->db->join('Competencies', 'competencies.CompetenciesID=quiz.CompetenciesID');
+    $this->db->join('user_course', 'competencies.CourseID=user_course.CourseID');
+    $this->db->where('QuizID', $QuizID);
+    $this->db->where('user_course.UserID', $id);
+    return $this->db->get('quiz')->row();
+  }
+  public function countQuestion($QuizID)
+  {
+    // SELECT COUNT(QuestionID) FROM `quiz_question` WHERE QuizID=1
+    $this->db->select('COUNT(*) as jml');
+    $this->db->where('QuizID', $QuizID);
+    $row = $this->db->get('quiz_question')->row();
+    return $row->jml;
+  }
 
 }
 
