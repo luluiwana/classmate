@@ -150,18 +150,38 @@ class Guru extends CI_Controller
         $insert_data = [
             'CourseID' => $CourseID,
             'CompetenciesName' => $this->input->post('nama-kd'),
-            'CourseID' => $CourseID,
+
         ];
         $this->Course_model->addCompetencies($insert_data);
         redirect('guru/course/' . $CourseID);
     }
 
-    public function Lesson($CompetenciesID)
+    public function editKD($CourseID, $CompetenciesID)
+    {
+        $update_data = [
+            // 'CourseID' => $CourseID,
+            'CompetenciesName' => $this->input->post('nama-kd'),
+            // 'CourseID' => $CourseID,
+        ];
+        $this->db->where('CompetenciesID', $CompetenciesID);
+        $this->db->update('competencies', $update_data);
+        redirect('guru/course/' . $CourseID);
+    }
+
+    public function deleteKD($CourseID, $CompetenciesID)
+    {
+        $this->db->where('CompetenciesID', $CompetenciesID);
+        $this->db->delete('competencies');
+        redirect('guru/course/' . $CourseID);
+    }
+
+    public function Lesson($CourseID, $CompetenciesID)
     {
         $data = array(
             'title'     => 'Tambah Materi',
             'menu'      => 'Add Lesson',
-            'CompetenciesID' => $CompetenciesID
+            'CompetenciesID' => $CompetenciesID,
+            'id' => $CourseID
         );
 
         $this->load->view('guru/template/header', $data);
@@ -170,7 +190,7 @@ class Guru extends CI_Controller
         $this->load->view('guru/template/footer');
     }
 
-    public function detail_lesson($LessonID)
+    public function detail_lesson($CourseID, $LessonID)
     {
         $data = array(
             'title'     => 'Lihat Materi',
@@ -184,10 +204,35 @@ class Guru extends CI_Controller
         $this->load->view('guru/template/footer');
     }
 
-
-
-    public function addLessonCourse($CompetenciesID)
+    public function editLesson($CourseID, $LessonID)
     {
+        $data = array(
+            'title'     => 'Edit Materi',
+            'menu'      => 'Edit Lesson',
+            'id' => $CourseID
+        );
+        $content['lesson'] = $this->Course_model->getLessonContentByID($LessonID);
+        $this->load->view('guru/template/header', $data);
+        // $this->load->view('guru/template/course_menu');
+        $this->load->view('guru/course/edit_materi');
+        $this->load->view('guru/template/footer');
+    }
+
+    public function editLessonCourse($CourseID, $LessonID)
+    {
+        # code...
+    }
+
+    public function deleteLesson($CourseID, $LessonID)
+    {
+        $this->db->delete('course_lesson',);
+    }
+
+
+
+    public function addLessonCourse($CourseID, $CompetenciesID)
+    {
+        $data['courseID'] = $CourseID;
         $config['upload_path']          = './assets/lesson/';
         $config['allowed_types']        = '*';
 
@@ -204,11 +249,11 @@ class Guru extends CI_Controller
                 'CompetenciesID' => $CompetenciesID,
                 'LessonContent' => $this->input->post('content'),
                 'LessonTitle' => $this->input->post('judul'),
-                'File' => $newfilename,
+                // 'File' => $newfilename,
                 'LessonTitle' => $this->input->post('title')
             );
             $this->Course_model->addLesson($insert_data);
-            redirect('guru/Lesson/' . $CompetenciesID);
+            redirect('guru/course/' . $CourseID);
         } else {
 
             $insert_data = array(
@@ -219,7 +264,7 @@ class Guru extends CI_Controller
                 'LessonTitle' => $this->input->post('title')
             );
             $this->Course_model->addLesson($insert_data);
-            redirect('guru/Lesson/' . $CompetenciesID);
+            redirect('guru/course/' . $CourseID);
         }
     }
 
@@ -373,7 +418,6 @@ class Guru extends CI_Controller
                 $newfilename = round(microtime(true)) . '.' . $temp[1];
 
                 $config['file_name']            = $newfilename;
-
                 $config['upload_path']          = "media/soal/";
                 $config['allowed_types']          = '*';
 
@@ -506,10 +550,10 @@ class Guru extends CI_Controller
         }
     }
 
-    public function hapus_soal($QuizID, $QuestionID)
+    public function hapus_soal($CourseID, $QuizID, $QuestionID)
     {
         $this->db->delete('quiz_question', array('QuestionID' => $QuestionID));
-        redirect('guru/list_question/' . $QuizID);
+        redirect('guru/list_question/' . $CourseID . '/' . $QuizID);
     }
 }
         

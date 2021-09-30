@@ -1,9 +1,9 @@
 <div class="card  mb-3">
-    <h4 class="p-2  text-light"> Soal Nomor <?= $nomor_soal->jumlah ?></h4>
+    <h4 class="p-2  text-light"> Soal Nomor <?= (int)($nomor_soal->jumlah) + 1 ?></h4>
 </div>
 <div class="card pb-2 mb-3">
     <div class="container">
-        <form action="<?= base_url('guru/create_question/' . $id) ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= base_url('guru/create_question/' . $courseID . '/' . $id) ?>" method="POST" enctype="multipart/form-data">
             <div class="col-12">
                 <label class="col-form-label text-light">Pertanyaan </label>
                 <textarea name="soal" class="form-control bg-darkblue text-light" rows="3"></textarea>

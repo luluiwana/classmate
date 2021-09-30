@@ -45,8 +45,8 @@
                                             <?= $row['Question'] ?>
                                         </p>
                                         <hr>
-                                        <a href="<?= base_url('guru/edit_question/' . $row['QuestionID']) ?>" class="text-warning">Edit</a>
-                                        <a href="<?= base_url('guru/hapus_soal/' . $id . '/' . $row['QuestionID']) ?>" class="text-danger">Hapus</a>
+                                        <a href="<?= base_url('guru/edit_question/' . $courseID . '/' . $row['QuestionID']) ?>" class="text-warning">Edit</a>
+                                        <a href="<?= base_url('guru/hapus_soal/' . $courseID . '/'  . $id . '/' . $row['QuestionID']) ?>" class="text-danger">Hapus</a>
 
                                     </div>
                                 </div>
@@ -85,6 +85,17 @@
 
 
 
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="text-white text-center">Tambah Pertanyaan </h6>
+                <div class="d-grid gap-2  mx-auto">
+                    <a class="btn btn-primary" href="<?= base_url('guru/create_question/' . $courseID . '/' . $id) ?>">ADD</a>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

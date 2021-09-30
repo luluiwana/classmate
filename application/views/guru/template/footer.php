@@ -39,3 +39,12 @@
       }
     });
   </script>
+
+  <script>
+    function changeAction(CompetenciesID) {
+
+      var action = document.getElementById('formEdit').action + '/' + CompetenciesID;
+      document.getElementById('formEdit').action = action;
+      console.log(action);
+    }
+  </script>
