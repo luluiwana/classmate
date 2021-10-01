@@ -245,6 +245,12 @@ p{
     font-weight: 600;
     letter-spacing: inherit;
 }
+.text-dark{
+	color:black !important;
+}.badge {
+    text-transform: none;
+    font-size: 15px;
+}
 
 /* MEDIA */
 @media only screen and (max-width: 768px) {

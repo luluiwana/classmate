@@ -47,34 +47,53 @@ class Quiz extends CI_Controller
         $this->load->view('siswa/template/footer');
     }
 
-    public function QuizResult($quizID,$CourseID)
+    public function QuizResult($quizID, $CourseID)
     {
-        //   $data = $this->quiz->getQuizByID($quizID);
-        //   $jmlsoal = $this->input->post('count');
-        //   $score=0;
-        //   foreach ($data as $row) {
-        //     // echo $this->input->post('pertanyaan' . $row->QuestionID);
-        //     if ($row->TrueOption == $this->input->post('pertanyaan' . $row->QuestionID)) {
-        //       print_r('pilihan kamu ' . $this->input->post('pertanyaan' . $row->QuestionID) . 'Benar');
-        //       echo '<br>';
-        //       $score++;
-        //     } else {
-        //       print_r('pilihan kamu ' . $this->input->post('pertanyaan' . $row->QuestionID) . 'Salah. Pilihan yang benar ' . $row->TrueOption);
-        //       echo '<br>';
-        //     }
-        //   }
-        //   $nilai=$score/$jmlsoal*100;
-        //   print_r($nilai);
-        // }
-      $data = array(
-      'title' => "Hasil Quiz",
-      'menu'  => 'Kelas',
-      'CourseID'=>$CourseID,
-      'quiz'=>$this->quiz->getQuiz($quizID),
-      'jmlsoal'=>$this->quiz->countQuestion($quizID)
-    );
-        $data['question'] = $this->quiz->getQuizByID($quizID);
-
+        //Masukkan jawaban ke tabel user_answer dan beri nilai
+        $question = $this->quiz->getQuizByID($quizID);
+        $score=0;
+        $addXP=0;
+        $jml_soal=$this->quiz->countQuestion($quizID);
+        foreach ($question as $row) {
+            if ($row->TrueOption == $this->input->post('pertanyaan' . $row->QuestionID)) {
+                $score++;
+                $addXP=$addXP+50;
+            }else{
+                $addXP=$addXP+10;
+            }
+            $answer = array(
+                'UserID'=>  $id = $this->session->userdata('id_user'),
+                'QuestionID'=>$row->QuestionID,
+                'answer'=>$this->input->post('pertanyaan' . $row->QuestionID)
+            );
+            $this->quiz->insertAnswer($answer);
+        }
+        //hitung nilai dan insert nilai
+        $nilai = $score/$jml_soal*100;
+        $dataNilai = array(
+            'UserID'=>  $id = $this->session->userdata('id_user'),
+            'QuizID'=>$quizID,
+            'result'=>ceil($nilai),
+            'addXP'=>$addXP
+        );
+        $this->quiz->insertNilai($dataNilai);
+        //updateXP
+        $this->quiz->updateXP($CourseID,$addXP);
+       //load page
+       
+       redirect('quiz/result/'.$quizID.'/'.$CourseID,'refresh');
+       
+    }
+    public function result($quizID,$CourseID)
+    {
+         $data = array(
+            'title' => "Hasil Quiz",
+            'menu'  => 'Kelas',
+            'CourseID'=>$CourseID,
+            'quiz'=>$this->quiz->getQuiz($quizID),
+            'user_quiz'=>$this->quiz->getUserQuiz($quizID),
+            'feedback'=>$this->quiz->feedback($quizID)
+        );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/quiz/quiz_result');
         $this->load->view('siswa/template/footer');

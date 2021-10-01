@@ -26,8 +26,6 @@
                                     <div class="mt-2 text-secondary text-white">
                                         <i class="fas fa-star me-2 fs-5  text-warning"></i>
                                         <span class=""><?=$lesson->LessonTitle?></span>
-
-
                                     </div>
                                     <?php else:?>
                                     <div class="mt-2 text-secondary">
@@ -41,7 +39,23 @@
                                 <?php endforeach;?>
                                 <?php $quiz = $this->M_Lesson->getQuiz($row->CompetenciesID)?>
                                 <?php foreach($quiz as $q):?>
-                                <a href="<?=base_url()?>quiz/quiz_detail/<?=$q->QuizID?>/<?=$course->CourseID?>"><div class="mt-2 text-secondary"> <i class="fas fa-gamepad me-2 fs-5"></i> <?=$q->QuizTitle?></div></a>
+                                <?php $uquiz = $this->M_Lesson->isQuizComplete($q->QuizID);?>
+                                <?php if($uquiz==false):?>
+                                <a href="<?=base_url()?>quiz/quiz_detail/<?=$q->QuizID?>/<?=$course->CourseID?>">
+                                    <div class="mt-2 text-secondary">
+                                        <i class="fas fa-gamepad me-2 fs-5"> </i>
+                                            <?=$q->QuizTitle?>
+                                    </div>
+                                </a>
+                                <?php else:?>
+                                     <a href="<?=base_url()?>quiz/result/<?=$q->QuizID?>/<?=$course->CourseID?>">
+                                    <div class="mt-2 text-white">
+                                        <i class="fas fa-gamepad me-2 fs-5 text-warning"> </i>
+                                            <?=$q->QuizTitle?>
+                                    </div>
+                                </a>
+                                <?php endif;?>
+
                                 <hr>
                                 <?php endforeach;?>
                             </div>
@@ -75,7 +89,8 @@
                     <p class="fs-5 text-warning fw-bolder"><?=$user->LevelID?></p>
                 </div>
                 <div class="text-center mb-3">
-                    <img src="<?=base_url()?>assets/character/<?=$user->LevelID?>.png" class="" style="max-height: 200px;" alt="">
+                    <img src="<?=base_url()?>assets/character/<?=$user->LevelID?>.png" class=""
+                        style="max-height: 200px;" alt="">
                 </div>
                 <div class="bg-dark text-white fw-bold py-2 text-center mb-3">
                     <?=$user->desc?>
@@ -256,7 +271,7 @@
                             type='button' disabled> <img src='<?=base_url()?>assets/badge/3.png' alt=''
                                 class='w-100'></button>
                     </span>
-                     <span class='d-inline-block w-15' tabindex='0' data-bs-toggle='popover' data-bs-placement="top"
+                    <span class='d-inline-block w-15' tabindex='0' data-bs-toggle='popover' data-bs-placement="top"
                         data-bs-trigger='hover focus' title='Lencana Petarung'
                         data-bs-content='Penghargaan karena kamu telah mencapai 4000XP'> <button class='btn m-0 p-0'
                             type='button' disabled> <img src='<?=base_url()?>assets/badge/4.png' alt=''
@@ -281,48 +296,46 @@
 </main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 <script>
-    //chart js
+//chart js
 var data = {
-	labels: ["Tantangan selesai", "Tantangan belum selesai"],
-	datasets: [
-		{
-			data: [12, 8],
-			backgroundColor: ["#7200ff", "#191b2a"],
-			hoverBackgroundColor: ["#7200ff", "#191b2a"],
-		},
-	],
+    labels: ["Tantangan selesai", "Tantangan belum selesai"],
+    datasets: [{
+        data: [12, 8],
+        backgroundColor: ["#7200ff", "#191b2a"],
+        hoverBackgroundColor: ["#7200ff", "#191b2a"],
+    }, ],
 };
 
 var promisedDeliveryChart = new Chart(document.getElementById('myChart'), {
-  type: 'doughnut',
-  data: data,
-  options: {
-  	responsive: true,
-	   cutoutPercentage: 70,
-    legend: {
-      display: false
+    type: 'doughnut',
+    data: data,
+    options: {
+        responsive: true,
+        cutoutPercentage: 70,
+        legend: {
+            display: false
+        }
     }
-  }
 });
 
 Chart.pluginService.register({
-  beforeDraw: function(chart) {
-    var width = chart.chart.width,
-        height = chart.chart.height,
-        ctx = chart.chart.ctx;
+    beforeDraw: function(chart) {
+        var width = chart.chart.width,
+            height = chart.chart.height,
+            ctx = chart.chart.ctx;
 
-    ctx.restore();
-    var fontSize = (height / 114).toFixed(2);
-    ctx.font = fontSize + "em sans-serif";
-    ctx.textBaseline = "middle";
-	ctx.fillStyle = "#fff";
+        ctx.restore();
+        var fontSize = (height / 114).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#fff";
 
-    var text = "12/20",
-        textX = Math.round((width - ctx.measureText(text).width) / 2),
-        textY = height / 2;
+        var text = "12/20",
+            textX = Math.round((width - ctx.measureText(text).width) / 2),
+            textY = height / 2;
 
-    ctx.fillText(text, textX, textY);
-    ctx.save();
-  }
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+    }
 });
 </script>

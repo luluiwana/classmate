@@ -84,6 +84,21 @@ class M_Lesson extends CI_Model
         $this->db->where('CompetenciesID', $CompetencyID);
         return $this->db->get('quiz')->result();
     }
+    public function isQuizComplete($QuizID)
+    {
+        // SELECT * FROM `user_quiz` WHERE UserID=1 AND QuizID=1
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as jml');
+        $this->db->where('UserId', $id);
+        $this->db->where('QuizID', $QuizID);
+        $row = $this->db->get('user_quiz')->row();
+        if ($row->jml==0) {
+            return false;
+        }else{
+            return true;
+        }
+        
+    }
 }
                         
 /* End of file lesson.php */
