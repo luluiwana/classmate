@@ -29,6 +29,8 @@ class Quiz extends CI_Controller
         if ($this->session->userdata('role') != 'siswa') {
             redirect('auth', 'refresh');
         }
+        $totalXP = $this->Course_model->totalXP();
+        $this->Course_model->setLevel($totalXP);
     }
 
     public function Quiz_detail($quizID, $CourseID)
@@ -58,7 +60,7 @@ class Quiz extends CI_Controller
             if ($row->TrueOption == $this->input->post('pertanyaan' . $row->QuestionID)) {
                 $score++;
                 $addXP=$addXP+50;
-            }else{
+            } else {
                 $addXP=$addXP+10;
             }
             $answer = array(
@@ -78,15 +80,14 @@ class Quiz extends CI_Controller
         );
         $this->quiz->insertNilai($dataNilai);
         //updateXP
-        $this->quiz->updateXP($CourseID,$addXP);
-       //load page
+        $this->quiz->updateXP($CourseID, $addXP);
+        //load page
        
-       redirect('quiz/result/'.$quizID.'/'.$CourseID,'refresh');
-       
+        redirect('quiz/result/'.$quizID.'/'.$CourseID, 'refresh');
     }
-    public function result($quizID,$CourseID)
+    public function result($quizID, $CourseID)
     {
-         $data = array(
+        $data = array(
             'title' => "Hasil Quiz",
             'menu'  => 'Kelas',
             'CourseID'=>$CourseID,

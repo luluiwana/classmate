@@ -12,6 +12,9 @@ class Discussion extends CI_Controller
         if (($this->session->userdata('role')) != 'siswa' && ($this->session->userdata('role')) != 'guru') {
             redirect('auth', 'refresh');
         }
+        $totalXP = $this->Course_model->totalXP();
+       $this->Course_model->setLevel($totalXP);
+
     }
 
     public function index()
@@ -97,6 +100,7 @@ class Discussion extends CI_Controller
         } else {
             $this->M_Discussion->addForumScore($CourseID,20);
         }
+        
         redirect('discussion/all/'.$CourseID);
     }
 
