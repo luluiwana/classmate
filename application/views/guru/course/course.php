@@ -28,10 +28,20 @@
                                         <?php if (!empty($lesson[$row['CompetenciesID']])) {
                                             foreach ($lesson[$row['CompetenciesID']] as $row2) :
                                         ?>
+                                                <div class="row">
 
-                                                <a href="<?= base_url('guru/detail_lesson/'  . $row2['LessonID']) ?>" class="text-white">
-                                                    <p><?= $row2['LessonTitle'] ?></p>
-                                                </a>
+
+                                                    <a href="<?= base_url('guru/detail_lesson/'  . $row2['LessonID']) ?>" class="col-8 text-white">
+                                                        <p><?= $row2['LessonTitle'] ?></p>
+                                                    </a>
+                                                    <a href="<?= base_url('guru/editLesson/' . $course->CourseID . '/' . $row2['LessonID']) ?>" class="col-2 text-warning">
+                                                        <p>Edit</p>
+                                                    </a>
+                                                    <a href="<?= base_url('guru/deleteLesson/' . $course->CourseID . '/' . $row2['LessonID']) ?>" class="col-2 text-danger">
+                                                        <p>Hapus</p>
+                                                    </a>
+                                                </div>
+
                                         <?php
                                             endforeach;
                                         } ?>

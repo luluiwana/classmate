@@ -1,12 +1,10 @@
 <div class="container">
     <div class="row">
         <div class="col-md-9">
-            <div class="car     d mt-3">
+            <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-white"><?= $lesson['LessonTitle'] ?></h5>
-                    <p class="card-text">
-                        <?= $lesson['LessonContent'] ?>
-                    </p>
+                    <p class="text-white fw-bold fs-4 mb-4"><?= $lesson['LessonTitle'] ?></p>
+                    <p class="text-white"><?= $lesson['LessonContent'] ?></p>
                 </div>
             </div>
         </div>

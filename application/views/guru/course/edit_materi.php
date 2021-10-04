@@ -1,6 +1,6 @@
 <div class="container-fluid py-4">
     <div class="card-forum">
-        <form action="<?= base_url('guru/editLesson/' . $id . '/' . $lesson['LessonID']) ?>" method="post" enctype="multipart/form-data">
+        <form action="<?= base_url('guru/editLessonCourse/' . $id . '/' . $lesson['LessonID']) ?>" method="post" enctype="multipart/form-data">
 
             <div class="form-group ">
                 <label class="col-md-2 col-xs-12 col-form-label">Judul Materi</label>
@@ -17,7 +17,7 @@
 
             <div class="form-group row">
                 <label class="col-md-12 col-xs-12 col-form-label">Content Materi </label>
-                <textarea name="content" id="add_question" class=" form-control" cols="30" rows="30" required>
+                <textarea name="content" id="add_question" class="text-lights form-control" cols="30" rows="30" required>
                 <?= $lesson['LessonContent'] ?>
                 </textarea>
             </div>

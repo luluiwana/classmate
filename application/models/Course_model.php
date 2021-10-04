@@ -17,8 +17,7 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->from('course');
         $this->db->where('TeacherID', $id);
-        return $this->db->count_all_results();
-        ;
+        return $this->db->count_all_results();;
     }
     public function getUser()
     {
@@ -105,8 +104,6 @@ class Course_model extends CI_Model
         $this->db->join('users', 'users.UserID=course.TeacherID');
         $this->db->where('CourseID', $CourseID);
         return $this->db->get('course')->row();
-        
-        
     }
     public function courseByGuru($CourseID)
     {
@@ -178,7 +175,6 @@ class Course_model extends CI_Model
         $this->db->where('CourseID', $CourseID);
         $this->db->where('UserID', $id);
         $this->db->delete('user_lesson');
-        
     }
 
     public function getCompetenciesByID($CourseID)
@@ -220,6 +216,13 @@ class Course_model extends CI_Model
         return $this->db->get_where('quiz', array('CompetenciesID' => $CompetenciesID))->result_array();
     }
 
+    public function editLesson($data, $id)
+    {
+
+        $this->db->where('LessonID', $id);
+        $this->db->update('course_lesson', $data);
+    }
+
     public function totalXP()
     {
         // SELECT SUM(courseXP) FROM `user_course`WHERE UserID=1
@@ -232,18 +235,18 @@ class Course_model extends CI_Model
     public function setLevel($XP)
     {
         $id = $this->session->userdata('id_user');
-        if ($XP<500) {
-            $level=0;
-        }elseif ($XP<1000) {
-            $level=1;
-        }elseif ($XP<2000) {
-            $level=2;
-        }elseif ($XP<4000) {
-            $level=3;
-        }elseif ($XP<8000) {
-            $level=4;
-        }else {
-            $level=5;
+        if ($XP < 500) {
+            $level = 0;
+        } elseif ($XP < 1000) {
+            $level = 1;
+        } elseif ($XP < 2000) {
+            $level = 2;
+        } elseif ($XP < 4000) {
+            $level = 3;
+        } elseif ($XP < 8000) {
+            $level = 4;
+        } else {
+            $level = 5;
         }
         $data = array(
             'level' => $level

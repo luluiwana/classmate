@@ -190,13 +190,13 @@ class Guru extends CI_Controller
         $this->load->view('guru/template/footer');
     }
 
-    public function detail_lesson($CourseID, $LessonID)
+    public function detail_lesson($LessonID)
     {
         $data = array(
             'title'     => 'Lihat Materi',
             'menu'      => 'Add Lesson',
-        );
 
+        );
 
         $content['lesson'] = $this->Course_model->getLessonContentByID($LessonID);
         $this->load->view('guru/template/header', $data);
@@ -206,6 +206,7 @@ class Guru extends CI_Controller
 
     public function editLesson($CourseID, $LessonID)
     {
+
         $data = array(
             'title'     => 'Edit Materi',
             'menu'      => 'Edit Lesson',
@@ -214,18 +215,54 @@ class Guru extends CI_Controller
         $content['lesson'] = $this->Course_model->getLessonContentByID($LessonID);
         $this->load->view('guru/template/header', $data);
         // $this->load->view('guru/template/course_menu');
-        $this->load->view('guru/course/edit_materi');
+        $this->load->view('guru/course/edit_materi', $content);
         $this->load->view('guru/template/footer');
     }
 
     public function editLessonCourse($CourseID, $LessonID)
     {
-        # code...
+        $data['courseID'] = $CourseID;
+        $config['upload_path']          = './assets/lesson/';
+        $config['allowed_types']        = '*';
+
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('file')) {
+            //jika user tidak upload file
+            $insert_data = array(
+
+                'LessonContent' => $this->input->post('content'),
+                'LessonTitle' => $this->input->post('judul'),
+                // 'File' => $newfilename,
+                'LessonTitle' => $this->input->post('title')
+            );
+            $this->Course_model->editLesson($insert_data, $LessonID);
+            redirect('guru/course/' . $CourseID);
+        } else {
+            $temp = explode(".", $_FILES["file"]["name"]);
+            $newfilename = $this->session->userdata('id_user') . '_' . round(microtime(true)) . '.' . $temp[1];
+            $config['file_name']            = $newfilename;
+
+
+            $insert_data = array(
+
+                'LessonContent' => $this->input->post('content'),
+                'LessonTitle' => $this->input->post('judul'),
+                'File' => $newfilename,
+                'LessonTitle' => $this->input->post('title')
+            );
+            $this->Course_model->editLesson($insert_data, $LessonID);
+            redirect('guru/course/' . $CourseID);
+        }
     }
 
     public function deleteLesson($CourseID, $LessonID)
     {
-        $this->db->delete('course_lesson',);
+        $this->db->where('LessonnID', $LessonID);
+        $this->db->delete('course_lesson');
+        redirect('guru/course/' . $CourseID);
     }
 
 
@@ -524,7 +561,7 @@ class Guru extends CI_Controller
                     'OptionC' => $this->input->post('jawaban_3'),
                     'OptionD' => $this->input->post('jawaban_4'),
                     'TrueOption' => $this->input->post('TrueOption'),
-                    'Score' => $total
+
                 );
                 $this->M_Quiz->EditQuestion($insert_data, $QuestionID);
                 redirect('guru/list_question/' . $CourseID . '/' . $this->input->post('quizid'));
@@ -541,7 +578,7 @@ class Guru extends CI_Controller
                     'OptionD' => $this->input->post('jawaban_4'),
                     'TrueOption' => $this->input->post('TrueOption'),
                     'question_img' => $config['file_name'],
-                    'Score' => $total,
+
                 );
 
                 $this->M_Quiz->EditQuestion($insert_data, $QuestionID);

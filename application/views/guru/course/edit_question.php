@@ -3,7 +3,7 @@
 </div>
 <div class="card pb-2 mb-3">
     <div class="container">
-        <form action="<?= base_url('guru/edit_question/' . $id) ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= base_url('guru/edit_question/' . $courseID . '/' . $id) ?>" method="POST" enctype="multipart/form-data">
             <div class="col-12">
                 <label class="col-form-label text-light">Pertanyaan </label>
                 <textarea name="soal" class="form-control bg-darkblue text-light" rows="3"><?= $result['Question'] ?></textarea>

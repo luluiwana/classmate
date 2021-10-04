@@ -17,7 +17,7 @@
 
             <div class="form-group row">
                 <label class="col-md-12 col-xs-12 col-form-label">Content Materi </label>
-                <textarea name="content" id="add_question" class=" form-control" cols="30" rows="30" required></textarea>
+                <textarea name="content" id="add_question" class="text-light form-control" cols="30" rows="30" required></textarea>
             </div>
 
             <div class="form-group row">
