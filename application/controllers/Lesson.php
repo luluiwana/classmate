@@ -12,6 +12,8 @@ class Lesson extends CI_Controller
         }
         $this->load->model('Course_model');
         $this->load->model('M_Lesson');
+        $totalXP = $this->Course_model->totalXP();
+        $this->Course_model->setLevel($totalXP);
     }
     public function course($CourseID)
     {

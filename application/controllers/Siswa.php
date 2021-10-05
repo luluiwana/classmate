@@ -12,6 +12,9 @@ class Siswa extends CI_Controller
         if ($this->session->userdata('role') != 'siswa') {
             redirect('auth', 'refresh');
         }
+        $totalXP = $this->Course_model->totalXP();
+        $this->Course_model->setLevel($totalXP);
+
     }
 
 
