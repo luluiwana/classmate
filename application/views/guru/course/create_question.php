@@ -40,6 +40,14 @@
                     <input type="text" name='jawaban_4' class="form-control bg-darkblue text-light">
                 </div>
             </div>
+            <div class="col-12 mt-2">
+                <div class="col-sm-12">
+                    <label class="col-form-label text-light ">Jawaban E </label>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" name='jawaban_5' class="form-control bg-darkblue text-light">
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-3">
@@ -47,9 +55,10 @@
                     <select id="inputState" name="TrueOption" class="form-select">
                         <option selected value="">Choose...</option>
                         <option value="A">A</option>
-                        <option value="A">B</option>
-                        <option value="A">C</option>
-                        <option value="A">D</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
 
                     </select>
                 </div>

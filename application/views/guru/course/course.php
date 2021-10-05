@@ -101,7 +101,15 @@
         <div class="card mb-4">
             <div class="card-body">
                 <h6 class="text-white text-center">Jumlah KD</h6>
-                <h2 class="text-center text-white">5</h2>
+                <h2 class="text-center text-white">
+                    <?php
+                    if (empty($countKD->value))
+                        echo '0';
+                    else
+                        echo $countKD->value;
+
+                    ?>
+                </h2>
             </div>
         </div>
         <div class="card">

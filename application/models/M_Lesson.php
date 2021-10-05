@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-                        
+
 class M_Lesson extends CI_Model
 {
     public function getCompetency($CourseID)
@@ -24,7 +24,7 @@ class M_Lesson extends CI_Model
         // $this->db->join('user_lesson', 'course_lesson.LessonID=user_lesson.LessonID', 'left');
         return $this->db->get('course_lesson')->result();
     }
-    
+
     public function isLessonComplete($LessonID)
     {
         $id = $this->session->userdata('id_user');
@@ -33,10 +33,9 @@ class M_Lesson extends CI_Model
         $row = $this->db->get('user_lesson')->row();
         if (!empty($row)) {
             return true;
-        }else {
+        } else {
             return false;
         }
-        
     }
     public function getLesson($LessonID)
     {
@@ -64,7 +63,7 @@ class M_Lesson extends CI_Model
         //add XP value
         $id = $this->session->userdata('id_user');
         $XP = $data['Score'];
-        $this->db->set('courseXP', 'courseXP+'.$XP, false);
+        $this->db->set('courseXP', 'courseXP+' . $XP, false);
         $this->db->where('CourseID', $CourseID);
         $this->db->where('UserID', $id);
         $this->db->update('user_course');
@@ -92,12 +91,15 @@ class M_Lesson extends CI_Model
         $this->db->where('UserId', $id);
         $this->db->where('QuizID', $QuizID);
         $row = $this->db->get('user_quiz')->row();
-        if ($row->jml==0) {
+        if ($row->jml == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
-        
+    }
+    public function getLogByCourseID($CourseID)
+    {
+        return $this->db->get_where('log', array('CourseID' => $CourseID))->result_object();
     }
 }
                         

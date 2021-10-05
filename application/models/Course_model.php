@@ -17,8 +17,7 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->from('course');
         $this->db->where('TeacherID', $id);
-        return $this->db->count_all_results();
-        ;
+        return $this->db->count_all_results();;
     }
     public function getUser()
     {
@@ -275,6 +274,13 @@ class Course_model extends CI_Model
         $row = $this->db->get('course_lesson')->row();
         return $row->c;
     }
+
+    public function countCompetencies($CourseID)
+    {
+        $this->db->select('count(*) as value');
+        return $this->db->get_where('competencies', array('CourseID' => $CourseID))->row_object();
+    }
+
     public function countCompletedLesson()
     {
         // SELECT COUNT(*) FROM user_lesson WHERE user_lesson.UserID=1 AND user_lesson.Score!=0
@@ -349,6 +355,11 @@ class Course_model extends CI_Model
         $this->db->where('UserId', $id);
         $row = $this->db->get('user_quiz')->row();
         return $row->c;
+    }
+
+    public function getLogByCourseID($CourseID)
+    {
+        return $this->db->get_where('log', array('CourseID' => $CourseID))->result_object();
     }
 }
                         

@@ -66,9 +66,17 @@ class Guru extends CI_Controller
                 'CourseLogo' => $this->upload->data('file_name'),
             );
             $this->db->insert('course', $data);
+            $courseID = $this->db->insert_id();
+
+            $log = [
+                'CourseID' => $courseID,
+                'Log' => $this->session->userdata('nama') . ' Telah Membuat Kelas ' . $this->input->post('ClassName') . '-' . $this->input->post('CourseName'),
+            ];
+            $this->db->insert('log', $log);
         }
         redirect('guru', 'refresh');
     }
+
     public function editkelas($CourseID)
     {
         $config['upload_path']          = './media/logo';
@@ -120,7 +128,8 @@ class Guru extends CI_Controller
             'course_menu' => "Kelas",
             // 'competencies' => $this->Course_model->getCompetenciesByID($CourseID),
             'course'    => $this->Course_model->courseByGuru($CourseID),
-            'id' => $CourseID
+            'id' => $CourseID,
+            'countKD' => $this->Course_model->countCompetencies($CourseID)
             // 'lesson' => $this->Course_model->getAllCourse()
         );
 
@@ -285,22 +294,35 @@ class Guru extends CI_Controller
             $insert_data = array(
                 'CompetenciesID' => $CompetenciesID,
                 'LessonContent' => $this->input->post('content'),
-                'LessonTitle' => $this->input->post('judul'),
+                // 'LessonTitle' => $this->input->post('judul'),
                 // 'File' => $newfilename,
                 'LessonTitle' => $this->input->post('title')
             );
             $this->Course_model->addLesson($insert_data);
+
+            $log = [
+                'CourseID' => $CourseID,
+                'Log' => $this->session->userdata('nama') . ' Telah Membuat Materi Baru - ' . $this->input->post('title'),
+            ];
+            $this->db->insert('log', $log);
+
             redirect('guru/course/' . $CourseID);
         } else {
 
             $insert_data = array(
                 'CompetenciesID' => $CompetenciesID,
                 'LessonContent' => $this->input->post('content'),
-                'LessonTitle' => $this->input->post('judul'),
+                // 'LessonTitle' => $this->input->post('judul'),
                 'File' => $newfilename,
                 'LessonTitle' => $this->input->post('title')
             );
             $this->Course_model->addLesson($insert_data);
+
+            $log = [
+                'CourseID' => $CourseID,
+                'Log' => $this->session->userdata('nama') . ' Telah Membuat Materi Baru - ' . $this->input->post('title'),
+            ];
+            $this->db->insert('log', $log);
             redirect('guru/course/' . $CourseID);
         }
     }
@@ -312,7 +334,9 @@ class Guru extends CI_Controller
             'menu'      => 'Kelas',
             'course_menu' => "Aktivitas",
             'course'    => $this->Course_model->courseByGuru($CourseID),
+            'log' => $this->Course_model->getLogByCourseID($CourseID)
         );
+
         $this->load->view('guru/template/header', $data);
         $this->load->view('guru/template/course_menu');
         $this->load->view('guru/course/aktivitas');
@@ -385,6 +409,12 @@ class Guru extends CI_Controller
             ];
 
             $QuizID =   $this->M_Quiz->createQuiz($insert_data);
+
+            $log = [
+                'CourseID' => $CourseID,
+                'Log' => $this->session->userdata('nama') . ' Telah Membuat Quiz - ' . $this->input->post('judul'),
+            ];
+            $this->db->insert('log', $log);
             redirect('guru/create_question/' . $CourseID . '/' . $QuizID);
         }
     }
@@ -431,6 +461,7 @@ class Guru extends CI_Controller
                         'OptionB' => $this->input->post('jawaban_2'),
                         'OptionC' => $this->input->post('jawaban_3'),
                         'OptionD' => $this->input->post('jawaban_4'),
+                        'OptionE' => $this->input->post('jawaban_5'),
                         'TrueOption' => $this->input->post('TrueOption'),
                     );
                     $this->M_Quiz->saveQuestion($insert_data, $QuizID);
@@ -443,6 +474,7 @@ class Guru extends CI_Controller
                         'OptionB' => $this->input->post('jawaban_2'),
                         'OptionC' => $this->input->post('jawaban_3'),
                         'OptionD' => $this->input->post('jawaban_4'),
+                        'OptionE' => $this->input->post('jawaban_5'),
                         'TrueOption' => $this->input->post('TrueOption'),
 
                         'question_img' => $config['file_name'],
@@ -469,6 +501,7 @@ class Guru extends CI_Controller
                         'OptionB' => $this->input->post('jawaban_2'),
                         'OptionC' => $this->input->post('jawaban_3'),
                         'OptionD' => $this->input->post('jawaban_4'),
+                        'OptionE' => $this->input->post('jawaban_5'),
                         'TrueOption' => $this->input->post('TrueOption'),
                     );
                     $this->M_Quiz->saveQuestion($insert_data, $QuizID);
@@ -481,6 +514,7 @@ class Guru extends CI_Controller
                         'OptionB' => $this->input->post('jawaban_2'),
                         'OptionC' => $this->input->post('jawaban_3'),
                         'OptionD' => $this->input->post('jawaban_4'),
+                        'OptionE' => $this->input->post('jawaban_5'),
                         'TrueOption' => $this->input->post('TrueOption'),
 
                         'question_img' => $config['file_name'],
@@ -560,6 +594,7 @@ class Guru extends CI_Controller
                     'OptionB' => $this->input->post('jawaban_2'),
                     'OptionC' => $this->input->post('jawaban_3'),
                     'OptionD' => $this->input->post('jawaban_4'),
+                    'OptionE' => $this->input->post('jawaban_5'),
                     'TrueOption' => $this->input->post('TrueOption'),
 
                 );
@@ -576,6 +611,7 @@ class Guru extends CI_Controller
                     'OptionB' => $this->input->post('jawaban_2'),
                     'OptionC' => $this->input->post('jawaban_3'),
                     'OptionD' => $this->input->post('jawaban_4'),
+                    'OptionE' => $this->input->post('jawaban_5'),
                     'TrueOption' => $this->input->post('TrueOption'),
                     'question_img' => $config['file_name'],
 

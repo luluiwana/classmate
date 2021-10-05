@@ -29,6 +29,7 @@ class M_Discussion extends CI_Model
     public function getDisscussionById($Forum_ID)
     {
         $id = $this->session->userdata('id_user');
+        $this->db->select('*,forum_question.CreatedDateTime as time_thread');
         $this->db->join('user_course', 'user_course.CourseID=forum_question.CourseID');
         $this->db->join('users', 'forum_question.UserID=users.UserID');
         $this->db->where('user_course.UserID', $id);
@@ -39,6 +40,7 @@ class M_Discussion extends CI_Model
 
     public function getCommentsById($id)
     {
+        $this->db->select('*,forum_answer.CreatedDateTime as time_answer');
         $this->db->join('users', 'users.UserID=forum_answer.UserID');
         return $this->db->get_where('forum_answer', array('ForumQID' => $id))->result_object();
     }
@@ -58,9 +60,10 @@ class M_Discussion extends CI_Model
     public function getDiskusi($CourseID)
     {
         $id = $this->session->userdata('id_user');
+        $this->db->select('*,forum_question.CreatedDateTime as time_thread');
         $this->db->join('user_course', 'user_course.CourseID=forum_question.CourseID');
         $this->db->join('users', 'forum_question.UserID=users.UserID');
-        
+
         $this->db->where('user_course.UserID', $id);
         $this->db->where('forum_question.CourseID', $CourseID);
         $this->db->order_by('ForumQID', 'desc');
@@ -77,7 +80,7 @@ class M_Discussion extends CI_Model
         $this->db->where('forum_question.CourseID', $CourseID);
         $this->db->where('forum_question.category', $topik);
         $this->db->order_by('ForumQID', 'desc');
-        
+
         return $this->db->get('forum_question')->result();
     }
     public function getCourseName($CourseID)
@@ -113,45 +116,44 @@ class M_Discussion extends CI_Model
         $this->db->where('CourseID', $CourseID);
         return $this->db->get('forum_score')->row();
     }
-    public function addForumScore($CourseID,$XP)
+    public function addForumScore($CourseID, $XP)
     {
         //add score
         $id = $this->session->userdata('id_user');
         $data = array(
             'UserID' => $id,
-            'CourseID'=>$CourseID,
-            'Score'=>$XP
+            'CourseID' => $CourseID,
+            'Score' => $XP
         );
         $this->db->insert('forum_score', $data);
         //add XP
-        $this->db->set('courseXP', 'courseXP+'.$XP, false);
-        $this->db->where('CourseID', $CourseID);
-        $this->db->where('UserID', $id);
-        $this->db->update('user_course');
-
-    }
-    public function updateForumScore($CourseID,$addXP)
-    {
-        $id = $this->session->userdata('id_user');
-        $this->db->set('Score', 'Score+'.$addXP, false);
-        $this->db->where('CourseID', $CourseID);
-        $this->db->where('UserID', $id);
-        $this->db->update('forum_score');
-         //add XP
-        $this->db->set('courseXP', 'courseXP+'.$addXP, false);
+        $this->db->set('courseXP', 'courseXP+' . $XP, false);
         $this->db->where('CourseID', $CourseID);
         $this->db->where('UserID', $id);
         $this->db->update('user_course');
     }
-     public function decreaseForumScore($CourseID,$minusXP)
+    public function updateForumScore($CourseID, $addXP)
     {
         $id = $this->session->userdata('id_user');
-        $this->db->set('Score', 'Score -'.$minusXP, false);
+        $this->db->set('Score', 'Score+' . $addXP, false);
         $this->db->where('CourseID', $CourseID);
         $this->db->where('UserID', $id);
         $this->db->update('forum_score');
-         //add XP
-        $this->db->set('courseXP', 'courseXP-'.$minusXP, false);
+        //add XP
+        $this->db->set('courseXP', 'courseXP+' . $addXP, false);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->update('user_course');
+    }
+    public function decreaseForumScore($CourseID, $minusXP)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->set('Score', 'Score -' . $minusXP, false);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->where('UserID', $id);
+        $this->db->update('forum_score');
+        //add XP
+        $this->db->set('courseXP', 'courseXP-' . $minusXP, false);
         $this->db->where('CourseID', $CourseID);
         $this->db->where('UserID', $id);
         $this->db->update('user_course');
