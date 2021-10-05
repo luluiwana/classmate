@@ -24,6 +24,8 @@ class Siswa extends CI_Controller
             'countCourse' => $this->Course_model->countCourseSiswa(),
             'user'        => $this->Course_model->getUser(),
             'total_xp'      =>$this->Course_model->totalXP(),
+            'total_mission'=>$this->Course_model->countAllLesson()+$this->Course_model->countAllQuiz(),
+            'completed_mission'=>$this->Course_model->countCompletedLesson()+$this->Course_model->countCompletedQuiz()
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/dashboard');
@@ -114,6 +116,21 @@ class Siswa extends CI_Controller
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');
         $this->load->view('siswa/course/informasi');
+        $this->load->view('siswa/template/footer');
+    }
+    public function leaderboard($CourseID)
+    {
+         $data = array(
+            'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
+            'menu'      => 'Kelas',
+            'course_menu'      => 'Leaderboard',
+            'course'    => $this->Course_model->courseInfo($CourseID),
+            'leaderboard'    => $this->Course_model->getLeaderboard($CourseID),
+            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
+        );
+        $this->load->view('siswa/template/header', $data);
+        $this->load->view('siswa/course/course_menu');
+        $this->load->view('siswa/course/leaderboard');
         $this->load->view('siswa/template/footer');
     }
 

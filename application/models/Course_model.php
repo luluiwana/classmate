@@ -17,7 +17,8 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->from('course');
         $this->db->where('TeacherID', $id);
-        return $this->db->count_all_results();;
+        return $this->db->count_all_results();
+        ;
     }
     public function getUser()
     {
@@ -218,7 +219,6 @@ class Course_model extends CI_Model
 
     public function editLesson($data, $id)
     {
-
         $this->db->where('LessonID', $id);
         $this->db->update('course_lesson', $data);
     }
@@ -253,6 +253,102 @@ class Course_model extends CI_Model
         );
         $this->db->where('UserID', $id);
         $this->db->update('users', $data);
+    }
+    public function getLeaderboard($CourseID)
+    {
+        # code...SELECT * FROM `user_course` INNER JOIN users ON user_course.UserID=users.UserID WHERE user_course.UserID=1 AND CourseID=1 ORDER BY user_course.courseXP DESC LIMIT 10
+        $id = $this->session->userdata('id_user');
+        $this->db->join('users', 'user_course.UserID=users.UserID');
+        $this->db->where('user_course.UserID', $id);
+        $this->db->where('CourseID', $CourseID);
+        $this->db->order_by('user_course.courseXP', 'desc');
+        $this->db->limit(10);
+        return $this->db->get('user_course')->result();
+    }
+    public function countAllLesson()
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->join('competencies', 'competencies.CompetenciesID=course_lesson.CompetenciesID');
+        $this->db->join('user_course', 'user_course.CourseID=competencies.CourseID');
+        $this->db->where('UserID', $id);
+        $row = $this->db->get('course_lesson')->row();
+        return $row->c;
+    }
+    public function countCompletedLesson()
+    {
+        // SELECT COUNT(*) FROM user_lesson WHERE user_lesson.UserID=1 AND user_lesson.Score!=0
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->where('user_lesson.UserID', $id);
+        $this->db->where('user_lesson.Score!=', 0);
+        $row = $this->db->get('user_lesson')->row();
+        return $row->c;
+    }
+    public function countAllQuiz()
+    {
+        // SELECT count(*) FROM `quiz` INNER JOIN competencies ON competencies.CompetenciesID=quiz.CompetenciesID INNER JOIN user_course ON user_course.CourseID=competencies.CourseID WHERE UserID=1
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->join('competencies', 'competencies.CompetenciesID=quiz.CompetenciesID');
+        $this->db->join('user_course', 'user_course.CourseID=competencies.CourseID');
+        $this->db->where('UserID', $id);
+        $row = $this->db->get('quiz')->row();
+        return $row->c;
+    }
+    public function countCompletedQuiz()
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->where('UserID', $id);
+        $row = $this->db->get('user_quiz')->row();
+        return $row->c;
+    }
+    public function countLessonByCourse($CourseID)
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->join('competencies', 'competencies.CompetenciesID=course_lesson.CompetenciesID');
+        $this->db->join('user_course', 'user_course.CourseID=competencies.CourseID');
+        $this->db->where('UserID', $id);
+        $this->db->where('user_course.CourseID', $id);
+        $row = $this->db->get('course_lesson')->row();
+        return $row->c;
+    }
+    public function countQuizByCourse($CourseID)
+    {
+        // SELECT count(*) FROM `quiz` INNER JOIN competencies ON competencies.CompetenciesID=quiz.CompetenciesID INNER JOIN user_course ON user_course.CourseID=competencies.CourseID WHERE UserID=1
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->join('competencies', 'competencies.CompetenciesID=quiz.CompetenciesID');
+        $this->db->join('user_course', 'user_course.CourseID=competencies.CourseID');
+        $this->db->where('UserID', $id);
+        $this->db->where('user_course.CourseID', $id);
+        $row = $this->db->get('quiz')->row();
+        return $row->c;
+    }
+    public function CompletedLessonByCourse($CourseID)
+    {
+        // SELECT COUNT(*) FROM user_lesson WHERE user_lesson.UserID=1 AND user_lesson.Score!=0
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->where('user_lesson.UserID', $id);
+        $this->db->where('user_lesson.Score!=', 0);
+        $this->db->where('user_lesson.CourseID', $CourseID);
+        $row = $this->db->get('user_lesson')->row();
+        return $row->c;
+    }
+    public function completedQuizByCourse($CourseID)
+    {
+        // SELECT * FROM `user_quiz` INNER JOIN quiz ON quiz.QuizID=user_quiz.QuizID INNER JOIN competencies ON competencies.CompetenciesID=quiz.CompetenciesID WHERE competencies.CourseID=1 AND UserID=1
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(*) as c');
+        $this->db->join('quiz', 'quiz.QuizID=user_quiz.QuizID');
+        $this->db->join('competencies', 'competencies.CompetenciesID=quiz.CompetenciesID');
+        $this->db->where('competencies.CourseID', $CourseID);
+        $this->db->where('UserId', $id);
+        $row = $this->db->get('user_quiz')->row();
+        return $row->c;
     }
 }
                         

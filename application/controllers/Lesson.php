@@ -26,6 +26,8 @@ class Lesson extends CI_Controller
             'total_xp'      =>$this->Course_model->totalXP(),
             'user'        => $this->Course_model->getUser(),
             'score'     =>$this->M_Lesson->scoreByCourse($CourseID),
+            'total_mission'=>$this->Course_model->countLessonByCourse($CourseID)+$this->Course_model->countQuizByCourse($CourseID),
+            'completed_mission'=>$this->Course_model->CompletedLessonByCourse($CourseID)+$this->Course_model->completedQuizByCourse($CourseID)
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/course/course_menu');

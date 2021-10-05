@@ -95,7 +95,7 @@
                             </div>
                             <div class="w-80">
                                 <p class="card-title text-white fw-bold mb-0"><?= $row->UserName ?> . <span
-                                        class="me-3 fw-light text-secondary"><?=$thread->CreatedDateTime?></span></p>
+                                        class="me-3 fw-light text-secondary small"><?=$thread->CreatedDateTime?></span></p>
                                 <div class="card-text text-white small fs-15 mb-4"><?= $row->ForumAContent ?>
                                     <?php if($row->UserID==$this->session->userdata('id_user')):?>
                                     <div>

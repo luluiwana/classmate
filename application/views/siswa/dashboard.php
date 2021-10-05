@@ -14,7 +14,7 @@
                                 Kelas <p class="fw-bold fs-4"><?=$countCourse?></p>
                             </div>
                             <div class="col-md-3 w-50">
-                                Misi <p class="fw-bold fs-4">0/6</p>
+                                Misi <p class="fw-bold fs-4"><?=$completed_mission?>/<?=$total_mission?></p>
                             </div>
                         </div>
                         <hr>

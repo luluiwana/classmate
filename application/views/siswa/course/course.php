@@ -72,6 +72,9 @@
             <div class="card-body p-0 pb-4">
                 <div class="text-center text-white fw-bold mt-3">
                     Tantangan
+                    <input type="hidden" id="completed_mission" value="<?=$completed_mission?>">
+                    <input type="hidden" id="ongoing_mission" value="<?=$total_mission-$completed_mission?>">
+                    <input type="hidden" id="total_mission" value="<?=$total_mission?>">
                     <canvas id="myChart" class="mt-3"></canvas>
                 </div>
             </div>
@@ -297,10 +300,13 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 <script>
 //chart js
+var total_mission=document.getElementById("total_mission").value; 
+var completed_mission=document.getElementById("completed_mission").value; 
+var ongoing_mission=document.getElementById("ongoing_mission").value; 
 var data = {
     labels: ["Tantangan selesai", "Tantangan belum selesai"],
     datasets: [{
-        data: [12, 8],
+        data: [completed_mission, ongoing_mission],
         backgroundColor: ["#7200ff", "#191b2a"],
         hoverBackgroundColor: ["#7200ff", "#191b2a"],
     }, ],
@@ -330,7 +336,7 @@ Chart.pluginService.register({
         ctx.textBaseline = "middle";
         ctx.fillStyle = "#fff";
 
-        var text = "12/20",
+        var text = completed_mission+"/"+total_mission,
             textX = Math.round((width - ctx.measureText(text).width) / 2),
             textY = height / 2;
 
