@@ -36,12 +36,12 @@ class Quiz extends CI_Controller
     public function Quiz_detail($quizID, $CourseID)
     {
         $data = array(
-      'title' => "Quiz",
-      'menu'  => 'Kelas',
-      'CourseID'=>$CourseID,
-      'quiz'=>$this->quiz->getQuiz($quizID),
-      'jmlsoal'=>$this->quiz->countQuestion($quizID)
-    );
+            'title' => "Quiz",
+            'menu'  => 'Kelas',
+            'CourseID' => $CourseID,
+            'quiz' => $this->quiz->getQuiz($quizID),
+            'jmlsoal' => $this->quiz->countQuestion($quizID)
+        );
         $data['question'] = $this->quiz->getQuizByID($quizID);
 
         $this->load->view('siswa/template/header', $data);
@@ -53,47 +53,52 @@ class Quiz extends CI_Controller
     {
         //Masukkan jawaban ke tabel user_answer dan beri nilai
         $question = $this->quiz->getQuizByID($quizID);
-        $score=0;
-        $addXP=0;
-        $jml_soal=$this->quiz->countQuestion($quizID);
+        $score = 0;
+        $addXP = 0;
+        $jml_soal = $this->quiz->countQuestion($quizID);
         foreach ($question as $row) {
             if ($row->TrueOption == $this->input->post('pertanyaan' . $row->QuestionID)) {
                 $score++;
-                $addXP=$addXP+50;
+                $addXP = $addXP + 50;
             } else {
-                $addXP=$addXP+10;
+                $addXP = $addXP + 10;
             }
             $answer = array(
-                'UserID'=>  $id = $this->session->userdata('id_user'),
-                'QuestionID'=>$row->QuestionID,
-                'answer'=>$this->input->post('pertanyaan' . $row->QuestionID)
+                'UserID' =>  $id = $this->session->userdata('id_user'),
+                'QuestionID' => $row->QuestionID,
+                'answer' => $this->input->post('pertanyaan' . $row->QuestionID)
             );
             $this->quiz->insertAnswer($answer);
         }
         //hitung nilai dan insert nilai
-        $nilai = $score/$jml_soal*100;
+        $nilai = $score / $jml_soal * 100;
         $dataNilai = array(
-            'UserID'=>  $id = $this->session->userdata('id_user'),
-            'QuizID'=>$quizID,
-            'result'=>ceil($nilai),
-            'addXP'=>$addXP
+            'UserID' =>  $id = $this->session->userdata('id_user'),
+            'QuizID' => $quizID,
+            'result' => ceil($nilai),
+            'addXP' => $addXP
         );
         $this->quiz->insertNilai($dataNilai);
         //updateXP
         $this->quiz->updateXP($CourseID, $addXP);
         //load page
-       
-        redirect('quiz/result/'.$quizID.'/'.$CourseID, 'refresh');
+
+        $log = [
+            'CourseID' => $CourseID,
+            'Log' => $this->session->userdata('nama') . ' Telah Menyelesaikan Quiz - ' . $this->quiz->getQuiz($quizID)->QuizTitle,
+        ];
+        $this->db->insert('log', $log);
+        redirect('quiz/result/' . $quizID . '/' . $CourseID, 'refresh');
     }
     public function result($quizID, $CourseID)
     {
         $data = array(
             'title' => "Hasil Quiz",
             'menu'  => 'Kelas',
-            'CourseID'=>$CourseID,
-            'quiz'=>$this->quiz->getQuiz($quizID),
-            'user_quiz'=>$this->quiz->getUserQuiz($quizID),
-            'feedback'=>$this->quiz->feedback($quizID)
+            'CourseID' => $CourseID,
+            'quiz' => $this->quiz->getQuiz($quizID),
+            'user_quiz' => $this->quiz->getUserQuiz($quizID),
+            'feedback' => $this->quiz->feedback($quizID)
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/quiz/quiz_result');

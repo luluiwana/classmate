@@ -19,7 +19,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class M_Quiz extends CI_Model
 {
 
-  // ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     public function __construct()
     {
@@ -51,11 +51,6 @@ class M_Quiz extends CI_Model
         $this->db->insert('quiz_question', $insert_data);
         // $QuizID = $insert_data['QuizID'];
 
-        $raw = $this->getQuizCount($QuizID);
-        $jumlah = $raw->jumlah;
-        (float)$total = 100 / $jumlah . (float)$jumlah;
-        $updateSkor = array('Score' => $total);
-        $this->db->update('quiz_question', $updateSkor, array('QuizID' => $QuizID));
     }
 
     public function getQuizCount($QuizID)
@@ -115,7 +110,7 @@ class M_Quiz extends CI_Model
     {
         $id = $this->session->userdata('id_user');
         //add XP
-        $this->db->set('courseXP', 'courseXP+'.$addXP, false);
+        $this->db->set('courseXP', 'courseXP+' . $addXP, false);
         $this->db->where('CourseID', $CourseID);
         $this->db->where('UserID', $id);
         $this->db->update('user_course');

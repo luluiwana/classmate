@@ -26,9 +26,9 @@ class Siswa extends CI_Controller
             'courseList' => $this->Course_model->getCourseSiswa_limit(),
             'countCourse' => $this->Course_model->countCourseSiswa(),
             'user'        => $this->Course_model->getUser(),
-            'total_xp'      =>$this->Course_model->totalXP(),
-            'total_mission'=>$this->Course_model->countAllLesson()+$this->Course_model->countAllQuiz(),
-            'completed_mission'=>$this->Course_model->countCompletedLesson()+$this->Course_model->countCompletedQuiz()
+            'total_xp'      => $this->Course_model->totalXP(),
+            'total_mission' => $this->Course_model->countAllLesson() + $this->Course_model->countAllQuiz(),
+            'completed_mission' => $this->Course_model->countCompletedLesson() + $this->Course_model->countCompletedQuiz()
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/dashboard');
@@ -76,7 +76,7 @@ class Siswa extends CI_Controller
 
         redirect('siswa/kelas', 'refresh');
     }
-  
+
     public function aktivitas($CourseID)
     {
         $data = array(
@@ -84,7 +84,8 @@ class Siswa extends CI_Controller
             'menu'      => 'Kelas',
             'course_menu'      => 'Aktivitas',
             'course'    => $this->Course_model->course($CourseID),
-            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID)
+            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID),
+            'log' => $this->Course_model->getLogByCourseID($CourseID)
 
         );
         $this->load->view('siswa/template/header', $data);
@@ -123,7 +124,7 @@ class Siswa extends CI_Controller
     }
     public function leaderboard($CourseID)
     {
-         $data = array(
+        $data = array(
             'title'     => $this->Course_model->course($CourseID)->CourseName . ' - ' . $this->Course_model->course($CourseID)->ClassName,
             'menu'      => 'Kelas',
             'course_menu'      => 'Leaderboard',
