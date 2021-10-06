@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
+     <link rel="shortcut icon" href="<?=base_url()?>assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?=base_url()?>assets/img/favicon.ico" type="image/x-icon">
 </head>
 
 <body class="g-sidenav-show ">
@@ -35,8 +37,8 @@
         <div class="sidenav-header  ">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                target="_blank">
+            <a class="navbar-brand m-0" href="<?=base_url()?>siswa/"
+               >
                 <img src="<?= base_url() ?>assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
                 <!-- <span class="ms-1 font-weight-bold text-white">Classmate</span> -->
             </a>

@@ -24,6 +24,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
+      <link rel="shortcut icon" href="<?=base_url()?>assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?=base_url()?>assets/img/favicon.ico" type="image/x-icon">
 
 </head>
 
@@ -31,12 +33,13 @@
     <aside class="sidenav navbar bg-dark navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <div class="sidenav-header  ">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html" target="_blank">
-                <img src="<?= base_url() ?>assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-                <span class="ms-1 font-weight-bold text-light">Classmate</span>
+            <a class="navbar-brand m-0" href="<?=base_url()?>guru/"
+               >
+                <img src="<?= base_url() ?>assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
+                <!-- <span class="ms-1 font-weight-bold text-white">Classmate</span> -->
             </a>
         </div>
-        <hr class="horizontal dark mt-0">
+        <hr class="horizontal dark mt-3">
         <div class="collapse navbar-collapse  w-auto  max-height-vh-100 h-100" id="sidenav-collapse-main">
             <ul class="navbar-nav">
                 <li class="nav-item">

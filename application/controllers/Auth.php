@@ -7,7 +7,6 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_Auth');
-       
     }
     public function index()
     {
@@ -15,11 +14,13 @@ class Auth extends CI_Controller
     }
     public function login()
     {
-         if ($this->session->userdata('role') == 'siswa') {
+        if ($this->session->userdata('role') == 'siswa') {
             redirect('siswa', 'refresh');
-        } if ($this->session->userdata('role') == 'guru') {
+        }
+        if ($this->session->userdata('role') == 'guru') {
             redirect('guru', 'refresh');
         }
+
         $this->form_validation->set_rules('email', 'email', 'callback_email_check');
         $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
         if ($this->form_validation->run() == false) {
@@ -125,6 +126,6 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('nama');
         $this->session->unset_userdata('role');
 
-        redirect('auth', 'refresh');
+        redirect('auth/login', 'refresh');
     }
 }
