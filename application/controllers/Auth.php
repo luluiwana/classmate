@@ -7,10 +7,19 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_Auth');
+       
     }
-
     public function index()
     {
+        $this->load->view('landing/index');
+    }
+    public function login()
+    {
+         if ($this->session->userdata('role') == 'siswa') {
+            redirect('siswa', 'refresh');
+        } if ($this->session->userdata('role') == 'guru') {
+            redirect('guru', 'refresh');
+        }
         $this->form_validation->set_rules('email', 'email', 'callback_email_check');
         $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
         if ($this->form_validation->run() == false) {
@@ -41,7 +50,7 @@ class Auth extends CI_Controller
         $email_cek = $this->M_Auth->email_check($email);
         $password = $this->input->post('password');
 
-        if ($email_cek == FALSE) {
+        if ($email_cek == false) {
             $this->form_validation->set_message('email_check', '{field} tidak terdaftar');
             return false;
         } else {
@@ -96,10 +105,7 @@ class Auth extends CI_Controller
         );
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Daftar";
-            $this->load->view('home/header', $data);
             $this->load->view('auth/daftar');
-            $this->load->view('home/footer');
         } else {
             $insert_data = [
                 'UserName' => $this->input->post('nama'),
@@ -117,6 +123,7 @@ class Auth extends CI_Controller
     {
         $this->session->unset_userdata('id_user');
         $this->session->unset_userdata('nama');
+        $this->session->unset_userdata('role');
 
         redirect('auth', 'refresh');
     }

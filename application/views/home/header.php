@@ -21,7 +21,7 @@
   <link id="pagestyle" href="<?= base_url() ?>assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 </head>
 
-<body class="">
+<body class="" style="background-color:#121212">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
