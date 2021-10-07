@@ -19,42 +19,7 @@
 
   </body>
 
-  <script>
-$(document).ready(function() {
-    $('#add_question').summernote({
-        placeholder: 'Tulis sesuatu...',
-        height: 100,
-        toolbar: [
-            // [groupName, [list of button]]
-            ['style', ['clear', 'bold', 'italic', ]],
-            ['insert', ['picture', 'link']],
-        ]
-    });
-    $("#add_question").on("summernote.enter", function(we, e) {
-        $(this).summernote("pasteHTML", "<br><br>");
-        e.preventDefault();
-    });
-    $('#add_answer').summernote({
-        placeholder: 'Tulis komentarmu...',
-        height: 100,
-        toolbar: [
-            // [groupName, [list of button]]
-            ['style', ['clear', 'bold', 'italic', ]],
-            ['insert', ['picture', 'link']],
-        ]
-    });
-    $("#add_answer").on("summernote.enter", function(we, e) {
-        $(this).summernote("pasteHTML", "<br><br>");
-        e.preventDefault();
-    });
-    $(".note-editable").click(function() {
-        $(".btn-diskusi").show();
-    });
-    $(".note-placeholder").click(function() {
-        $(".btn-diskusi").show();
-    });
-});
-  </script>
+
 
 
   </html>

@@ -130,7 +130,8 @@ class Guru extends CI_Controller
             // 'competencies' => $this->Course_model->getCompetenciesByID($CourseID),
             'course'    => $this->Course_model->courseByGuru($CourseID),
             'id' => $CourseID,
-            'countKD' => $this->Course_model->countCompetencies($CourseID)
+            'countKD' => $this->Course_model->countCompetencies($CourseID),
+            'CourseID'=>$CourseID,
             // 'lesson' => $this->Course_model->getAllCourse()
         );
 
@@ -189,9 +190,10 @@ class Guru extends CI_Controller
     {
         $data = array(
             'title'     => 'Tambah Materi',
-            'menu'      => 'Add Lesson',
+            'menu'      => 'Kelas',
             'CompetenciesID' => $CompetenciesID,
-            'id' => $CourseID
+            'id' => $CourseID,
+            'CourseName'=>$this->Course_model->getCourseName($CourseID)
         );
 
         $this->load->view('guru/template/header', $data);
@@ -200,11 +202,13 @@ class Guru extends CI_Controller
         $this->load->view('guru/template/footer');
     }
 
-    public function detail_lesson($LessonID)
+    public function detail_lesson($LessonID,$CourseID)
     {
         $data = array(
             'title'     => 'Lihat Materi',
             'menu'      => 'Add Lesson',
+            'CourseID'=>$CourseID,
+            'CourseName'=>$this->Course_model->getCourseName($CourseID)
 
         );
 
@@ -270,7 +274,7 @@ class Guru extends CI_Controller
 
     public function deleteLesson($CourseID, $LessonID)
     {
-        $this->db->where('LessonnID', $LessonID);
+        $this->db->where('LessonID', $LessonID);
         $this->db->delete('course_lesson');
         redirect('guru/course/' . $CourseID);
     }

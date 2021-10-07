@@ -258,6 +258,9 @@ p{
 .log-ava{
 	width:30px
 }
+.li-hover:hover{
+	background-color: #7200ff !important;
+}
 
 /* MEDIA */
 @media only screen and (max-width: 768px) {

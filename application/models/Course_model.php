@@ -369,6 +369,12 @@ class Course_model extends CI_Model
         return $this->db->get('log')->result();
 
     }
+    public function getCourseName($CourseID)
+    {
+       $this->db->where('CourseID', $CourseID);
+        return $this->db->get('course')->row()->CourseName;
+        
+    }
 }
                         
 /* End of file Course.php */

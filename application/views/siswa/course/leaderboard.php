@@ -1,6 +1,6 @@
 <div class="row mt-4 mx-0">
     <div class="col-md-6">
-        <img src="<?=base_url()?>assets/img/vector/Growth curve-cuate.svg" alt="">
+        <img src="<?=base_url()?>assets/img/vector/Project Stages-pana.svg" alt="">
     </div>
     <div class="col-md-6 card-forum mt-3">
         <div class="row">

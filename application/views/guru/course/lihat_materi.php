@@ -1,27 +1,46 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a href="<?=base_url()?>guru/kelas"
+                        class="text-primary fw-bold">Kelas</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="<?=base_url()?>guru/course/<?=$CourseID?>"
+                        class="text-primary fw-bold"><?=$CourseName?></a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <?= $lesson['LessonTitle'] ?>
+                </li>
+            </ol>
+        </nav>
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <p class="text-white fw-bold fs-4 mb-4"><?= $lesson['LessonTitle'] ?></p>
+                    <p class="text-white fw-bold fs-4 mb-4"><?= $lesson['LessonTitle'] ?>
+                    </p>
+                    <p>
+                        <a class="btn btn-warning btn-sm"
+                            href="<?= base_url('guru/editLesson/' . $CourseID . '/' . $lesson['LessonID']) ?>">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <a class="btn btn-danger btn-sm"
+                            href="<?= base_url('guru/deleteLesson/' . $CourseID . '/' . $lesson['LessonID']) ?>">
+                            <i class="fas fa-trash"></i> Hapus
+                        </a>
+                    </p>
                     <p class="text-white"><?= $lesson['LessonContent'] ?></p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card mt-3">
+        <?php if (!empty($lesson['File'])) { ?>
+        <div class="col-md-12">
+            <div class="card mt-4">
                 <div class="card-body">
-                    <h6 class="text-white text-center">Download File Materi </h6>
-                    <div class="d-grid gap-2  mx-auto">
-                        <?php if (empty($lesson['File'])) { ?>
-                            <a disabled class="btn btn-secondary">File Tidak Tersedia</a>
-                        <?php } else {  ?>
-                            <a download href="<?= base_url('assets/lesson/' . $lesson['File']) ?>" target="_blank" class="btn btn-primary">Download</a>
-                        <?php } ?>
-
-                    </div>
+                    <p class="text-white fw-bold fs-5">Berkas Lampiran</p>
+                    <p class="text-white"><i class="fas fa-file me-2"></i> <?=$lesson->File?> </p>
+                    <a href="<?= base_url('assets/lesson/' . $lesson['File']) ?>" target="_blank"
+                        class="btn btn-primary"><i class="fas fa-download me-2"></i> Download</a>
                 </div>
             </div>
         </div>
+        <?php } ?>
     </div>
 </div>
