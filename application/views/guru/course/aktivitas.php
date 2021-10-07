@@ -1,18 +1,16 @@
 <div class="col-12 mt-3 card">
     <div class="card-body">
-        <table>
-            <th class="col-3">
-                Waktu
-            </th>
-            <th class="col-9">
-                Kegiatan
-            </th>
-
+        <p class="fw-bold text-white small my-3"> <i class="fas fa-dot-circle text-warning me-1"></i> AKTIVITAS</p>
+        <table class="table table-borderless table-hover table-sm border-start border-warning border-2 ms-1 p-2">
             <?php foreach ($log as $row) : ?>
-                <tr>
-                    <td> <?= $row->datetime ?></td>
-                    <td> <?= $row->log ?></td>
-                </tr>
+            <tr>
+                <td class="small ps-3">
+                    <img src="<?=base_url()?>media/avatar/<?=$row->UserAvatar?>" alt="" srcset="" class="log-ava me-2">
+                    <span class="text-warning fw-bold"><?=$row->UserName?> </span>
+                    <?= $row->log ?>
+                    <span class="text-secondary">. <?= date("d M Y (H:i", strtotime($row->datetime));  ?> WIB)</span>
+                </td>
+            </tr>
             <?php endforeach;  ?>
         </table>
 

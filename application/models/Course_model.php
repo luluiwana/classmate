@@ -359,7 +359,15 @@ class Course_model extends CI_Model
 
     public function getLogByCourseID($CourseID)
     {
-        return $this->db->get_where('log', array('CourseID' => $CourseID))->result_object();
+        // SELECT * FROM `log` INNER JOIN users ON users.UserID=log.UserID WHERE CourseID=2
+        $this->db->join('users', 'users.UserID=log.UserID');
+        $this->db->where('CourseID', $CourseID);
+        $this->db->order_by('LogID', 'desc');
+        $this->db->limit(30);
+        
+        
+        return $this->db->get('log')->result();
+
     }
 }
                         

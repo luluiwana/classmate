@@ -85,7 +85,8 @@ class Quiz extends CI_Controller
 
         $log = [
             'CourseID' => $CourseID,
-            'Log' => $this->session->userdata('nama') . ' Telah Menyelesaikan Quiz - ' . $this->quiz->getQuiz($quizID)->QuizTitle,
+            'UserID' =>  $id = $this->session->userdata('id_user'),
+            'Log' => 'telah menyelesaikan quiz: ' . $this->quiz->getQuiz($quizID)->QuizTitle,
         ];
         $this->db->insert('log', $log);
         redirect('quiz/result/' . $quizID . '/' . $CourseID, 'refresh');

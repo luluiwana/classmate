@@ -70,7 +70,8 @@ class Guru extends CI_Controller
 
             $log = [
                 'CourseID' => $courseID,
-                'Log' => $this->session->userdata('nama') . ' Telah Membuat Kelas ' . $this->input->post('ClassName') . '-' . $this->input->post('CourseName'),
+                'UserID' => $this->session->userdata('id_user'),
+                'Log' =>'membuat Kelas ' . $this->input->post('ClassName') . ' - ' . $this->input->post('CourseName'),
             ];
             $this->db->insert('log', $log);
         }
@@ -302,7 +303,8 @@ class Guru extends CI_Controller
 
             $log = [
                 'CourseID' => $CourseID,
-                'Log' => $this->session->userdata('nama') . ' Telah Membuat Materi Baru - ' . $this->input->post('title'),
+                'UserID' => $this->session->userdata('id_user'),
+                'Log' => 'membuat materi baru: ' . $this->input->post('title'),
             ];
             $this->db->insert('log', $log);
 
@@ -320,8 +322,10 @@ class Guru extends CI_Controller
 
             $log = [
                 'CourseID' => $CourseID,
-                'Log' => $this->session->userdata('nama') . ' Telah Membuat Materi Baru - ' . $this->input->post('title'),
+                'UserID' => $this->session->userdata('id_user'),
+                'Log' => 'membuat materi baru: ' . $this->input->post('title'),
             ];
+
             $this->db->insert('log', $log);
             redirect('guru/course/' . $CourseID);
         }
@@ -412,7 +416,8 @@ class Guru extends CI_Controller
 
             $log = [
                 'CourseID' => $CourseID,
-                'Log' => $this->session->userdata('nama') . ' Telah Membuat Quiz - ' . $this->input->post('judul'),
+                'UserID' => $this->session->userdata('id_user'),
+                'Log' => 'membuat quiz: ' . $this->input->post('judul'),
             ];
             $this->db->insert('log', $log);
             redirect('guru/create_question/' . $CourseID . '/' . $QuizID);

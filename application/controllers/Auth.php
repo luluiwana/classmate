@@ -24,10 +24,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('email', 'email', 'callback_email_check');
         $this->form_validation->set_rules('password', 'Kata Sandi', 'required');
         if ($this->form_validation->run() == false) {
-            $data['title'] = "Login";
-            $this->load->view('home/header', $data);
             $this->load->view('auth/login');
-            $this->load->view('home/footer');
         } else {
             $email = $this->input->post('email');
             $data = $this->M_Auth->getUserByEmail($email);
@@ -117,7 +114,7 @@ class Auth extends CI_Controller
             ];
             $this->M_Auth->do_register($insert_data);
 
-            redirect('auth', 'refresh');
+            redirect('auth/login', 'refresh');
         }
     }
     public function logout()

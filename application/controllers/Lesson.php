@@ -63,7 +63,8 @@ class Lesson extends CI_Controller
         $lesson_title =  $this->M_Lesson->getLesson($this->input->post('lesson'))->LessonTitle;
         $log = [
             'CourseID' => $CourseID,
-            'Log' => $this->session->userdata('nama') . ' Telah Menyelesaikan Materi - ' . $lesson_title,
+            'UserID'    => $this->session->userdata('id_user'),
+            'Log' => 'telah membaca materi: ' . $lesson_title,
         ];
         $this->db->insert('log', $log);
 
