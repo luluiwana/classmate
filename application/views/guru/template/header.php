@@ -24,8 +24,8 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/user.css">
-      <link rel="shortcut icon" href="<?=base_url()?>assets/img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="<?=base_url()?>assets/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<?= base_url() ?>assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?= base_url() ?>assets/img/favicon.ico" type="image/x-icon">
 
 </head>
 
@@ -33,8 +33,7 @@
     <aside class="sidenav navbar bg-dark navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
         <div class="sidenav-header  ">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand m-0" href="<?=base_url()?>guru/"
-               >
+            <a class="navbar-brand m-0" href="<?= base_url() ?>guru/">
                 <img src="<?= base_url() ?>assets/img/logo.png" class="navbar-brand-img h-100" alt="main_logo">
                 <!-- <span class="ms-1 font-weight-bold text-white">Classmate</span> -->
             </a>
@@ -63,7 +62,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="../pages/billing.html">
+                    <a class="nav-link  " href="<?= base_url('discussionguru') ?>">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-comments "></i>
                         </div>
@@ -71,7 +70,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  " href="<?= base_url('siswa/livecode') ?>">
+                    <a class="nav-link  " href="<?= base_url('guru/livecode') ?>">
                         <div class=" text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="fas fa-code "></i>
                         </div>

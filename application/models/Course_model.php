@@ -84,6 +84,15 @@ class Course_model extends CI_Model
         $this->db->order_by('user_course.JoinDate', 'desc');
         return $this->db->get('course')->result();
     }
+
+    public function getTeacherCourse()
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->join('users', 'course.TeacherID = users.UserID');
+        $this->db->where('users.UserID', $id);
+        // $this->db->order_by('user_course.JoinDate', 'desc');
+        return $this->db->get('course')->result();
+    }
     public function getAllCourse()
     //get course where user not joining into that course
     {
@@ -364,16 +373,14 @@ class Course_model extends CI_Model
         $this->db->where('CourseID', $CourseID);
         $this->db->order_by('LogID', 'desc');
         $this->db->limit(30);
-        
-        
-        return $this->db->get('log')->result();
 
+
+        return $this->db->get('log')->result();
     }
     public function getCourseName($CourseID)
     {
-       $this->db->where('CourseID', $CourseID);
+        $this->db->where('CourseID', $CourseID);
         return $this->db->get('course')->row()->CourseName;
-        
     }
 }
                         
