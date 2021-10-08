@@ -193,7 +193,7 @@ class Guru extends CI_Controller
             'menu'      => 'Kelas',
             'CompetenciesID' => $CompetenciesID,
             'id' => $CourseID,
-            'CourseName'=>$this->Course_model->getCourseName($CourseID)
+            'CourseName'=> $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName
         );
 
         $this->load->view('guru/template/header', $data);
@@ -208,13 +208,11 @@ class Guru extends CI_Controller
             'title'     => 'Lihat Materi',
             'menu'      => 'Add Lesson',
             'CourseID'=>$CourseID,
-            'CourseName'=>$this->Course_model->getCourseName($CourseID)
-
+            'CourseName'=> $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
+            'lesson'=>$this->Course_model->getLessonContentByID($LessonID)
         );
-
-        $content['lesson'] = $this->Course_model->getLessonContentByID($LessonID);
         $this->load->view('guru/template/header', $data);
-        $this->load->view('guru/course/lihat_materi', $content);
+        $this->load->view('guru/course/lihat_materi');
         $this->load->view('guru/template/footer');
     }
 
@@ -224,7 +222,9 @@ class Guru extends CI_Controller
         $data = array(
             'title'     => 'Edit Materi',
             'menu'      => 'Edit Lesson',
-            'id' => $CourseID
+            'id' => $CourseID,
+            'CourseName'=> $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName
+
         );
         $content['lesson'] = $this->Course_model->getLessonContentByID($LessonID);
         $this->load->view('guru/template/header', $data);
@@ -236,6 +236,12 @@ class Guru extends CI_Controller
     public function editLessonCourse($CourseID, $LessonID)
     {
         $data['courseID'] = $CourseID;
+        if(!empty($_FILES['file']['name'])){
+            $temp = explode(".", $_FILES["file"]["name"]);
+            $newfilename = $this->session->userdata('id_user') . '_' . round(microtime(true)) . '.' . $temp[1];
+            $config['file_name']            = $newfilename;
+
+        }
         $config['upload_path']          = './assets/lesson/';
         $config['allowed_types']        = '*';
 
@@ -255,10 +261,7 @@ class Guru extends CI_Controller
             $this->Course_model->editLesson($insert_data, $LessonID);
             redirect('guru/course/' . $CourseID);
         } else {
-            $temp = explode(".", $_FILES["file"]["name"]);
-            $newfilename = $this->session->userdata('id_user') . '_' . round(microtime(true)) . '.' . $temp[1];
-            $config['file_name']            = $newfilename;
-
+          
 
             $insert_data = array(
 
@@ -398,15 +401,13 @@ class Guru extends CI_Controller
         if ($this->form_validation->run() == false) {
             $data = array(
                 'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
-                'menu'      => 'Tambah Quiz',
-                'course_menu' => "Tambah Quiz",
+                'menu'      => 'Kelas',
                 'course'    => $this->Course_model->courseByGuru($CourseID),
                 'id' => $CompetenciesID,
                 'courseID' => $CourseID
             );
 
             $this->load->view('guru/template/header', $data);
-
             $this->load->view('guru/course/create_quiz');
             $this->load->view('guru/template/footer');
         } else {
@@ -424,7 +425,7 @@ class Guru extends CI_Controller
                 'Log' => 'membuat quiz: ' . $this->input->post('judul'),
             ];
             $this->db->insert('log', $log);
-            redirect('guru/create_question/' . $CourseID . '/' . $QuizID);
+            redirect('guru/list_question/' . $CourseID . '/' . $QuizID);
         }
     }
 
@@ -540,9 +541,8 @@ class Guru extends CI_Controller
     public function list_question($CourseID, $QuizID)
     {
         $data = array(
-            'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
-            'menu'      => 'Daftar Pertanyaan',
-            'course_menu' => "Daftar Pertanyaan",
+            'title'     => 'Quiz',
+            'menu'      => 'Kelas',
             'course'    => $this->Course_model->courseByGuru($CourseID),
             'id' => $QuizID,
             'courseID' => $CourseID,
@@ -550,7 +550,6 @@ class Guru extends CI_Controller
 
         $data['question'] = $this->M_Quiz->getListQuestionByQuizID($QuizID);
         $this->load->view('guru/template/header', $data);
-
         $this->load->view('guru/course/list_question');
         $this->load->view('guru/template/footer');
     }

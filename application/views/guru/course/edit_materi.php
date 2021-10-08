@@ -1,23 +1,35 @@
 <div class="container-fluid py-4">
-    <div class="card-forum">
+     <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item" aria-current="page"><a href="<?=base_url()?>guru/kelas"
+                        class="text-primary fw-bold">Kelas</a></li>
+                <li class="breadcrumb-item" aria-current="page"><a href="<?=base_url()?>guru/course/<?=$id?>"
+                        class="text-primary fw-bold"><?=$CourseName?></a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                 Edit Materi: <?= $lesson['LessonTitle'] ?>
+                </li>
+            </ol>
+        </nav>
+    <div class="card card-body">
+        
         <form action="<?= base_url('guru/editLessonCourse/' . $id . '/' . $lesson['LessonID']) ?>" method="post" enctype="multipart/form-data">
 
             <div class="form-group ">
-                <label class="col-md-2 col-xs-12 col-form-label">Judul Materi</label>
+                <label class="">Judul Materi</label>
                 <div class="col-sm-12">
-                    <input type="text" class="form-control bg-light text-dark" name="title" value='<?= $lesson['LessonTitle'] ?>' placeholder="Judul Artikel" required>
+                    <input type="text" class="form-control text-white" name="title" value='<?= $lesson['LessonTitle'] ?>' placeholder="Judul Artikel" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-md-12 col-xs-12 col-form-label">File </label>
+                <label class="">File </label>
                 <div class="col-md-8">
-                    <input type="file" name="file" class='form-control bg-light text-dark'>
+                    <input type="file" name="file" class='form-control  text-white'>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-md-12 col-xs-12 col-form-label">Content Materi </label>
-                <textarea name="content" id="add_question" class="text-lights form-control" cols="30" rows="30" required>
+                <label class="">Isi Materi </label>
+                <textarea name="content" id="add_materi" class="text-lights form-control" cols="30" rows="30" required>
                 <?= $lesson['LessonContent'] ?>
                 </textarea>
             </div>

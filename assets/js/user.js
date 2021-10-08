@@ -48,18 +48,19 @@ $(document).ready(function () {
 	});
 	$("#add_materi").summernote({
 		placeholder: "Tulis sesuatu...",
-		height: 100,
+		height: 500,
 		toolbar: [
 			// [groupName, [list of button]]
 			["style", ["clear", "bold", "italic"]],
-			["insert", ["picture", "link"]],
 			["fontsize", ["fontsize"]],
-			["color", ["color"]],
-			["para", ["ul", "ol", "paragraph"]],
+			["insert", ["picture", "link", "video"]],
+			["para", ["ul", "ol"]],
+			["view", ["codeview"]],
 		],
 	});
 	$("#add_materi").on("summernote.enter", function (we, e) {
 		$(this).summernote("pasteHTML", "<br><br>");
 		e.preventDefault();
 	});
+	$(".dropdown-toggle").dropdown();
 });

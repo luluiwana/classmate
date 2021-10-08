@@ -176,9 +176,12 @@ table.dataTable tbody tr {
 }
 .note-editable p {
 	font-size: 14px !important;
+	color: white;
 }
 .note-editable {
 	font-size: 14px !important;
+	color: white;
+
 }
 .modal-content {
 	background-color: #191b2a;
@@ -217,6 +220,12 @@ p{
 }
 .dropdown-menu > li > a{
 	font-family: inherit;
+	 display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: normal;
+            line-height: 1.42857143;
+            white-space: nowrap;
 }
 .btn:disabled, .btn.disabled, fieldset:disabled .btn {
     pointer-events: none;

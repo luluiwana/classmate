@@ -16,17 +16,17 @@
                 <div class="card-body">
                     <p class="text-white fw-bold fs-4 mb-4"><?= $lesson['LessonTitle'] ?>
                     </p>
-                    <p>
-                        <a class="btn btn-warning btn-sm"
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                        <a class="btn btn-warning btn-sm px-2"
                             href="<?= base_url('guru/editLesson/' . $CourseID . '/' . $lesson['LessonID']) ?>">
                             <i class="fas fa-edit"></i> Edit
                         </a>
-                        <a class="btn btn-danger btn-sm"
+                        <a class="btn btn-danger btn-sm px-2"
                             href="<?= base_url('guru/deleteLesson/' . $CourseID . '/' . $lesson['LessonID']) ?>">
                             <i class="fas fa-trash"></i> Hapus
                         </a>
-                    </p>
-                    <p class="text-white"><?= $lesson['LessonContent'] ?></p>
+                    </div>
+                    <div class="text-white"><?= $lesson['LessonContent'] ?></div>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="card mt-4">
                 <div class="card-body">
                     <p class="text-white fw-bold fs-5">Berkas Lampiran</p>
-                    <p class="text-white"><i class="fas fa-file me-2"></i> <?=$lesson->File?> </p>
+                    <p class="text-white mt-3"><i class="fas fa-file me-2"></i> <?=$lesson['File']?> </p>
                     <a href="<?= base_url('assets/lesson/' . $lesson['File']) ?>" target="_blank"
                         class="btn btn-primary"><i class="fas fa-download me-2"></i> Download</a>
                 </div>

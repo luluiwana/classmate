@@ -31,7 +31,7 @@
 
             <div class="form-group row">
               <label class=" text-white">Isi Materi</label>
-                <textarea name="content" id="add_materi" class="text-light form-control" cols="30" rows="30"
+                <textarea name="content" id="add_materi" class="text-white form-control" cols="30" rows="30"
                     required></textarea>
             </div>
 

@@ -7,9 +7,44 @@
         <div class="card bg-darkpurple mb-4">
             <div class="card-body">
                 <span class="fw-bold text-white fs-5"><?= $row['CompetenciesName'] ?></span>
+
+                <hr>
+
+                <ol class="mt-0 ps-3">
+                    <?php if (!empty($lesson[$row['CompetenciesID']])) { foreach ($lesson[$row['CompetenciesID']] as $row2) :?>
+                    <a class="text-white"
+                        href="<?= base_url('guru/detail_lesson/'  . $row2['LessonID'].'/'.$CourseID) ?>">
+                        <li class="text-white py-1 li-hover">
+                            <div class="row">
+                                <div class="w-90">Materi: <?= $row2['LessonTitle'] ?></div>
+                                <div class="w-10"><i class="fas fa-angle-double-right"></i></div>
+                            </div>
+                        </li>
+                    </a>
+                    <?php endforeach;} ?>
+                    <?php if (!empty($quiz[$row['CompetenciesID']])) {foreach ($quiz[$row['CompetenciesID']] as $row3) :?>
+
+                    <a class="text-white" href="<?= base_url('guru/list_question/' . $id . '/' . $row3['QuizID']) ?>">
+                        <li class="text-white py-1 li-hover">
+                            <div class="row">
+                                <div class="w-90">Quiz: <?= $row3['QuizTitle'] ?></div>
+                                <div class="w-10"><i class="fas fa-angle-double-right"></i></div>
+                            </div>
+                        </li>
+                    </a>
+                    <?php  endforeach;} ?>
+                </ol>
+                <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
+                   <a href="<?= base_url('guru/Lesson/' . $id . '/' . $row['CompetenciesID']) ?>"
+                    class="btn btn-outline-info btn-sm px-2 small ">+Tambah Materi</a>
+                <a href="<?= base_url('guru/create_quiz/' . $id . '/' . $row['CompetenciesID']) ?>"
+                    class="btn btn-outline-info btn-sm px-2 small ">+Tambah Quiz</a>
                 <a data-bs-toggle="modal" data-bs-target="#editKD<?= $row['CompetenciesID'] ?>" type="button"
-                    class="btn btn-primary btn-sm px-2 float-end">Edit KD</a>
-                <div class="modal fade" id="editKD<?= $row['CompetenciesID'] ?>" tabindex="-1" aria-labelledby="editKD"
+                    class="btn btn-outline-info btn-sm px-2 small"> <i class="fas fa-edit"></i> Edit KD</a>
+                     
+               
+                </div>
+                 <div class="modal fade" id="editKD<?= $row['CompetenciesID'] ?>" tabindex="-1" aria-labelledby="editKD"
                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -39,35 +74,7 @@
                         </div>
                     </div>
                 </div>
-                <hr>
-                <a href="<?= base_url('guru/Lesson/' . $id . '/' . $row['CompetenciesID']) ?>"
-                    class="btn btn-warning btn-sm px-2 small me-1">+Tambah Materi</a>
-                <a href="<?= base_url('guru/create_quiz/' . $id . '/' . $row['CompetenciesID']) ?>"
-                    class="btn btn-warning btn-sm px-2 small ">+Tambah Quiz</a>
-                <ol class="mt-0 ps-3">
-                    <?php if (!empty($lesson[$row['CompetenciesID']])) { foreach ($lesson[$row['CompetenciesID']] as $row2) :?>
-                    <a class="text-white"
-                        href="<?= base_url('guru/detail_lesson/'  . $row2['LessonID'].'/'.$CourseID) ?>">
-                        <li class="text-white py-1 li-hover">
-                            <div class="row">
-                                <div class="w-90">Materi: <?= $row2['LessonTitle'] ?></div>
-                                <div class="w-10"><i class="fas fa-angle-double-right"></i></div>
-                            </div>
-                        </li>
-                    </a>
-                    <?php endforeach;} ?>
-                    <?php if (!empty($quiz[$row['CompetenciesID']])) {foreach ($quiz[$row['CompetenciesID']] as $row3) :?>
-
-                    <a class="text-white" href="<?= base_url('guru/list_question/' . $id . '/' . $row3['QuizID']) ?>">
-                        <li class="text-white py-1 li-hover">
-                            <div class="row">
-                                <div class="w-90">Quiz: <?= $row3['QuizTitle'] ?></div>
-                                <div class="w-10"><i class="fas fa-angle-double-right"></i></div>
-                            </div>
-                        </li>
-                    </a>
-                    <?php  endforeach;} ?>
-                </ol>
+               
             </div>
         </div>
         <?php endforeach;} else { ?>
@@ -90,7 +97,7 @@
     </div>
     <div class="col-md-3">
         <div class="card mb-4">
-            <div class="card-body">
+            <div class="card-body text-center">
                 <h6 class="text-white text-center">Jumlah KD</h6>
                 <h2 class="text-center text-white">
                     <?php
@@ -100,17 +107,12 @@
                         echo $countKD->value;
                     ?>
                 </h2>
+                <button data-bs-toggle="modal" data-bs-target="#addKD" class="btn btn-warning text-center btn-sm"
+                    type="button">+Tambah
+                    KD</button>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <h6 class="text-white text-center">Tambah KD </h6>
-                <div class="d-grid gap-2  mx-auto">
-                    <button data-bs-toggle="modal" data-bs-target="#addKD" class="btn btn-primary" type="button">Buat
-                        KD</button>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
 <div class="modal fade" id="addKD" tabindex="-1" aria-labelledby="addKD" aria-hidden="true">
