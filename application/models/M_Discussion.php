@@ -43,7 +43,7 @@ class M_Discussion extends CI_Model
         $this->db->select('*,forum_question.CreatedDateTime as time_thread');
         $this->db->join('course', 'course.CourseID=forum_question.CourseID');
         $this->db->join('users', 'forum_question.UserID=users.UserID');
-        $this->db->where('users.UserID', $id);
+        // $this->db->where('users.UserID', $id);
         $this->db->where('forum_question.ForumQID', $Forum_ID);
 
         return $this->db->get('forum_question')->row();
@@ -88,9 +88,10 @@ class M_Discussion extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->select('*,forum_question.CreatedDateTime as time_thread');
         $this->db->join('course', 'course.CourseID=forum_question.CourseID');
+        // $this->db->join('user_course', 'forum_question.UserID=user_course.UserID');
         $this->db->join('users', 'forum_question.UserID=users.UserID');
 
-        $this->db->where('users.UserID', $id);
+        // $this->db->where('user_course.UserID', $id);
         $this->db->where('forum_question.CourseID', $CourseID);
         $this->db->order_by('ForumQID', 'desc');
 
@@ -120,7 +121,7 @@ class M_Discussion extends CI_Model
         $this->db->join('course', 'course.CourseID=forum_question.CourseID');
         $this->db->join('users', 'forum_question.UserID=users.UserID');
 
-        $this->db->where('users.UserID', $id);
+        // $this->db->where('users.UserID', $id);
         $this->db->where('forum_question.CourseID', $CourseID);
         $this->db->where('forum_question.category', $topik);
         $this->db->order_by('ForumQID', 'desc');
