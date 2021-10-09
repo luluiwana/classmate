@@ -10,7 +10,8 @@
             </li>
         </ol>
     </nav>
-    <div class="card">
+    
+    <div class="card mt-4">
        <div class="card-body">
             <form action="<?= base_url('guru/addLessonCourse/' . $id . '/' . $CompetenciesID) ?>" method="post"
             enctype="multipart/form-data">

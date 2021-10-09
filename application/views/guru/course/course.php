@@ -1,5 +1,5 @@
-<div class="row mt-1">
-    <p class="fw-bold text-white small mt-3"> <i class="fas fa-dot-circle text-warning me-1"></i> KOMPETENSI DASAR</p>
+<div class="row mt-4">
+    <p class="fw-bold text-white small"> <i class="fas fa-dot-circle text-warning me-1"></i> KOMPETENSI DASAR</p>
     <div class="col-md-9 mt-3">
         <?php
         if (!empty($competencies)) {
@@ -24,7 +24,7 @@
                     <?php endforeach;} ?>
                     <?php if (!empty($quiz[$row['CompetenciesID']])) {foreach ($quiz[$row['CompetenciesID']] as $row3) :?>
 
-                    <a class="text-white" href="<?= base_url('guru/list_question/' . $id . '/' . $row3['QuizID']) ?>">
+                    <a class="text-white" href="<?= base_url('guru/list_question/' . $CourseID . '/' . $row3['QuizID']) ?>">
                         <li class="text-white py-1 li-hover">
                             <div class="row">
                                 <div class="w-90">Quiz: <?= $row3['QuizTitle'] ?></div>
@@ -35,9 +35,9 @@
                     <?php  endforeach;} ?>
                 </ol>
                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic outlined example">
-                   <a href="<?= base_url('guru/Lesson/' . $id . '/' . $row['CompetenciesID']) ?>"
+                   <a href="<?= base_url('guru/Lesson/' . $CourseID . '/' . $row['CompetenciesID']) ?>"
                     class="btn btn-outline-info btn-sm px-2 small ">+Tambah Materi</a>
-                <a href="<?= base_url('guru/create_quiz/' . $id . '/' . $row['CompetenciesID']) ?>"
+                <a href="<?= base_url('guru/create_quiz/' . $CourseID . '/' . $row['CompetenciesID']) ?>"
                     class="btn btn-outline-info btn-sm px-2 small ">+Tambah Quiz</a>
                 <a data-bs-toggle="modal" data-bs-target="#editKD<?= $row['CompetenciesID'] ?>" type="button"
                     class="btn btn-outline-info btn-sm px-2 small"> <i class="fas fa-edit"></i> Edit KD</a>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <?php endforeach;} else { ?>
-        <div class="card bg-primary mb-4">
+        <div class="card  mb-4">
             <div class="card-body p-0">
                 <div class="accordion text-dark " id="accordionFlushExample">
                     <div class="accordion-item text-dark">
@@ -86,7 +86,7 @@
                             <button class="accordion-button collapsed text-white" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
-                                Tidak ada Kompetensi Dasar Tersedia
+                                Tidak Ada Kompetensi Dasar Tersedia
                             </button>
                         </h2>
                     </div>

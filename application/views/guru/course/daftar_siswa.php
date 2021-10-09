@@ -1,11 +1,11 @@
 <div class="row mx-0 mt-4">
-    <div class="text-white fw-bold">Daftar Nama Siswa</div>
+    <p class="fw-bold text-white small"> <i class="fas fa-dot-circle text-warning me-1"></i>DAFTAR NAMA SISWA</p>
     <div class="card mt-3 bg-darkblue">
         <div class="card-body overflow-auto">
             <table class="table table-hover mt-3" id="daftar_siswa">
                 <thead>
                     <th>No</th>
-                    <th>Ava</th>
+                    <th>#</th>
                     <th>Nama Lengkap</th>
                     <th>Email</th>
                     <th>Nomor Telepon</th>
@@ -23,8 +23,7 @@
                         <td><?=$row->UserEmail?></td>
                         <td><?=$row->UserContactNo?></td>
                         <td>
-                            <a href="" data-bs-toggle="tooltip" data-bs-placement="left" title="Informasi"><i
-                                    class="fas fa-info-circle fs-5 me-2 text-primary"></i></a>
+                          
                             <a href="" data-bs-toggle="modal" data-bs-target="#kick<?=$i?>">
                                 <i class="fas fa-user-slash fs-5 text-primary" data-bs-toggle="tooltip"
                                     data-bs-placement="right" title="Keluarkan dari kelas"></i>

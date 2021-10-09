@@ -218,6 +218,16 @@ table.dataTable tbody tr {
 p{
 	margin-bottom: 0;
 }
+.w-fit{
+	width: fit-content;
+}
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 900px;
+    margin: 1.75rem auto;
+}
+}
+
 .dropdown-menu > li > a{
 	font-family: inherit;
 	 display: block;

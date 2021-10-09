@@ -1,6 +1,6 @@
-<div class="col-12 mt-3 card">
-    <div class="card-body">
-        <p class="fw-bold text-white small my-3"> <i class="fas fa-dot-circle text-warning me-1"></i> AKTIVITAS</p>
+<div class="col-12 mt-4">
+    <p class="fw-bold text-white small my-3"> <i class="fas fa-dot-circle text-warning me-1"></i> AKTIVITAS</p>
+    <div class="card card-body">
         <table class="table table-borderless table-hover table-sm border-start border-warning border-2 ms-1 p-2">
             <?php foreach ($log as $row) : ?>
             <tr>

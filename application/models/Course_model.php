@@ -17,7 +17,8 @@ class Course_model extends CI_Model
         $id = $this->session->userdata('id_user');
         $this->db->from('course');
         $this->db->where('TeacherID', $id);
-        return $this->db->count_all_results();;
+        return $this->db->count_all_results();
+        ;
     }
     public function getUser()
     {
@@ -256,9 +257,7 @@ class Course_model extends CI_Model
     public function getLeaderboard($CourseID)
     {
         # code...SELECT * FROM `user_course` INNER JOIN users ON user_course.UserID=users.UserID WHERE user_course.UserID=1 AND CourseID=1 ORDER BY user_course.courseXP DESC LIMIT 10
-        $id = $this->session->userdata('id_user');
         $this->db->join('users', 'user_course.UserID=users.UserID');
-        $this->db->where('user_course.UserID', $id);
         $this->db->where('CourseID', $CourseID);
         $this->db->order_by('user_course.courseXP', 'desc');
         $this->db->limit(10);
@@ -312,24 +311,18 @@ class Course_model extends CI_Model
     }
     public function countLessonByCourse($CourseID)
     {
-        $id = $this->session->userdata('id_user');
         $this->db->select('count(*) as c');
         $this->db->join('competencies', 'competencies.CompetenciesID=course_lesson.CompetenciesID');
-        $this->db->join('user_course', 'user_course.CourseID=competencies.CourseID');
-        $this->db->where('UserID', $id);
-        $this->db->where('user_course.CourseID', $id);
+        $this->db->where('competencies.CourseID', $CourseID);
         $row = $this->db->get('course_lesson')->row();
         return $row->c;
     }
     public function countQuizByCourse($CourseID)
     {
         // SELECT count(*) FROM `quiz` INNER JOIN competencies ON competencies.CompetenciesID=quiz.CompetenciesID INNER JOIN user_course ON user_course.CourseID=competencies.CourseID WHERE UserID=1
-        $id = $this->session->userdata('id_user');
         $this->db->select('count(*) as c');
         $this->db->join('competencies', 'competencies.CompetenciesID=quiz.CompetenciesID');
-        $this->db->join('user_course', 'user_course.CourseID=competencies.CourseID');
-        $this->db->where('UserID', $id);
-        $this->db->where('user_course.CourseID', $id);
+        $this->db->where('competencies.CourseID', $CourseID);
         $row = $this->db->get('quiz')->row();
         return $row->c;
     }
@@ -367,13 +360,56 @@ class Course_model extends CI_Model
         
         
         return $this->db->get('log')->result();
-
     }
     public function getCourseName($CourseID)
     {
-       $this->db->where('CourseID', $CourseID);
+        $this->db->where('CourseID', $CourseID);
         return $this->db->get('course')->row()->CourseName;
+    }
+    public function getQuizByID($QuizID)
+    {
+        $this->db->where('QuizID', $QuizID);
+        return $this->db->get('quiz')->row();
+    }
+    public function countUserLesson($LessonID)
+    {
+        // SELECT count(*) FROM `user_lesson` WHERE LessonID=4
+        $this->db->select('count(*) as c');
+        $this->db->where('LessonID', $LessonID);
+        $row = $this->db->get('user_lesson')->row();
+        return $row->c;
+    }
+    public function getUserLesson($LessonID)
+    {
+        // SELECT * FROM `user_lesson` INNER JOIN users ON  WHERE LessonID=4
+        $this->db->join('users', 'users.UserID=user_lesson.UserID');
+        $this->db->where('LessonID', $LessonID);
+        $this->db->order_by('users.UserName', 'ASC');
         
+        return $this->db->get('user_lesson')->result();
+    }
+    public function getUserQuiz($QuizID)
+    {
+        // SELECT * FROM `user_quiz` INNER JOIN users ON users.UserID=user_quiz.UserID WHERE QuizID=4
+        $this->db->join('users', 'users.UserID=user_quiz.UserID');
+        $this->db->where('QuizID', $QuizID);
+        return $this->db->get('user_quiz')->result();
+    }
+    public function getUserQuizByUser($QuizID, $UserID)
+    {
+        // SELECT * FROM `user_quiz` INNER JOIN users ON users.UserID=user_quiz.UserID WHERE QuizID=4
+        $this->db->join('users', 'users.UserID=user_quiz.UserID');
+        $this->db->where('QuizID', $QuizID);
+        $this->db->where('users.UserID', $UserID);
+        return $this->db->get('user_quiz')->row();
+    }
+    public function feedback($QuizID, $UserID)
+    {
+        # code...SELECT * FROM `user_answer` INNER JOIN quiz_question ON quiz_question.QuestionID=user_answer.QuestionID WHERE user_answer.UserID=1 AND quiz_question.QuizID=1 ORDER BY quiz_question.QuestionID ASC
+        $this->db->join('quiz_question', 'quiz_question.QuestionID=user_answer.QuestionID');
+        $this->db->where('quiz_question.QuizID', $QuizID);
+        $this->db->where('user_answer.UserID', $UserID);
+        return $this->db->get('user_answer')->result();
     }
 }
                         
