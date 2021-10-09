@@ -7,6 +7,8 @@
                     <th>No</th>
                     <th>#</th>
                     <th>Nama Lengkap</th>
+                    <th>Skor</th>
+                    <th>Level</th>
                     <th>Email</th>
                     <th>Nomor Telepon</th>
                     <th>Opsi</th>
@@ -20,6 +22,8 @@
                             <img src="<?=base_url()?>media/avatar/<?=$row->UserAvatar?>" class="small-ava" alt="">
                         </td>
                         <td><?=$row->UserName?></td>
+                        <td><?=$row->courseXP?></td>
+                        <td><?=$row->Level?></td>
                         <td><?=$row->UserEmail?></td>
                         <td><?=$row->UserContactNo?></td>
                         <td>

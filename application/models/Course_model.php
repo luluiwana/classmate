@@ -378,6 +378,13 @@ class Course_model extends CI_Model
         $this->db->where('QuizID', $QuizID);
         return $this->db->get('quiz')->row();
     }
+    public function countUserQuiz($QuizID)
+    {
+        $this->db->select('count(*) as c');
+        $this->db->where('QuizID', $QuizID);
+        $row = $this->db->get('user_quiz')->row();
+        return $row->c;
+    }
     public function countUserLesson($LessonID)
     {
         // SELECT count(*) FROM `user_lesson` WHERE LessonID=4
@@ -397,14 +404,12 @@ class Course_model extends CI_Model
     }
     public function getUserQuiz($QuizID)
     {
-        // SELECT * FROM `user_quiz` INNER JOIN users ON users.UserID=user_quiz.UserID WHERE QuizID=4
         $this->db->join('users', 'users.UserID=user_quiz.UserID');
         $this->db->where('QuizID', $QuizID);
         return $this->db->get('user_quiz')->result();
     }
     public function getUserQuizByUser($QuizID, $UserID)
     {
-        // SELECT * FROM `user_quiz` INNER JOIN users ON users.UserID=user_quiz.UserID WHERE QuizID=4
         $this->db->join('users', 'users.UserID=user_quiz.UserID');
         $this->db->where('QuizID', $QuizID);
         $this->db->where('users.UserID', $UserID);
@@ -412,11 +417,46 @@ class Course_model extends CI_Model
     }
     public function feedback($QuizID, $UserID)
     {
-        # code...SELECT * FROM `user_answer` INNER JOIN quiz_question ON quiz_question.QuestionID=user_answer.QuestionID WHERE user_answer.UserID=1 AND quiz_question.QuizID=1 ORDER BY quiz_question.QuestionID ASC
         $this->db->join('quiz_question', 'quiz_question.QuestionID=user_answer.QuestionID');
         $this->db->where('quiz_question.QuizID', $QuizID);
         $this->db->where('user_answer.UserID', $UserID);
         return $this->db->get('user_answer')->result();
+    }
+    public function countTeacherLesson()
+    {
+        $id = $this->session->userdata('id_user');
+        $this->db->select('count(LessonID) as c');
+        $this->db->join('competencies', 'competencies.CompetenciesID=course_lesson.CompetenciesID');
+        $this->db->join('course', 'course.CourseID=competencies.CourseID');
+        $this->db->where('course.TeacherID', $id);
+        $row = $this->db->get('course_lesson')->row();
+        return $row->c;
+    }
+    public function countTeacherQuiz()
+    {
+        // SELECT * FROM `quiz` INNER JOIN competencies ON  INNER JOIN course ON course.CourseID=competencies.CompetenciesID
+        $id = $this->session->userdata('id_user');
+         $this->db->select('count(QuizID) as c');
+        $this->db->join('competencies', 'competencies.CompetenciesID=quiz.CompetenciesID');
+        $this->db->join('course', 'course.CourseID=competencies.CourseID');
+        $this->db->where('course.TeacherID', $id);
+        $row = $this->db->get('quiz')->row();
+        return $row->c;
+
+    }
+    public function updateQuiz($QuizID,$data)
+    {
+        $this->db->where('QuizID', $QuizID);
+        $this->db->update('quiz', $data);
+        
+        
+    }
+    public function deleteQuiz($QuizID)
+    {
+        $this->db->where('QuizID', $QuizID);
+        $this->db->delete('quiz');
+        
+        
     }
 }
                         

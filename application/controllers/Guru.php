@@ -22,6 +22,8 @@ class Guru extends CI_Controller
             'courseList'    => $this->Course_model->getCourseGuru_limit(),
             'countCourse'   => $this->Course_model->countCourseGuru(),
             'countSiswa'    => $this->Course_model->countSiswa(),
+            'countTeacherLesson'=>$this->Course_model->countTeacherLesson(),
+            'countTeacherQuiz'=>$this->Course_model->countTeacherQuiz()
         );
         $this->load->view('guru/template/header', $data);
         $this->load->view('guru/dashboard');
@@ -191,9 +193,10 @@ class Guru extends CI_Controller
         $data = array(
             'title'     => 'Tambah Materi',
             'menu'      => 'Kelas',
+            'course_menu'      => 'Kelas',
             'CompetenciesID' => $CompetenciesID,
             'id' => $CourseID,
-            
+            'course'    => $this->Course_model->courseByGuru($CourseID),
             'CourseName'=> $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName
         );
 
@@ -207,7 +210,9 @@ class Guru extends CI_Controller
     {
         $data = array(
             'title'     => 'Lihat Materi',
-            'menu'      => 'Add Lesson',
+            'menu'      => 'Kelas',
+            'course_menu'      => 'Kelas',
+            'course'    => $this->Course_model->courseByGuru($CourseID),
             'CourseID'=>$CourseID,
             'countUserLesson'=>$this->Course_model->countUserLesson($LessonID),
             'CourseName'=> $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
@@ -224,6 +229,8 @@ class Guru extends CI_Controller
             'title'     => 'Edit Materi',
             'menu'      => 'Edit Lesson',
             'id' => $CourseID,
+            'course_menu'      => 'Kelas',
+            'course'    => $this->Course_model->courseByGuru($CourseID),
             'CourseName'=> $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName
 
         );
@@ -415,6 +422,7 @@ class Guru extends CI_Controller
                 'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
                 'menu'      => 'Kelas',
                 'course'    => $this->Course_model->courseByGuru($CourseID),
+                'course_menu'      => 'Kelas',
                 'id' => $CompetenciesID,
                 'courseID' => $CourseID
             );
@@ -554,10 +562,12 @@ class Guru extends CI_Controller
         $data = array(
             'title'     => 'Quiz',
             'menu'      => 'Kelas',
+            'course_menu'      => 'Kelas',
             'course'    => $this->Course_model->courseByGuru($CourseID),
             'id' => $QuizID,
             'courseID' => $CourseID,
             'quiz'=>$this->Course_model->getQuizByID($QuizID),
+            'countUserQuiz'=>$this->Course_model->countUserQuiz($QuizID)
         );
 
         $data['question'] = $this->M_Quiz->getListQuestionByQuizID($QuizID);
@@ -665,6 +675,24 @@ class Guru extends CI_Controller
         // $this->load->view('guru/template/course_menu');
         $this->load->view('guru/course/answer');
         $this->load->view('guru/template/footer');
+    }
+    public function editQuiz($QuizID,$CourseID)
+    {
+        $data = array(
+            'QuizTitle'=>$this->input->post('QuizTitle')
+            
+        );
+        $this->Course_model->updateQuiz($QuizID,$data);
+        
+        redirect('guru/list_question/'.$CourseID.'/'.$QuizID,'refresh');
+        
+    }
+    public function deleteQuiz($QuizID,$CourseID)
+    {
+        $this->Course_model->deleteQuiz($QuizID);
+        
+        redirect('guru/course/'.$CourseID,'refresh');
+        
     }
 }
         

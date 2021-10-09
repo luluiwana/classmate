@@ -1,5 +1,5 @@
-<div class="container">
-    <div class="row mt-4">
+<div class="container py-4">
+    <div class="row">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item" aria-current="page"><a href="<?= base_url() ?>guru/kelas"
@@ -15,7 +15,27 @@
             </ol>
         </nav>
     </div>
-    <div class="card card-body d-block bg-darkpurple">
+    <div class="row mx-0">
+        <div class="card">
+            <div class="card-body p-0 py-2">
+                <a href="<?=base_url()?>guru/course/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Kelas"){echo "active-menu";}?>">Kelas</a>
+                <a href="<?=base_url()?>guru/aktivitas/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Aktivitas"){echo "active-menu";}?>">Aktivitas</a>
+                <a href="<?=base_url()?>guru/rekap/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Rekap Nilai"){echo "active-menu";}?>">Rekap
+                    Nilai</a>
+                <a href="<?=base_url()?>guru/siswa/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Daftar Siswa"){echo "active-menu";}?>">Daftar
+                    Siswa</a>
+                <a href="<?=base_url()?>guru/pengaturan/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Pengaturan"){echo "active-menu";}?>">Pengaturan</a>
+            </div>
+        </div>
+    </div>
+    <p class="fw-bold text-white small mt-4 text-uppercase"> <i class="fas fa-dot-circle text-warning me-1"></i>
+        quiz <?=$quiz->QuizTitle?></p>
+    <div class="card card-body d-block bg-darkpurple mt-3">
         <h5 class="text-white">Quiz: <?=$quiz->QuizTitle?></h5>
         <a data-bs-toggle="modal" data-bs-target="#addMateri" class="btn btn-warning"
             href="<?= base_url('guru/create_question/' . $courseID . '/' . $id) ?>"><i class="fas fa-plus"></i> Tambah
@@ -25,10 +45,13 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                       <label for="">Judul Quiz</label>
-                       <input type="text" value="<?=$quiz->QuizTitle?>" class="form-control mb-3">
-                       <a href="" class="btn btn-primary">Simpan</a>
-                       <a href="" class="btn btn-danger float-end">Hapus Quiz</a>
+                        <label for="">Judul Quiz</label>
+                        <form action="<?=base_url()?>guru/editquiz/<?=$quiz->QuizID?>/<?= $course->CourseID ?>" method="post">
+                            <input required type="text" value="<?=$quiz->QuizTitle?>" name="QuizTitle" class="form-control mb-3">
+                            <input type="submit"  class="btn btn-primary" value="Simpan">
+                        <a href="<?=base_url()?>guru/deleteQuiz/<?=$quiz->QuizID?>/<?= $course->CourseID ?>" class="btn btn-danger float-end">Hapus Quiz</a>
+
+                        </form>
                     </div>
                 </div>
             </div>
@@ -238,9 +261,10 @@
         <?php if(!empty($question)):?>
         <div class="col-md-3 mt-3 ">
             <div class="card card-body bg-darkgreen">
-                <h1 class="text-white">56</h1>
+                <h1 class="text-white"><?=$countUserQuiz?></h1>
                 <p class="text-white small">Siswa telah mengerjakan quiz</p>
-                <a href="" class="btn btn-warning mt-3"><i class="fas fa-file-alt me-2"></i> Lihat Hasil</a>
+                <a href="<?=base_url()?>guru/resultquiz/<?= $course->CourseID ?>/<?=$quiz->QuizID?>"
+                    class="btn btn-warning mt-3"><i class="fas fa-file-alt me-2"></i> Lihat Hasil</a>
             </div>
         </div>
         <?php endif;?>

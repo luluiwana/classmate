@@ -15,10 +15,10 @@
                             Siswa <p class="fw-bold fs-4"> <?=$countSiswa?></p>
                         </div>
                         <div class="col-md-3 w-50">
-                            Materi <p class="fw-bold fs-4">3</p>
+                            Materi <p class="fw-bold fs-4"><?=$countTeacherLesson?></p>
                         </div>
                         <div class="col-md-3 w-50">
-                            Quiz <p class="fw-bold fs-4">6</p>
+                            Quiz <p class="fw-bold fs-4"><?=$countTeacherQuiz?></p>
                         </div>
                     </div>
 
