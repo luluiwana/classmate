@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_Discussion extends CI_Model
+class M_DiscussionGuru extends CI_Model
 {
     public function __construct()
     {
@@ -37,17 +37,6 @@ class M_Discussion extends CI_Model
 
         return $this->db->get('forum_question')->row();
     }
-    public function getDisscussionGuruById($Forum_ID)
-    {
-        $id = $this->session->userdata('id_user');
-        $this->db->select('*,forum_question.CreatedDateTime as time_thread');
-        $this->db->join('course', 'course.CourseID=forum_question.CourseID');
-        $this->db->join('users', 'forum_question.UserID=users.UserID');
-        $this->db->where('users.UserID', $id);
-        $this->db->where('forum_question.ForumQID', $Forum_ID);
-
-        return $this->db->get('forum_question')->row();
-    }
 
     public function getCommentsById($id)
     {
@@ -55,8 +44,6 @@ class M_Discussion extends CI_Model
         $this->db->join('users', 'users.UserID=forum_answer.UserID');
         return $this->db->get_where('forum_answer', array('ForumQID' => $id))->result_object();
     }
-
-
     public function getComment($ForumAID)
     {
         $id = $this->session->userdata('id_user');
@@ -83,21 +70,6 @@ class M_Discussion extends CI_Model
 
         return $this->db->get('forum_question')->result();
     }
-    public function getDiskusiGuru($CourseID)
-    {
-        $id = $this->session->userdata('id_user');
-        $this->db->select('*,forum_question.CreatedDateTime as time_thread');
-        $this->db->join('course', 'course.CourseID=forum_question.CourseID');
-        $this->db->join('users', 'forum_question.UserID=users.UserID');
-
-        $this->db->where('users.UserID', $id);
-        $this->db->where('forum_question.CourseID', $CourseID);
-        $this->db->order_by('ForumQID', 'desc');
-
-        return $this->db->get('forum_question')->result();
-    }
-
-
     public function getTopik($topik, $CourseID)
     {
         $id = $this->session->userdata('id_user');
@@ -112,23 +84,6 @@ class M_Discussion extends CI_Model
 
         return $this->db->get('forum_question')->result();
     }
-
-    public function getTopikGuru($topik, $CourseID)
-    {
-        $id = $this->session->userdata('id_user');
-        $this->db->select('*,forum_question.CreatedDateTime as time_thread');
-        $this->db->join('course', 'course.CourseID=forum_question.CourseID');
-        $this->db->join('users', 'forum_question.UserID=users.UserID');
-
-        $this->db->where('users.UserID', $id);
-        $this->db->where('forum_question.CourseID', $CourseID);
-        $this->db->where('forum_question.category', $topik);
-        $this->db->order_by('ForumQID', 'desc');
-
-        return $this->db->get('forum_question')->result();
-    }
-
-
     public function getCourseName($CourseID)
     {
         $this->db->where('CourseID', $CourseID);
