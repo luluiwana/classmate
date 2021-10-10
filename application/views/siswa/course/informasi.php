@@ -23,7 +23,7 @@
                             </tr>
                             <tr>
                                 <td>Guru</td>
-                                <td><?=$course->UserName?></td>
+                                <td class="text-wrap"><?=$course->UserName?></td>
                             </tr>
                         </table>
                         <a href="" class="btn btn-danger" data-bs-toggle="modal"

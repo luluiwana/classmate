@@ -99,7 +99,9 @@ class Quiz extends CI_Controller
             'CourseID' => $CourseID,
             'quiz' => $this->quiz->getQuiz($quizID),
             'user_quiz' => $this->quiz->getUserQuiz($quizID),
-            'feedback' => $this->quiz->feedback($quizID)
+            'feedback' => $this->quiz->feedback($quizID),
+            'course_menu'      => "Kelas",
+            'course'    => $this->Course_model->course($CourseID),
         );
         $this->load->view('siswa/template/header', $data);
         $this->load->view('siswa/quiz/quiz_result');

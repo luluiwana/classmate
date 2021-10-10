@@ -22,7 +22,6 @@ class Lesson extends CI_Controller
             'menu'      => 'Kelas',
             'course_menu'      => 'Kelas',
             'course'    => $this->Course_model->course($CourseID),
-            'jml_siswa' => $this->Course_model->countSiswaByCourse($CourseID),
             'kd'        => $this->M_Lesson->getCompetency($CourseID),
             'total_xp'      => $this->Course_model->totalXP(),
             'user'        => $this->Course_model->getUser(),
@@ -35,11 +34,13 @@ class Lesson extends CI_Controller
         $this->load->view('siswa/course/course');
         $this->load->view('siswa/template/footer');
     }
-    public function study($LessonID)
+    public function study($CourseID,$LessonID)
     {
         $data = array(
-            'title'     => $this->M_Lesson->getLesson($LessonID)->LessonTitle,
+            'title'     => 'Materi',
             'menu'      => "Kelas",
+            'course_menu'      => "Kelas",
+            'course'    => $this->Course_model->course($CourseID),
             'lesson'  => $this->M_Lesson->getLesson($LessonID),
             'check' => $this->M_Lesson->check_user_lesson($LessonID)
         );

@@ -66,3 +66,19 @@ $(document).ready(function () {
 	});
 	$(".dropdown-toggle").dropdown();
 });
+//animejs
+var total_xp = document.getElementById("total_xp").value;
+var level = document.getElementById("level").value; 
+anime({
+	targets: ".anime-xp input",
+	value: [0, total_xp],
+	round: 1,
+	easing: "easeInOutExpo",
+});
+
+anime({
+	targets: ".anime-level input",
+	value: [0, level],
+	round: 1,
+	easing: "easeInOutExpo",
+});

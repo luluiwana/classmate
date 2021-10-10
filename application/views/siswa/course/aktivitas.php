@@ -1,4 +1,4 @@
-<div class="col-12 mt-3 card">
+<div class="row mx-0 mt-4 card">
     <div class="card-body">
         <p class="fw-bold text-white small my-3"> <i class="fas fa-dot-circle text-warning me-1"></i> AKTIVITAS</p>
         <table class="table table-borderless table-hover table-sm border-start border-warning border-2 ms-1 p-2">

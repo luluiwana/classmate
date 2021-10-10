@@ -1,5 +1,4 @@
 <div class="row mt-4">
-    <p class="small text-white"> <i class="fas fa-dot-circle text-primary me-1"></i> 3 MISI</p>
     <div class="col-md-8">
         <?php foreach($kd as $row):?>
         <div class="card bg-darkgreen mt-2">
@@ -21,7 +20,7 @@
                                 <p class="small text-secondary mb-4">Tantangan</p>
                                 <?php $lessons = $this->M_Lesson->getLessons($row->CompetenciesID)?>
                                 <?php foreach($lessons as $lesson):?>
-                                <a href="<?=base_url()?>lesson/study/<?=$lesson->LessonID?>">
+                                <a href="<?=base_url()?>lesson/study/<?=$course->CourseID?>/<?=$lesson->LessonID?>">
                                     <?php if($this->M_Lesson->isLessonComplete($lesson->LessonID)==true): ?>
                                     <div class="mt-2 text-secondary text-white">
                                         <i class="fas fa-star me-2 fs-5  text-warning"></i>
@@ -44,14 +43,14 @@
                                 <a href="<?=base_url()?>quiz/quiz_detail/<?=$q->QuizID?>/<?=$course->CourseID?>">
                                     <div class="mt-2 text-secondary">
                                         <i class="fas fa-gamepad me-2 fs-5"> </i>
-                                            <?=$q->QuizTitle?>
+                                        <?=$q->QuizTitle?>
                                     </div>
                                 </a>
                                 <?php else:?>
-                                     <a href="<?=base_url()?>quiz/result/<?=$q->QuizID?>/<?=$course->CourseID?>">
+                                <a href="<?=base_url()?>quiz/result/<?=$q->QuizID?>/<?=$course->CourseID?>">
                                     <div class="mt-2 text-white">
                                         <i class="fas fa-gamepad me-2 fs-5 text-warning"> </i>
-                                            <?=$q->QuizTitle?>
+                                        <?=$q->QuizTitle?>
                                     </div>
                                 </a>
                                 <?php endif;?>
@@ -81,15 +80,16 @@
         </div>
         <div class="card mt-3">
             <div class="card-body row ">
+                <div class="text-white fw-bold w-30 text-center anime-skor-course">Skor
+                    <input type="text" value="" class="w-100 anime fs-5 text-warning fw-bolder text-center">
+                </div>
+                <div class="text-white fw-bold w-40 text-center anime-xp-course">Total XP
+                    <!-- <p class="fs-5 text-warning fw-bolder"><?=$total_xp?></p> -->
+                    <input type="text" value="" class="w-100 anime fs-5 text-warning fw-bolder text-center">
+                </div>
+                <div class="text-white fw-bold w-30 text-center anime-level-course">Level
+                    <input type="text" value="" class="w-100 anime fs-5 text-warning fw-bolder text-center">
 
-                <div class="text-white fw-bold w-30 text-center">Skor
-                    <p class="fs-5 text-warning fw-bolder"><?=$score?></p>
-                </div>
-                <div class="text-white fw-bold w-40 text-center">Total XP
-                    <p class="fs-5 text-warning fw-bolder"><?=$total_xp?></p>
-                </div>
-                <div class="text-white fw-bold w-30 text-center">Level
-                    <p class="fs-5 text-warning fw-bolder"><?=$user->LevelID?></p>
                 </div>
                 <div class="text-center mb-3">
                     <img src="<?=base_url()?>assets/character/<?=$user->LevelID?>.png" class=""
@@ -98,6 +98,10 @@
                 <div class="bg-dark text-white fw-bold py-2 text-center mb-3">
                     <?=$user->desc?>
                 </div>
+                <input type="hidden" value="<?=$total_xp?>" id="total_xp_course">
+                <input type="hidden" value="<?=$user->LevelID?>" id="level_course">
+                <input type="hidden" value="<?=$score?>" id="total_skor_course">
+
                 <!-- start badges -->
                 <div class="text-center">
                     <?php if($user->LevelID==0):?>
@@ -298,50 +302,5 @@
 </div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
-<script>
-//chart js
-var total_mission=document.getElementById("total_mission").value; 
-var completed_mission=document.getElementById("completed_mission").value; 
-var ongoing_mission=document.getElementById("ongoing_mission").value; 
-var data = {
-    labels: ["Tantangan selesai", "Tantangan belum selesai"],
-    datasets: [{
-        data: [completed_mission, ongoing_mission],
-        backgroundColor: ["#7200ff", "#191b2a"],
-        hoverBackgroundColor: ["#7200ff", "#191b2a"],
-    }, ],
-};
-
-var promisedDeliveryChart = new Chart(document.getElementById('myChart'), {
-    type: 'doughnut',
-    data: data,
-    options: {
-        responsive: true,
-        cutoutPercentage: 70,
-        legend: {
-            display: false
-        }
-    }
-});
-
-Chart.pluginService.register({
-    beforeDraw: function(chart) {
-        var width = chart.chart.width,
-            height = chart.chart.height,
-            ctx = chart.chart.ctx;
-
-        ctx.restore();
-        var fontSize = (height / 114).toFixed(2);
-        ctx.font = fontSize + "em sans-serif";
-        ctx.textBaseline = "middle";
-        ctx.fillStyle = "#fff";
-
-        var text = completed_mission+"/"+total_mission,
-            textX = Math.round((width - ctx.measureText(text).width) / 2),
-            textY = height / 2;
-
-        ctx.fillText(text, textX, textY);
-        ctx.save();
-    }
-});
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script src="<?=base_url()?>assets/js/animechart.js"></script>

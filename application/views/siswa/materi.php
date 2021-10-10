@@ -1,4 +1,4 @@
-<div class="row mx-4 mt-4">
+<div class="container-fluid mt-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item" aria-current="page"><a href="<?=base_url()?>siswa/kelas"
@@ -11,9 +11,26 @@
             </li>
         </ol>
     </nav>
-    <div class="card">
+     <div class="row mx-0">
+        <div class="card">
+            <div class="card-body p-0 py-2">
+                <a href="<?=base_url()?>lesson/course/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Kelas"){echo "active-menu";}?>">Misi</a>
+                    <a href="<?=base_url()?>siswa/leaderboard/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Leaderboard"){echo "active-menu";}?>">Leaderboard</a>
+                <a href="<?=base_url()?>siswa/aktivitas/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Aktivitas"){echo "active-menu";}?>">Aktivitas</a>
+                <a href="<?=base_url()?>siswa/teman/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Teman"){echo "active-menu";}?>">Teman </a>
+                <a href="<?=base_url()?>siswa/informasi/<?=$course->CourseID?>"
+                    class="btn btn-disabled mb-0 course-menu shadow-none <?php if($course_menu=="Informasi"){echo "active-menu";}?>">Informasi</a>
+               
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4">
         <div class="card-body">
-            <p class="text-white fw-bold fs-4"><?=$title?></p>
+            <p class="text-white fw-bold fs-4"><?=$lesson->LessonTitle?></p>
             <p class="text-white"><?=$lesson->LessonContent?></p>
         </div>
     </div>
@@ -30,7 +47,7 @@
     <form action="<?=base_url()?>Lesson/complete/" method="post">
         <input type="hidden" name="lesson" value="<?=$lesson->LessonID?>">
         <input type="hidden" name="course" value="<?=$lesson->ID_Course?>">
-        <input type="submit" class="form-control  bg-warning btn btn-warning mt-4" value="Saya sudah mempelajari <?=$title?>">
+        <input type="submit" class="form-control  bg-warning btn btn-warning mt-4 text-wrap" value="Saya sudah mempelajari <?=$lesson->LessonTitle?>">
     </form>
     <?php else:?>
     <a href="<?=base_url()?>lesson/course/<?=$lesson->ID_Course?>" class="btn btn-primary mt-4">Kembali</a>

@@ -13,30 +13,35 @@
     </nav>
     <div class="card bg-darkpurple">
         <div class="card-body">
-            
+
             <div class="row" id="start" style="display:flex">
-             <div class="bg-warning text-white fw-bold  p-2 small" style="margin-top:-2rem"> <i class="fas fa-star "></i> Reward hingga <?=$jmlsoal*50?> XP</div>
+                <div class="bg-warning text-white fw-bold  p-2 small" style="margin-top:-2rem"> <i
+                        class="fas fa-star "></i> Reward hingga <?=$jmlsoal*50?> XP</div>
                 <div class="col-md-6 mb-3">
                     <img src="<?=base_url()?>assets/img/vector/Online test-pana.svg" alt="" class="w-100" srcset="">
                 </div>
                 <div class="col-md-6 my-auto">
-                   
+
                     <p class="h3 text-white text-uppercase"><?=$quiz->QuizTitle?></p>
                     <p class="text-white h6">Jumlah Soal <?=$jmlsoal?></p>
                     <a href="#" class="btn btn-primary btn-lg mt-3" onclick="hideshow('start','Q1')">Mulai Quiz</a>
-                    
+
                 </div>
             </div>
             <form action="<?= base_url('quiz/QuizResult/'.$quiz->QuizID.'/'.$CourseID) ?>" method="post" id="quizForm">
                 <?php $x=1; foreach ($question as $row) : ?>
                 <div class="row " id="Q<?=$x?>" style="display:none">
                     <div class="col-md-6 text-white text-center my-auto h5">
-                        <?php if($row->question_img!=NULL):?>
-                        <img src="<?=$row->question_img?>" alt="" class="w-70 d-block mx-auto rounded mb-4" srcset="">
+
+                        <p class="fw-bold"><?= $row->Question ?></p>
+                        <?php if ($row->question_img!=null):?>
+                        <a href="<?=base_url()?>media/soal/<?=$row->question_img?>" target="_blank">
+                            <img src="<?=base_url()?>media/soal/<?=$row->question_img?>" class="rounded ms-3 w-80 mt-2"
+                                alt="">
+                        </a>
                         <?php endif;?>
-                        <?= $row->Question ?>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mt-3">
                         <!-- optA -->
                         <label for="optA<?=$row->QuestionID?>" class="d-block"
                             onclick="hideshow('Q<?=$x?>','Q<?=$x+1?>')">
@@ -77,13 +82,15 @@
                 </div>
                 <?php $x++; endforeach;?>
                 <div class="row" id="end" style="display:none">
-                    <div class="col-md-6 mb-3">
-                        <img src="<?=base_url()?>assets/img/vector/Online test-amico (1).svg" alt="" class="w-100" srcset="">
-                    </div>
-                    <div class="col-md-6 my-auto">
+                 
+                    <div class="col-md-8 my-auto">
                         <p class="h3 text-white text-uppercase">Yeay! Kamu sudah menyelesaikan quiz</p>
                         <input type="hidden" name="count" value="<?=$jmlsoal?>">
-                            <input type="submit" class="btn btn-primary btn-lg mt-3" value="Simpan dan Lihat Hasilnya">
+                        <input type="submit" class="btn btn-primary btn-lg mt-3 text-wrap" value="Simpan dan Lihat Hasilnya">
+                    </div>
+                       <div class="col-md-4 mb-3">
+                        <img src="<?=base_url()?>assets/img/vector/Online test-amico (1).svg" alt="" class="w-100"
+                            srcset="">
                     </div>
                 </div>
                 <!-- <input type="submit" value="Selesei" class="btn btn-block btn-primary" id="send" display:none> -->

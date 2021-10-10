@@ -1,6 +1,6 @@
 <div class="row mt-4 mx-0">
-    <div class="col-md-6 card bg-darkblue">
-        <p class="text-white  mb-3  mt-3 small"><i class="fas fa-dot-circle text-warning me-1"
+    <div class="col-md-6 card bg-darkblue card-body">
+        <p class="text-white  my-4 small"><i class="fas fa-dot-circle text-warning me-1"
                 aria-hidden="true"></i>TEMAN</p>
         <table class="table table-hover">
             <tbody>
@@ -17,7 +17,7 @@
         </table>
        
     </div>
-    <div class="col-md-6"> <img src="<?=base_url()?>assets/img/vector/Collab-amico.svg" class="" alt="" srcset=""></div>
+    <div class="col-md-6 d-none d-sm-block"> <img src="<?=base_url()?>assets/img/vector/Collab-amico.svg" class="" alt="" srcset=""></div>
 </div>
 </div>
 </main>

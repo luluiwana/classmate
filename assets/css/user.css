@@ -125,6 +125,10 @@ label,
 	width: 400px;
 	margin-top: -160px;
 }
+.anime{
+	background-color: transparent;
+	border: none;
+}
 
 /* TABLE */
 thead,

@@ -403,7 +403,7 @@ class Guru extends CI_Controller
     {
         $data = array(
             'title'     => $this->Course_model->courseByGuru($CourseID)->CourseName . " - " . $this->Course_model->courseByGuru($CourseID)->ClassName,
-            'menu'      => 'Pengaturan',
+            'menu'      => 'Kelas',
             'course_menu' => "Pengaturan",
             'course'    => $this->Course_model->courseByGuru($CourseID),
         );
