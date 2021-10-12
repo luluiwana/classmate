@@ -13,6 +13,23 @@
 .small-ava {
 	width: 30px;
 }
+.note-popover{
+	background-color: #412572 !important;
+}
+.blockquote {
+    border-left: 3px solid #fec600;
+    padding: 1rem;
+    background-color: #291848;
+    border-radius: 20px;
+    border-right: 3px solid #fec600;
+	    color: white;
+}
+pre{
+	background-color: black;
+    padding: 1rem;
+	color:white
+}
+
 body {
 	background-color: #111111;
 }

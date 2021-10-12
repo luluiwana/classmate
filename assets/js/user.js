@@ -53,11 +53,22 @@ $(document).ready(function () {
 		height: 500,
 		toolbar: [
 			// [groupName, [list of button]]
+			["style", ["style"]],
 			["style", ["clear", "bold", "italic"]],
 			["fontsize", ["fontsize"]],
 			["insert", ["picture", "link", "video"]],
 			["para", ["ul", "ol"]],
 			["view", ["codeview"]],
+		],
+		styleTags: [
+			"p",
+			{
+				title: "Blockquote",
+				tag: "blockquote",
+				className: "blockquote",
+				value: "blockquote",
+			},
+			"pre",
 		],
 	});
 	$("#add_materi").on("summernote.enter", function (we, e) {

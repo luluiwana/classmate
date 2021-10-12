@@ -29,8 +29,9 @@
         </div>
     </div>
     <div class="card mt-4">
-        <div class="card-body">
-            <p class="text-white fw-bold fs-4"><?=$lesson->LessonTitle?></p>
+        <div class="card-body text-white">
+            <p class="text-white fw-bolder fs-3"><?=$lesson->LessonTitle?></p>
+            <hr>
             <p class="text-white"><?=$lesson->LessonContent?></p>
         </div>
     </div>
